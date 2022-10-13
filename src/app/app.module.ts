@@ -52,7 +52,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {CdkMenuModule} from '@angular/cdk/menu';
 import {DialogModule} from '@angular/cdk/dialog';
 
-import { NavBarComponent } from './view/nav-bar/nav-bar.component';
+import { NavbarComponent } from './view/navbar/navbar.component';
 
 
 
@@ -60,7 +60,7 @@ import { NavBarComponent } from './view/nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
