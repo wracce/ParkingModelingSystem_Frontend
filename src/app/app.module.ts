@@ -53,6 +53,7 @@ import {CdkMenuModule} from '@angular/cdk/menu';
 import {DialogModule} from '@angular/cdk/dialog';
 
 import { NavbarComponent } from './view/navbar/navbar.component';
+import { DesignerComponent } from './view/designer/designer.component';
 
 
 
@@ -60,7 +61,8 @@ import { NavbarComponent } from './view/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    DesignerComponent
   ],
   imports: [
     BrowserModule,

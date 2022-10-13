@@ -1,5 +1,6 @@
   <mat-toolbar mat-toolbar color="primary">
-    <span>Парковка</span>
+    <button mat-button (click)="setView('home')">Парковка</button>
     <span class="example-spacer"></span>
-    <button mat-button>Войти</button>
+    <button mat-button (click)="setView('designer')">Коструктор</button>
+    <button mat-button (click)="setView('auth')">Войти</button>
   </mat-toolbar>
