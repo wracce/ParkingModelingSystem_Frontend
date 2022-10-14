@@ -1,0 +1,7 @@
+.container{
+    margin: 20px;
+    background: red;
+}
+mat-grid-tile{
+    background: blue;
+}

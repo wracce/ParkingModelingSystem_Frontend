@@ -1,0 +1,7 @@
+mat-grid-list{
+    background-color: gray;
+}
+
+mat-grid-tile{
+    background-color: hwb(271 17% 11%);
+}
