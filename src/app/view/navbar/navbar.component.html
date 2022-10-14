@@ -1,6 +1,6 @@
   <mat-toolbar mat-toolbar color="primary">
-    <button mat-button (click)="setView('home')">Парковка</button>
+    <button mat-button routerLink="">Парковка</button>
     <span class="example-spacer"></span>
-    <button mat-button (click)="setView('designer')">Коструктор</button>
-    <button mat-button (click)="setView('auth')">Войти</button>
+    <button mat-button routerLink="/designer" routerLinkActive="activeLink">Коструктор</button>
+    <button mat-button routerLink="/auth" routerLinkActive="activeLink">Войти</button>
   </mat-toolbar>
