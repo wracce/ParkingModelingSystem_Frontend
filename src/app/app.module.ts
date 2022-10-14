@@ -54,6 +54,10 @@ import {DialogModule} from '@angular/cdk/dialog';
 
 import { NavbarComponent } from './view/navbar/navbar.component';
 import { DesignerComponent } from './view/designer/designer.component';
+import { AuthComponent } from './view/auth/auth.component';
+import { AboutComponent } from './view/about/about.component';
+import { NfComponent } from './view/nf/nf.component';
+import { HomeComponent } from './view/home/home.component';
 
 
 
@@ -62,7 +66,11 @@ import { DesignerComponent } from './view/designer/designer.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    DesignerComponent
+    DesignerComponent,
+    AuthComponent,
+    AboutComponent,
+    NfComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
