@@ -1,5 +1,7 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { Cell } from '../cell';
+import { DesignerService } from '../designer.service';
 
 @Component({
   selector: 'app-park-designer',
@@ -8,22 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParkDesignerComponent implements OnInit {
   indexOver: number = -1;
-
-  icons = [
-    'https://source.unsplash.com/random/200x200?sig=1',
-    'https://source.unsplash.com/random/200x200?sig=2',
-    'https://source.unsplash.com/random/200x200?sig=3',
-    'https://source.unsplash.com/random/200x200?sig=4',
-    'https://source.unsplash.com/random/200x200?sig=5',
-    
-  ];
-
-  cells = Array(25)
-    .fill(' ')
-    .map((_, index) => ({ src: null, id: index }));
-  constructor() {}
+  icons:string[] = [];
+  cells:Cell[] = [];
+  
+  constructor(private designerService:DesignerService) {}
 
   ngOnInit(): void {
+    this.icons = this.designerService.getIcons();
+    this.cells = this.designerService.getCells();
   }
 
   drop(event: CdkDragDrop<any>) {

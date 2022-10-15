@@ -19,6 +19,7 @@ import { AboutComponent } from './view/about/about.component';
 import { NfComponent } from './view/nf/nf.component';
 import { HomeComponent } from './view/home/home.component';
 import { ParkDesignerComponent } from './view/designer/park-designer/park-designer.component';
+import { DesignerService } from './view/designer/designer.service';
 
 
 
@@ -43,7 +44,7 @@ import { ParkDesignerComponent } from './view/designer/park-designer/park-design
     MatGridListModule,
     DragDropModule
   ],
-  providers: [],
+  providers: [DesignerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
