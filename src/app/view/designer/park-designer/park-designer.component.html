@@ -1,6 +1,41 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile cdkDragLockAxis="y" cdkDrag>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-  </mat-grid-list>
+<div class="content" cdkDropListGroup>
+  <div #board class="board">
+    <mat-grid-list cols="5" gutterSize="
+    1">
+      <mat-grid-tile *ngFor="let cell of cells; let i = index">
+        <div
+          class="cell"
+          cdkDropList
+          [cdkDropListData]="cell"
+          (cdkDropListDropped)="drop($event)"
+          [style.background]="i == indexOver ? 'red' : 'yellowgreen'"
+          (mouseover)="indexOver = i"
+          (mouseout)="indexOver = -1"
+        >
+          <div cdkDrag >
+            <img *ngIf="cell.src" [src]="cell.src" width="100%" />
+            <span *ngIf="!cell.src"></span>
+            <div *cdkDragPlaceholder></div>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div class="side">
+    <mat-grid-list cols="1" gutterSize="0">
+      <mat-grid-tile *ngFor="let cell of icons; let i = index">
+        <div
+          class="cell"
+          cdkDropList
+          [cdkDropListData]="cell"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div cdkDrag>
+            <img [src]="cell" width="100%"  />
+            <div *cdkDragPlaceholder></div>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

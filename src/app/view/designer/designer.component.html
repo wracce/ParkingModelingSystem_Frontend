@@ -1,14 +1,33 @@
 <div class="container">
-    <mat-grid-list cols="10">
-        <mat-grid-tile colspan="3" rowspan="5">Компоненты парковки</mat-grid-tile>
-        <mat-grid-tile></mat-grid-tile>
-        <mat-grid-tile colspan="5" rowspan="1">Дорога сверху</mat-grid-tile>
-        <mat-grid-tile></mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="3">Дорога слева</mat-grid-tile>
-        <mat-grid-tile colspan="5" rowspan="3">Парковочные места</mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="3">Дорога справа</mat-grid-tile>
-        <mat-grid-tile></mat-grid-tile>
-        <mat-grid-tile colspan="5" rowspan="1">Дорога снизу</mat-grid-tile>
-        <mat-grid-tile></mat-grid-tile>
-      </mat-grid-list>
+  <mat-grid-list cols="32">
+    <mat-grid-tile colspan="16" rowspan="16">Компоненты парковки</mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile colspan="14" rowspan="1">Дорога сверху</mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="14">Дорога слева</mat-grid-tile>
+    <mat-grid-tile colspan="14" rowspan="14">
+      <div class="container2">
+        <app-park-designer></app-park-designer>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="14">Дорога справа</mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile colspan="14" rowspan="1">Дорога снизу</mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+  </mat-grid-list>
 </div>
+
+<!-- <div class="container">
+  <div class="grid-container">
+    <div class="grid-item item1">Компоненты парковки</div>
+    <div class="grid-item item2"></div>
+    <div class="grid-item item3">Дорога сверх</div>
+    <div class="grid-item item4"></div>
+    <div class="grid-item item5">Дорога слева</div>
+    <div class="grid-item item6">Парковка</div>
+    <div class="grid-item item7">Дорога справа</div>
+    <div class="grid-item item8"></div>
+    <div class="grid-item item9"></div>
+    <div class="grid-item item10">Дорога сниз</div>
+  </div>
+</div> -->
