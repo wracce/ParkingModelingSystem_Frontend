@@ -13,7 +13,7 @@ export class DesignerService {
   private cells:Cell[]=[];
 
   constructor() { 
-    this.len=25;
+    this.len=64;
     this.nameOfGridList = "designerCellList";
     this.nameOfObjsList = "designerObjsList";
     this.icons = [

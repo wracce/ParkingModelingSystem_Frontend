@@ -15,6 +15,8 @@ export class ParkObjectsComponent implements OnInit {
   nameOfIdList:string ="";
   valueListConnectedTo: string[] =[];
   
+  panelOpenState = false;
+
   constructor(private designerService:DesignerService) {}
 
   ngOnInit(): void {

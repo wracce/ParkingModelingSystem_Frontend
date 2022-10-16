@@ -21,6 +21,10 @@ import { HomeComponent } from './view/home/home.component';
 import { ParkDesignerComponent } from './view/designer/park-designer/park-designer.component';
 import { DesignerService } from './view/designer/designer.service';
 import { ParkObjectsComponent } from './view/designer/park-objects/park-objects.component';
+import {MatTreeModule} from '@angular/material/tree';
+
+
+
 
 
 
@@ -44,7 +48,9 @@ import { ParkObjectsComponent } from './view/designer/park-objects/park-objects.
     MatToolbarModule,
     MatButtonModule,
     MatGridListModule,
-    DragDropModule
+    DragDropModule,
+    MatTreeModule
+
   ],
   providers: [DesignerService],
   bootstrap: [AppComponent]

@@ -3,12 +3,14 @@
   background: red;
 }
 .container2 {
-  border:1px solid red; min-width:80%;
+  border:1px solid red;
+   min-width:80%;
 }
 
 .container3 {
-  border:1px solid red; min-width:80%;
-  height: 50px;;
+  border:1px solid red; 
+  min-width:100%;
+  min-height:80%;
 }
 mat-grid-tile {
   background: blue;
@@ -27,55 +29,4 @@ mat-grid-tile {
   font-size: 30px;
 }
 
-.item1 {
-  grid-row: 1 / span 7;
-  grid-column: 1 / span 3;
-}
-
-.item2 {
-  grid-row: 1;
-  grid-column: 4 ;
-}
-
-
-.item3 {
-  grid-row: 1;
-  grid-column: 5 / span 5;
-}
-
-
-.item4 {
-  grid-row: 1;
-  grid-column: 10 ;
-}
-
-.item5 {
-  grid-row: 2 / span 5;
-  grid-column: 4 ;
-}
-
-.item6 {
-  grid-row: 2 / span 5;
-  grid-column: 5 / span 5;
-}
-
-.item7 {
-  grid-row: 2 / span 5;
-  grid-column: 10;
-}
-
-.item8 {
-  grid-row: 7;
-  grid-column: 4;
-}
-
-.item9 {
-  grid-row: 7;
-  grid-column: 5 / span 5;
-}
-
-.item10 {
-  grid-row: 7;
-  grid-column: 10;
-}
 

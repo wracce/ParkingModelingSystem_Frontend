@@ -1,17 +1,14 @@
 .content
 {
   display:flex;
-  justify-content: space-between;
-  position:relative;
+  justify-content: center;
+
 
 }
 
 .board{
   flex-basis:80%;
-  position:relative;
-}
-.side{
-  flex-basis:16%; /*it's flex-basis of board/5 */
+
 }
 
 .cell{

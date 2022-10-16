@@ -11,6 +11,7 @@ import { DesignerService } from '../designer.service';
 export class ParkDesignerComponent implements OnInit {
   indexOver: number = -1;
   icons:string[] = [];
+  cols:number =0;
   cells:Cell[] = [];
   nameOfIdList:string ="";
   valueListConnectedTo: string[] =[];
@@ -19,6 +20,7 @@ export class ParkDesignerComponent implements OnInit {
   constructor(private designerService:DesignerService) {}
 
   ngOnInit(): void {
+    this.cols = Math.sqrt(this.designerService.getLen());
     this.icons = this.designerService.getIcons();
     this.cells = this.designerService.getCells();
     this.nameOfIdList = this.designerService.getNameOfGridList();
