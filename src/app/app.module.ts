@@ -20,6 +20,7 @@ import { NfComponent } from './view/nf/nf.component';
 import { HomeComponent } from './view/home/home.component';
 import { ParkDesignerComponent } from './view/designer/park-designer/park-designer.component';
 import { DesignerService } from './view/designer/designer.service';
+import { ParkObjectsComponent } from './view/designer/park-objects/park-objects.component';
 
 
 
@@ -34,6 +35,7 @@ import { DesignerService } from './view/designer/designer.service';
     NfComponent,
     HomeComponent,
     ParkDesignerComponent,
+    ParkObjectsComponent,
   ],
   imports: [
     BrowserModule,

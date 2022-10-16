@@ -1,0 +1,21 @@
+<div class="content">
+<div class="side">
+    <mat-grid-list cols="1" gutterSize="0">
+      <mat-grid-tile *ngFor="let cell of icons; let i = index">
+        <div
+          class="cell"
+          cdkDropList
+          [id] ="nameOfIdList"
+          [cdkDropListData]="cell"
+          [cdkDropListConnectedTo]="valueListConnectedTo"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div cdkDrag>
+            <img [src]="cell" width="100%"  />
+            <div *cdkDragPlaceholder></div>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

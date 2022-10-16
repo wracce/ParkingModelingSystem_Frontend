@@ -5,6 +5,11 @@
 .container2 {
   border:1px solid red; min-width:80%;
 }
+
+.container3 {
+  border:1px solid red; min-width:80%;
+  height: 50px;;
+}
 mat-grid-tile {
   background: blue;
 }
