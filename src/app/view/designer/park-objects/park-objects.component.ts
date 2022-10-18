@@ -6,7 +6,7 @@ import { DesignerService } from '../designer.service';
 @Component({
   selector: 'app-park-objects',
   templateUrl: './park-objects.component.html',
-  styleUrls: ['./park-objects.component.css']
+  styleUrls: ['./park-objects.component.scss']
 })
 export class ParkObjectsComponent implements OnInit {
   indexOver: number = -1;
