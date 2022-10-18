@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { AboutComponent } from './view/about/about.component';
 import { AuthComponent } from './view/auth/auth.component';
 import { DesignerComponent } from './view/designer/designer.component';
-import { ParkDesignerComponent } from './view/designer/park-designer/park-designer.component';
 import { HomeComponent } from './view/home/home.component';
 import { NfComponent } from './view/nf/nf.component';
 
@@ -13,7 +12,6 @@ const routes: Routes = [
   { path: "about", component: AboutComponent},
   { path: "auth", component: AuthComponent},
   { path: "designer", component: DesignerComponent},
-  {path: "designer/grid", component: ParkDesignerComponent},
   { path: "**", component: NfComponent},
   
 ];

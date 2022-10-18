@@ -1,32 +1,27 @@
-.container {
-  margin: 20px;
-  background: red;
+.mat-tab-group{
+  max-height: calc(100vh - 64px);
 }
-.container2 {
-  border:1px solid red;
-   min-width:80%;
+.content {
+  height: calc(100vh - 64px - 50px);
 }
 
-.container3 {
-  border:1px solid red; 
-  min-width:100%;
-  min-height:80%;
+.mat-grid-listWrapper{
+   margin-left: auto;
+   margin-right: auto;
+   margin-top:10px;
+   max-width: 92%;
 }
+
 mat-grid-tile {
-  background: blue;
+  background-color: gainsboro;
+  border-radius: 5px;
+}
+.app-park-designerWrapper{
+  border:1px solid teal;
+  min-width:90%;
 }
 
-.grid-container {
-  display: flex;
-  background-color: #2196F3;
-  padding: 10px;
+.app-park-objectsWrapper {
+  min-width:100%;
+  min-height:100%;
 }
-
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px;
-  font-size: 30px;
-}
-
-

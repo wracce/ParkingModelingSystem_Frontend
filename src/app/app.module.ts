@@ -22,6 +22,8 @@ import { ParkDesignerComponent } from './view/designer/park-designer/park-design
 import { DesignerService } from './view/designer/designer.service';
 import { ParkObjectsComponent } from './view/designer/park-objects/park-objects.component';
 import {MatTreeModule} from '@angular/material/tree';
+import { ParkSetupComponent } from './view/designer/park-setup/park-setup.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -40,6 +42,7 @@ import {MatTreeModule} from '@angular/material/tree';
     HomeComponent,
     ParkDesignerComponent,
     ParkObjectsComponent,
+    ParkSetupComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,9 @@ import {MatTreeModule} from '@angular/material/tree';
     MatButtonModule,
     MatGridListModule,
     DragDropModule,
-    MatTreeModule
+    MatTreeModule,
+    MatTabsModule
+    
 
   ],
   providers: [DesignerService],
