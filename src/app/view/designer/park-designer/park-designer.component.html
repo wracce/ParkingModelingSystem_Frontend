@@ -9,7 +9,7 @@
           [cdkDropListData]="cell"
           [cdkDropListConnectedTo]="valueListConnectedTo"
           (cdkDropListDropped)="drop($event)"
-          [style.background]="i == indexOver ? 'red' : 'yellowgreen'"
+          [class.selected]="i == indexOver"
           (mouseover)="indexOver = i"
           (mouseout)="indexOver = -1"
         >
