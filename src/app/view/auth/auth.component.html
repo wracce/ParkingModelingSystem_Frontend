@@ -1,1 +1,28 @@
-<p>auth works!</p>
+<div class="container">
+  <div class="content">
+    <mat-form-field appearance="outline">
+      <mat-label>Логин</mat-label>
+      <input matInput placeholder="Введите ваш логин" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Пароль</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        placeholder="Введите ваш пароль"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-checkbox>Запомнить?</mat-checkbox>
+    <button mat-button (click)="(onClicked)">Войти</button>
+    <div class="clearfix"></div>
+  </div>
+</div>

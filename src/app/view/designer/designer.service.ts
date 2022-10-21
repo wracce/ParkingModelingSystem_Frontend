@@ -1,6 +1,8 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
 import { Cell } from './cell';
+import { CellType } from './cell-type';
+import { CellState } from './cell-state';
 
 @Injectable({
   providedIn: 'root'
@@ -9,27 +11,30 @@ export class DesignerService {
   private nameOfGridList:string ="";
   private nameOfObjsList:string = "";
   private len:number = 0;
-  private icons:string[] =[];
+  private types:CellType[] =[];
   private cells:Cell[]=[];
 
   constructor() { 
-    this.len=64;
+    this.len=25;
     this.nameOfGridList = "designerCellList";
     this.nameOfObjsList = "designerObjsList";
-    this.icons = [
-      'https://source.unsplash.com/random/200x200?sig=1',
-      'https://source.unsplash.com/random/200x200?sig=2',
-      'https://source.unsplash.com/random/200x200?sig=3',
-      'https://source.unsplash.com/random/200x200?sig=4',
-      'https://source.unsplash.com/random/200x200?sig=5',
+    this.types = [
+      new CellType('/assets/car/car1.png',"Машины",CellState.Car,0),
+      new CellType('/assets/car/car2.png',"Машины",CellState.Car,0),
+      new CellType('/assets/car/car3.png',"Машины",CellState.Car,0),
+      new CellType('/assets/car/car4.png',"Машины",CellState.Car,0),
+      new CellType('/assets/car/car5.png',"Машины",CellState.Car,0),
+      new CellType('/assets/car/car6.png',"Машины",CellState.Car,0),
+      new CellType('/assets/car/car7.png',"Машины",CellState.Car,0),
+
     ];
     for (let index = 0; index < this.len; index++) {
-      this.cells.push(new Cell(null,index));
+      this.cells.push(new Cell(new CellType(null,"",CellState.Undef,0),index));
     }
   }
 
-  public getIcons():string[] {
-    return this.icons;
+  public getTypes():CellType[] {
+    return this.types;
   }
 
   public getCells():Cell[] {
@@ -49,22 +54,15 @@ export class DesignerService {
   }
 
   public drop(event: CdkDragDrop<any>) {
-    console.log(event);
     if (event.previousContainer != event.container) {
-      
-      if (event.container.data.src !== undefined) { //we are drop on "board"
-        if (event.previousContainer.data.src != undefined) { //we are dragging an element of "board"
-          event.container.data.src = event.previousContainer.data.src;
-          event.previousContainer.data.src = null;
-        } else {  //we are dragging an element of "side"
-          event.container.data.src = event.previousContainer.data;
+
+      if (event.container.data instanceof Cell) { //on board
+        if (event.previousContainer.data instanceof CellType) {// from side to board
+          event.container.data.type = event.previousContainer.data;
+        } else {  // from board to board
+          event.container.data.type = event.previousContainer.data.type;
+          event.previousContainer.data.type = new CellType(null,"",CellState.Undef,0);
         }
-      } else {
-        if (
-          event.container.data.src === undefined &&
-          event.previousContainer.data.src !== undefined
-        ) //we are drop an img from "board" on the "side"
-          event.previousContainer.data.src = null;
       }
     }
   }

@@ -24,11 +24,11 @@ import { ParkObjectsComponent } from './view/designer/park-objects/park-objects.
 import {MatTreeModule} from '@angular/material/tree';
 import { ParkSetupComponent } from './view/designer/park-setup/park-setup.component';
 import {MatTabsModule} from '@angular/material/tabs';
-
-
-
-
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -43,6 +43,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     ParkDesignerComponent,
     ParkObjectsComponent,
     ParkSetupComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,12 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatGridListModule,
     DragDropModule,
     MatTreeModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatCheckboxModule
     
 
   ],

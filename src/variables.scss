@@ -2,7 +2,7 @@
 @import './custom-palettes.scss';
 
 $ParkingModelingSystem_Frontend-primary: mat.define-palette($primary-palette, 500,50,800);
-$ParkingModelingSystem_Frontend-accent: mat.define-palette($accent-palette, 500,100,800);
+$ParkingModelingSystem_Frontend-accent: mat.define-palette($accent-palette, A400,A100,800);
 $ParkingModelingSystem_Frontend-warn: mat.define-palette(mat.$red-palette);
 
 $ParkingModelingSystem_Frontend-theme: mat.define-light-theme((

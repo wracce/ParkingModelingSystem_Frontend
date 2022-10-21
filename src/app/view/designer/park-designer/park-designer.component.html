@@ -1,25 +1,27 @@
-<div class="boardWrapper">
-  <div class="board" cdkDropListGroup>
-    <mat-grid-list [cols]="cols" gutterSize="1">
-      <mat-grid-tile *ngFor="let cell of cells; let i = index">
-        <div
-          class="cell"
-          cdkDropList
-          [id]="nameOfIdList + i"
-          [cdkDropListData]="cell"
-          [cdkDropListConnectedTo]="valueListConnectedTo"
-          (cdkDropListDropped)="drop($event)"
-          [class.selected]="i == indexOver"
-          (mouseover)="indexOver = i"
-          (mouseout)="indexOver = -1"
-        >
-          <div cdkDrag>
-            <img *ngIf="cell.src" [src]="cell.src" width="100%" />
-            <span *ngIf="!cell.src"></span>
-            <div *cdkDragPlaceholder></div>
+<div class="container">
+  <div class="boardWrapper">
+    <div class="board" cdkDropListGroup>
+      <mat-grid-list [cols]="cols" gutterSize="0" >
+        <mat-grid-tile *ngFor="let cell of cells; let i = index">
+          <div
+            class="cell"
+            cdkDropList
+            [id]="nameOfIdList + i"
+            [cdkDropListData]="cell"
+            [cdkDropListConnectedTo]="valueListConnectedTo"
+            (cdkDropListDropped)="drop($event)"
+            [class.selected]="i == indexOver"
+            (mouseover)="indexOver = i"
+            (mouseout)="indexOver = -1"
+          >
+            <div cdkDrag>
+              <img *ngIf="cell.type.src" [src]="cell.type.src"/>
+              <span *ngIf="!cell.type.src"></span>
+              <div *cdkDragPlaceholder></div>
+            </div>
           </div>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
   </div>
 </div>

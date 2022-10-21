@@ -6,40 +6,52 @@ $color-config:    mat.get-color-config($defaultTheme);
 $accent-palette: map.get($color-config, 'accent');
 $warn-palette: map.get($color-config, 'warn');
 
+img{
+  object-fit: contain;
+  object-position: center;
+  width:100%; height:100%;
+}
 
 .boardWrapper
 {
-  display:flex;
+  // display:flex;
   justify-content: center;
+  border: 3px black solid;
+  max-width: 100%;
+  max-height:100%;
+  
 }
 
 .board{
-  flex-basis:50%;
+  max-height:100%;
+  max-width:100%;
+}
+
+.mat-grid-list{
 }
 
 .cell{
-  width:100%;
-  height:100%;
-}
-
-.cell{
-  background-color: mat.get-color-from-palette($accent-palette,lighter);
+  width: 100%;
+  height: 100%;
+  // background-color: mat.get-color-from-palette($accent-palette,lighter);
+  background-image: url("/assets/rock.png");
+  background-size: contain;
 }
 
 .selected {
   background-color: mat.get-color-from-palette($warn-palette,default);
+  background-image: unset;
 }
 
 /*This makes a little animation when drop, for this it's necesary the img float:left:margin-right:-100%
   else, when dropped the img dropped goes below the img in cell*/
-.cell img{
-  float:left;
-  width:100%;
-  margin-right:-100%;
-}
 
 .cdk-drag-animating {
   transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cell > div {
+  width:100%; height:100%;
 }
 
 

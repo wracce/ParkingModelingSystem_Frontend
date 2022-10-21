@@ -1,6 +1,7 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Cell } from '../cell';
+import { CellType } from '../cell-type';
 import { DesignerService } from '../designer.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { DesignerService } from '../designer.service';
 })
 export class ParkObjectsComponent implements OnInit {
   indexOver: number = -1;
-  icons:string[] = [];
+  types:CellType[] = [];
   cells:Cell[] = [];
   nameOfIdList:string ="";
   valueListConnectedTo: string[] =[];
@@ -20,7 +21,7 @@ export class ParkObjectsComponent implements OnInit {
   constructor(private designerService:DesignerService) {}
 
   ngOnInit(): void {
-    this.icons = this.designerService.getIcons();
+    this.types = this.designerService.getTypes();
     this.cells = this.designerService.getCells();
     this.nameOfIdList = this.designerService.getNameOfObjsList();
     for (let index = 0; index < this.designerService.getLen(); index++) {
