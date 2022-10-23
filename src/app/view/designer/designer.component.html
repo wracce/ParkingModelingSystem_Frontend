@@ -1,21 +1,30 @@
-<mat-tab-group>
-  <mat-tab label="Настройка"
-    ><div class="container"><div class="content"><app-park-setup></app-park-setup></div></div>
-  </mat-tab>
-  <mat-tab label="Заполнение">
+
+<mat-horizontal-stepper>
+  <mat-step label="Настройка">
+    <div class="container">
+      <div class="content"><app-park-setup></app-park-setup></div>
+    </div>
+  </mat-step>
+  <mat-step label="Заполнение">
     <div class="container">
       <div class="app-park-objectsWrapper">
         <app-park-objects></app-park-objects>
       </div>
       <div class="scaleButtons">
-        <button class="btnZoomOut" mat-button><mat-icon>zoom_out</mat-icon></button>
-        <button class="btnZoomFree"  mat-button ><mat-icon>crop_free</mat-icon></button>
-        <button class="btnZoomIn"  mat-button ><mat-icon>zoom_in</mat-icon></button>
+        <button class="btnZoomOut" mat-button>
+          <mat-icon>zoom_out</mat-icon>
+        </button>
+        <button class="btnZoomFree" mat-button>
+          <mat-icon>crop_free</mat-icon>
+        </button>
+        <button class="btnZoomIn" mat-button>
+          <mat-icon>zoom_in</mat-icon>
+        </button>
       </div>
       <div class="app-park-designerWrapper">
         <app-park-designer></app-park-designer>
       </div>
     </div>
-  </mat-tab>
-  <mat-tab label="Подтверждение"> <div class="content"></div></mat-tab>
-</mat-tab-group>
+  </mat-step>
+  <mat-step label="Подтверждение"> </mat-step>
+</mat-horizontal-stepper>

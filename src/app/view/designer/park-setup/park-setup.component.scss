@@ -11,29 +11,36 @@ $accent-palette: map.get($color-config, 'accent');
     display:flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 64px - 72px);
+    width: 350px;
 }
 .content{
-    display: block;
+    width: 100%;
     background-color:  mat.get-color-from-palette($primary-palette,lighter);
-    padding: 20px;
     border-radius: 10px;
 }
 
-mat-form-field {
-    display: block;
+.sliderBox{
+    box-sizing: border-box;
+    min-width: 100%;
+    padding: 15px;
+}
+label{
+    margin-right: 8px;
+    margin-left: 8px;
+}
+.sliderBoxLabel{
+    font-weight: 600;
 }
 
-.content > button {
-    margin-right: 10px;
-    margin-left: auto;
-    background-color: mat.get-color-from-palette($accent-palette,default);
+.sliderBoxLabelValue{
     float: right;
+}
+
+mat-slider{
+    width: 100%;
+    margin-top: 14px;
 }
 .clearfix {
     overflow: auto;
-}
-
-mat-checkbox{
-    padding-top: 5px;
 }

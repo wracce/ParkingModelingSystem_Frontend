@@ -6,7 +6,8 @@ $color-config:    mat.get-color-config($defaultTheme);
 $primary-palette: map.get($color-config, 'primary');
 $accent-palette: map.get($color-config, 'accent');
 
-.mat-tab-group{
+:host ::ng-deep .mat-horizontal-content-container {
+  padding:0 !important;
 }
 
 .container {
@@ -14,23 +15,23 @@ $accent-palette: map.get($color-config, 'accent');
   display:flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 64px - 50px);
-  max-height: calc(100vh - 64px - 50px);
+  min-height: calc(100vh - 64px - 72px);
+  max-height: calc(100vh - 64px - 72px);
   width: 100%;
 }
 
 .app-park-designerWrapper{
   background-color: mat.get-color-from-palette($primary-palette,lighter);
-  min-height: calc(100vh - 64px - 50px - 32px);
-  max-height: calc(100vh - 64px - 50px - 32px);
+  min-height: calc(100vh - 64px - 72px - 32px);
+  max-height: calc(100vh - 64px - 72px - 32px);
   width: 70%;
 }
 
 .app-park-objectsWrapper {
   background-color: mat.get-color-from-palette($primary-palette,lighter);
   border-radius: 10px 10px 0 0px;
-  min-height: calc(100vh - 64px - 50px - 64px - 32px);
-  max-height: calc(100vh - 64px - 50px - 64px - 32px);
+  min-height: calc(100vh - 64px - 72px - 64px - 32px);
+  max-height: calc(100vh - 64px - 72px - 64px - 32px);
   width: 25%;
 }
 
