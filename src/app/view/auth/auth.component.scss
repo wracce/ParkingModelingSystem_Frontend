@@ -23,10 +23,8 @@ $accent-palette: map.get($color-config, 'accent');
 mat-form-field {
     display: block;
 }
-mat-form-field  button{
-    background-color: mat.get-color-from-palette($accent-palette,lighter);
-}
-button {
+
+.content > button {
     margin-right: 10px;
     margin-left: auto;
     background-color: mat.get-color-from-palette($accent-palette,default);
