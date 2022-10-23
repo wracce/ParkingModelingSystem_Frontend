@@ -12,3 +12,8 @@ $primary-palette: map.get($color-config, 'primary');
 .activeLink {
   background-color: mat.get-color-from-palette($primary-palette, darker);
 }
+
+.mat-toolbar {
+  position: relative;
+  z-index: 2;
+}
