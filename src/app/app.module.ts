@@ -33,6 +33,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 
 
 
@@ -70,7 +72,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatSliderModule,
     MatCardModule,
     MatDividerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatButtonToggleModule
     
 
   ],

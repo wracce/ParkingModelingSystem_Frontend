@@ -1,16 +1,42 @@
 <div class="container">
   <div class="content">
-    <div class="sliderBox">
-      <label class="sliderBoxLabel">Кол-во строк</label>
+    <div class="box">
+      <label class="boxLabel">Название топологии</label>
+      <mat-form-field appearance="outline" floatLabel='never'>
+        <input matInput placeholder="Топология Иванова ИИ">
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="box">
+      <label class="boxLabel">Кол-во строк</label>
       <label class="sliderBoxLabelValue">25</label>
       <mat-slider thumbLabel> </mat-slider>
     </div>
     <mat-divider></mat-divider>
-    <div class="sliderBox">
-      <label class="sliderBoxLabel">Кол-во стобцов</label>
+    <div class="box">
+      <label class="boxLabel">Кол-во стобцов</label>
       <label class="sliderBoxLabelValue">32</label>
       <mat-slider thumbLabel> </mat-slider>
     </div>
     <mat-divider></mat-divider>
+    <div class="box">
+      <label class="boxLabel">Расположение дороги</label>
+      <div class="roadDirectionBox">
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+          <mat-button-toggle value="left" aria-label="Text align left">
+            <mat-icon>border_left</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="top" aria-label="Text align center">
+            <mat-icon>border_top</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="right" aria-label="Text align right">
+            <mat-icon>border_right</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="bottom" aria-label="Text align justify">
+            <mat-icon>border_bottom</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
   </div>
 </div>
