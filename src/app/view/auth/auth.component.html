@@ -1,28 +1,91 @@
-<div class="container">
-  <div class="content">
-    <mat-form-field appearance="outline">
-      <mat-label>Логин</mat-label>
-      <input matInput placeholder="Введите ваш логин" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Пароль</mat-label>
-      <input
-        matInput
-        [type]="hide ? 'password' : 'text'"
-        placeholder="Введите ваш пароль"
-      />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hide = !hide"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide"
-      >
-        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-checkbox>Запомнить?</mat-checkbox>
-    <button mat-button (click)="(onClicked)">Войти</button>
-    <div class="clearfix"></div>
-  </div>
+<div class="content">
+  <mat-tab-group dynamicHeight>
+    <!-- ВХОД -->
+    <mat-tab label="ВХОД">
+      <mat-form-field appearance="outline">
+        <mat-label>Логин</mat-label>
+        <input matInput placeholder="Введите ваш логин" />
+        <button mat-icon-button matPrefix disabled>
+          <mat-icon>person</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Пароль</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          placeholder="Введите ваш пароль"
+        />
+        <button
+          mat-icon-button
+          matPrefix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "vpn_key_off" : "vpn_key" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-checkbox>Запомнить?</mat-checkbox>
+      <button mat-button (click)="(onClicked)">Войти</button>
+      <div class="clearfix"></div>
+    </mat-tab>
+
+    <!-- РЕГИСТРАЦИЯ -->
+    <mat-tab label="РЕГИСТРАЦИЯ">
+      <mat-form-field appearance="outline">
+        <mat-label>Логин</mat-label>
+        <input matInput placeholder="Введите ваш логин" />
+        <button mat-icon-button matPrefix disabled>
+          <mat-icon>person</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Пароль</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          placeholder="Введите ваш пароль"
+        />
+        <button
+          mat-icon-button
+          matPrefix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "vpn_key_off" : "vpn_key" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Повторите пароль</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          placeholder="Введите ваш пароль"
+        />
+        <button
+          mat-icon-button
+          matPrefix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "vpn_key_off" : "vpn_key" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <button mat-icon-button matPrefix disabled>
+          <mat-icon>settings_accessibility</mat-icon>
+        </button>
+        <mat-label>Роль</mat-label>
+        <mat-select>
+          <mat-option value="one">Администратор</mat-option>
+          <mat-option value="two">Пользователь</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button (click)="(onClicked)">Зарегистрироваться</button>
+      <div class="clearfix"></div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
