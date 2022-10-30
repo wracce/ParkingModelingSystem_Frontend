@@ -14,14 +14,18 @@ import { ParkingMap } from '../../models/parking-map';
 export class DesignerParkingComponent implements OnInit {
   
   @ViewChild("board", {static: false})
-  board: ElementRef|undefined;
+  board!: ElementRef;
   @ViewChild("grid", {static: false})
-  grid: ElementRef|undefined;
+  grid!: ElementRef;
+
+  scaleZoom:number = 1;
+  scaleZoomBase:number = 1;
+  translateX:number = 0;
+  translateY:number = 0;
 
   parkingMap:ParkingMap = new ParkingMap();
   indexOver: number = -1;
   types:ParkingTemplate[] = [];
-  cellSize:number = 0;
   cells:ParkingCell[] = [];
   nameOfIdList:string ="";
   valueListConnectedTo: string[] =[];
@@ -29,10 +33,6 @@ export class DesignerParkingComponent implements OnInit {
   constructor(private designerService:DesignerService) {
     this.parkingMap = designerService.getParkingMap();
   }
-
-  resizeObservable$: Observable<Event> = new Observable<Event>();
-  resizeSubscription$: Subscription = new Subscription();
-    
 
   ngOnInit(): void {
     
@@ -45,17 +45,37 @@ export class DesignerParkingComponent implements OnInit {
     // this.resizeSubscription$ = this.resizeObservable$.subscribe( evt => this.resize())
   }
 
-  ngOnDestroy() {
-    this.resizeSubscription$.unsubscribe()
-}
+  ngAfterViewInit(){
+    // this.zoomFree();
+  }
 
   drop(event: CdkDragDrop<any>) {
     this.designerService.drop(event);
   }
 
-  resize() {
-    maxWidth:Number = this.board?.nativeElement.offsetWidth;
-    maxHeight:Number = this.board?.nativeElement.offsetHeigth;
-    // this.cellSize = Math.min([maxWidth, maxHeight])
+  public zoomIn():void {
+    this.scaleZoom += 0.2;
+
+    
+  }
+
+  public zoomFree():void {
+    let h:number =this.board.nativeElement.clientHeight;
+    let w:number =this.board.nativeElement.clientWidth;
+    let x:number = this.parkingMap.cols*64;
+    
+    if (w>h) {
+      this.scaleZoomBase = this.scaleZoom = h/x;
+      this.translateX = (w-x*this.scaleZoom)/2;
+      this.translateY = 0;
+    } else {
+      this.scaleZoomBase = this.scaleZoom = w/x;
+      this.translateX = 0;
+      this.translateY = (h-x*this.scaleZoom)/2;
+    }
+    // this.board.nativeElement.scrollTop = (this.board.nativeElement.offsetWidth - this.board.nativeElement.offsetHeight)/2;
+  }
+  public zoomOut():void {
+    this.scaleZoom -= 0.2;
   }
 }

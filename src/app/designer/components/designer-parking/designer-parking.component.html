@@ -1,6 +1,6 @@
     <div #board class="board" cdkDropListGroup>
-      <mat-grid-list #grid [cols]="parkingMap.cols" gutterSize="0" >
-        <mat-grid-tile *ngFor="let cell of cells; let i = index">
+      <mat-grid-list #grid [cols]="parkingMap.cols" gutterSize="0" role="list" rowHeight="64px" [style.width]="parkingMap.cols*64+'px'" [style.transform]="'scale(' + scaleZoom + ') translate(' + translateX + 'px, ' + translateY + 'px)'">
+        <mat-grid-tile role="listitem" *ngFor="let cell of cells; let i = index">
           <div
             class="cell"
             cdkDropList

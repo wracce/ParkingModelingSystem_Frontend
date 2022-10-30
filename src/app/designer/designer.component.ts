@@ -1,5 +1,6 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DesignerParkingComponent } from './components/designer-parking/designer-parking.component';
 import { DesignerService } from './services/designer.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { DesignerService } from './services/designer.service';
   styleUrls: ['./designer.component.scss']
 })
 export class DesignerComponent implements OnInit {
+  @ViewChild(DesignerParkingComponent)
+  private designerParkingComponent!: DesignerParkingComponent;
   constructor(private designerService:DesignerService) { }
 
   ngOnInit(): void {
@@ -16,6 +19,17 @@ export class DesignerComponent implements OnInit {
   public selectionChange(event:StepperSelectionEvent):void {
     if (event.previouslySelectedIndex == 0 && event.selectedIndex == 1)
       this.designerService.fillCells();
-    
   }
+
+  public zoomIn():void {
+    this.designerParkingComponent.zoomIn();
+  }
+
+  public zoomFree():void {
+    this.designerParkingComponent.zoomFree();
+  }
+  public zoomOut():void {
+    this.designerParkingComponent.zoomOut();
+  }
+  
 }
