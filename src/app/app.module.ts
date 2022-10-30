@@ -12,17 +12,17 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
-import { NavbarComponent } from './view/navbar/navbar.component';
-import { DesignerComponent } from './view/designer/designer.component';
-import { AuthComponent } from './view/auth/auth.component';
-import { AboutComponent } from './view/about/about.component';
-import { NfComponent } from './view/nf/nf.component';
-import { HomeComponent } from './view/home/home.component';
-import { ParkDesignerComponent } from './view/designer/park-designer/park-designer.component';
-import { DesignerService } from './view/designer/designer.service';
-import { ParkObjectsComponent } from './view/designer/park-objects/park-objects.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { DesignerComponent } from './designer/designer.component';
+import { AuthComponent } from './auth/auth.component';
+import { AboutComponent } from './about/about.component';
+import { NfComponent } from './nf/nf.component';
+import { HomeComponent } from './home/home.component';
+import { DesignerParkingComponent } from './designer/components/designer-parking/designer-parking.component';
+import { DesignerService } from './designer/services/designer.service';
+import { DesignerSetupComponent } from './designer/components/designer-setup/designer-setup.component';
 import {MatTreeModule} from '@angular/material/tree';
-import { ParkSetupComponent } from './view/designer/park-setup/park-setup.component';
+import { DesignerTemplatesComponent } from './designer/components/designer-templates/designer-templates.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -35,6 +35,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -50,9 +51,9 @@ import {MatSelectModule} from '@angular/material/select';
     AboutComponent,
     NfComponent,
     HomeComponent,
-    ParkDesignerComponent,
-    ParkObjectsComponent,
-    ParkSetupComponent,
+    DesignerParkingComponent,
+    DesignerSetupComponent,
+    DesignerTemplatesComponent
     
   ],
   imports: [
@@ -75,7 +76,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatDividerModule,
     MatStepperModule,
     MatButtonToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule
     
 
   ],

@@ -1,5 +1,5 @@
     <div #board class="board" cdkDropListGroup>
-      <mat-grid-list #grid [cols]="cols" gutterSize="0" >
+      <mat-grid-list #grid [cols]="parkingMap.cols" gutterSize="0" >
         <mat-grid-tile *ngFor="let cell of cells; let i = index">
           <div
             class="cell"

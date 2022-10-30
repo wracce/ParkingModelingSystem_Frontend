@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ParkObjectsComponent } from './park-objects.component';
+import { DesignerTemplatesComponent } from './designer-templates.component';
 
 describe('ParkObjectsComponent', () => {
-  let component: ParkObjectsComponent;
-  let fixture: ComponentFixture<ParkObjectsComponent>;
+  let component: DesignerTemplatesComponent;
+  let fixture: ComponentFixture<DesignerTemplatesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ParkObjectsComponent ]
+      declarations: [ DesignerTemplatesComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ParkObjectsComponent);
+    fixture = TestBed.createComponent(DesignerTemplatesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
