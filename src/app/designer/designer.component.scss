@@ -21,7 +21,7 @@ $accent-palette: map.get($color-config, 'accent');
 }
 
 .app-park-designerWrapper{
-  background-color: mat.get-color-from-palette($primary-palette,lighter);
+
   min-height: calc(100vh - 64px - 72px - 32px);
   max-height: calc(100vh - 64px - 72px - 32px);
   width: 70%;
@@ -68,3 +68,4 @@ $accent-palette: map.get($color-config, 'accent');
   border-radius: 0 8px 8px 0;
   height: 70%;
 }
+
