@@ -19,6 +19,7 @@ export class DesignerComponent implements OnInit {
   public selectionChange(event:StepperSelectionEvent):void {
     if (event.previouslySelectedIndex == 0 && event.selectedIndex == 1)
       this.designerService.fillCells();
+      this.designerParkingComponent.zoomFree();
   }
 
   public zoomIn():void {

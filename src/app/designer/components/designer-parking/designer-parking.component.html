@@ -1,23 +1,32 @@
-    <div #board class="board" cdkDropListGroup>
-      <mat-grid-list #grid [cols]="parkingMap.cols" gutterSize="0" role="list" rowHeight="64px" [style.width]="parkingMap.cols*64+'px'" [style.transform]="'scale(' + scaleZoom + ') translate(' + translateX + 'px, ' + translateY + 'px)'">
-        <mat-grid-tile role="listitem" *ngFor="let cell of cells; let i = index">
-          <div
-            class="cell"
-            cdkDropList
-            [id]="nameOfIdList + i"
-            [cdkDropListData]="cell"
-            [cdkDropListConnectedTo]="valueListConnectedTo"
-            (cdkDropListDropped)="drop($event)"
-            [class.selected]="i == indexOver"
-            (mouseover)="indexOver = i"
-            (mouseout)="indexOver = -1"
-          >
-            <div cdkDrag>
-              <img *ngIf="cell.type.src" [src]="cell.type.src"/>
-              <span *ngIf="!cell.type.src"></span>
-              <div *cdkDragPlaceholder></div>
-            </div>
-          </div>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
+<div #board class="board" cdkDropListGroup>
+  <mat-grid-list
+    #grid
+    [cols]="parkingMap.cols"
+    gutterSize="0"
+    role="list"
+    [style.width]="parkingMap.cols * sizeCell + 'px'"
+    [style.height]="parkingMap.rows * sizeCell + 'px'"
+    [style.margin-top]="marginTop + 'px'"
+    [style.margin-left]="marginLeft + 'px'"
+  >
+    <mat-grid-tile role="listitem" *ngFor="let cell of cells; let i = index">
+      <div
+        class="cell"
+        cdkDropList
+        [id]="nameOfIdList + i"
+        [cdkDropListData]="cell"
+        [cdkDropListConnectedTo]="valueListConnectedTo"
+        (cdkDropListDropped)="drop($event)"
+        [class.selected]="i == indexOver"
+        (mouseover)="indexOver = i"
+        (mouseout)="indexOver = -1"
+      >
+        <div cdkDrag>
+          <img *ngIf="cell.type.src" [src]="cell.type.src" />
+          <span *ngIf="!cell.type.src"></span>
+          <div *cdkDragPlaceholder></div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
