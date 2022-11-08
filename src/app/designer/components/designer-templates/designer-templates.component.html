@@ -1,58 +1,33 @@
-<div class="container">
-  <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Парковочные места </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="sideWrapper">
-        <div class="side">
-          <mat-grid-list cols="4" gutterSize="0" [class.mat-elevation-z2]>
-            <mat-grid-tile *ngFor="let type of types; let i = index">
-              <div
-                class="cell"
-                cdkDropList
-                [id]="nameOfIdList"
-                [cdkDropListData]="type"
-                [cdkDropListConnectedTo]="valueListConnectedTo"
-                (cdkDropListDropped)="drop($event)"
-              >
-                <div cdkDrag>
-                  <img [src]="type.src" width="100%" />
-                  <div *cdkDragPlaceholder></div>
+  <cdk-virtual-scroll-viewport itemSize="50">
+    <div class="container">
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel *ngFor="let type of types.getGroupList()">
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{ type }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="sideWrapper">
+          <div class="side">
+            <mat-grid-list cols="4" gutterSize="0" [class.mat-elevation-z2]>
+              <mat-grid-tile *ngFor="let template of types.getGroup(type)">
+                <div
+                  class="cell"
+                  cdkDropList
+                  [id]="nameOfIdList"
+                  [cdkDropListData]="template"
+                  [cdkDropListConnectedTo]="valueListConnectedTo"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <div cdkDrag>
+                    <img [src]="template.src" width="100%" />
+                    <div *cdkDragPlaceholder></div>
+                  </div>
                 </div>
-              </div>
-            </mat-grid-tile>
-          </mat-grid-list>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
         </div>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Парковочные места </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="sideWrapper">
-        <div class="side">
-          <mat-grid-list cols="4" gutterSize="0" [class.mat-elevation-z2]>
-            <mat-grid-tile *ngFor="let type of types; let i = index">
-              <div
-                class="cell"
-                cdkDropList
-                [id]="nameOfIdList"
-                [cdkDropListData]="type"
-                [cdkDropListConnectedTo]="valueListConnectedTo"
-                (cdkDropListDropped)="drop($event)"
-              >
-                <div cdkDrag>
-                  <img [src]="type.src" width="100%" />
-                  <div *cdkDragPlaceholder></div>
-                </div>
-              </div>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </div>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  </cdk-virtual-scroll-viewport>

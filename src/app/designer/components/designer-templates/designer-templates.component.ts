@@ -2,6 +2,7 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ParkingCell } from '../../models/parking-cell';
 import { ParkingTemplate } from '../../models/parking-template';
+import { ParkingTemplateGroup } from '../../models/parking-template-group';
 import { DesignerService } from '../../services/designer.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { DesignerService } from '../../services/designer.service';
 })
 export class DesignerTemplatesComponent implements OnInit {
   indexOver: number = -1;
-  types:ParkingTemplate[] = [];
+  types!:ParkingTemplateGroup;
   cells:ParkingCell[] = [];
   nameOfIdList:string ="";
   valueListConnectedTo:string[] =[];

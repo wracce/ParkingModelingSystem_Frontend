@@ -36,6 +36,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { AdministratorComponent } from './administrator/administrator.component';
+
 
 
 
@@ -53,7 +56,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     DesignerParkingComponent,
     DesignerSetupComponent,
-    DesignerTemplatesComponent
+    DesignerTemplatesComponent,
+    AdministratorComponent
     
   ],
   imports: [
@@ -77,7 +81,8 @@ import { FormsModule } from '@angular/forms';
     MatStepperModule,
     MatButtonToggleModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    ScrollingModule
     
 
   ],

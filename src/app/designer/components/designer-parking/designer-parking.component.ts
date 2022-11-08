@@ -11,6 +11,7 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 import { ParkingTemplate } from '../../models/parking-template';
 import { ParkingCell } from '../../models/parking-cell';
 import { ParkingMap } from '../../models/parking-map';
+import { ParkingTemplateGroup } from '../../models/parking-template-group';
 
 @Component({
   selector: 'app-designer-parking',
@@ -37,7 +38,7 @@ export class DesignerParkingComponent implements OnInit {
 
   parkingMap: ParkingMap = new ParkingMap();
   indexOver: number = -1;
-  types: ParkingTemplate[] = [];
+  types!: ParkingTemplateGroup;
   cells: ParkingCell[] = [];
   nameOfIdList: string = '';
   valueListConnectedTo: string[] = [];

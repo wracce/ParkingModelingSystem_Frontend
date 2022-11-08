@@ -4,56 +4,48 @@ import { ParkingCell } from '../models/parking-cell';
 import { ParkingMap } from '../models/parking-map';
 import { ParkingState } from '../models/parking-state';
 import { ParkingTemplate } from '../models/parking-template';
+import { ParkingTemplateGroup } from '../models/parking-template-group';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DesignerService {
-  private linkOfCell:string ="";
-  private linkOfObjsList:string = "";
-  private linksToCellList:string[] = [];
+  private linkOfParkingCell:string ="";
+  private linkOfParkingTemplate:string = "";
+  private linksToParkingCells:string[] = [];
 
   private parkingMap: ParkingMap = new ParkingMap();
-  private types:ParkingTemplate[] =[];
-  private cells:ParkingCell[]=[];
+  private parkingTemplateGroup!:ParkingTemplateGroup;
+  private parkingCells:ParkingCell[]=[];
 
   constructor() { 
-    this.parkingMap = new ParkingMap("test",6, 6, "left");
-    this.linkOfCell = "designerCellList";
-    this.linkOfObjsList = "designerObjsList";
-    this.types = [
-      new ParkingTemplate('/assets/car/car1.png',"Машины",ParkingState.Car,0),
-      new ParkingTemplate('/assets/car/car2.png',"Машины",ParkingState.Car,0),
-      new ParkingTemplate('/assets/car/car3.png',"Машины",ParkingState.Car,0),
-      new ParkingTemplate('/assets/car/car4.png',"Машины",ParkingState.Car,0),
-      new ParkingTemplate('/assets/car/car5.png',"Машины",ParkingState.Car,0),
-      new ParkingTemplate('/assets/car/car6.png',"Машины",ParkingState.Car,0),
-      new ParkingTemplate('/assets/car/car7.png',"Машины",ParkingState.Car,0),
-
-    ];
+    this.parkingMap = new ParkingMap("",6, 6, "left");
+    this.linkOfParkingCell = "designerCellList";
+    this.linkOfParkingTemplate = "designerObjsList";
+    this.parkingTemplateGroup = new ParkingTemplateGroup();
     this.fillCells();
   }
   public getParkingMap(): ParkingMap {
     return this.parkingMap;
   }
-  public getTypes():ParkingTemplate[] {
-    return this.types;
+  public getTypes():ParkingTemplateGroup {
+    return this.parkingTemplateGroup;
   }
 
   public getCells():ParkingCell[] {
-    return this.cells;
+    return this.parkingCells;
   }
 
   public getNameOfGridList():string {
-    return this.linkOfCell;
+    return this.linkOfParkingCell;
   }
 
   public getLinksToCellList():string[] {
-    return this.linksToCellList;
+    return this.linksToParkingCells;
   }
 
   public getNameOfObjsList():string {
-    return this.linkOfObjsList;
+    return this.linkOfParkingTemplate;
   }
 
   public drop(event: CdkDragDrop<any>) {
@@ -64,21 +56,21 @@ export class DesignerService {
           event.container.data.type = event.previousContainer.data;
         } else {  // from board to board
           event.container.data.type = event.previousContainer.data.type;
-          event.previousContainer.data.type = new ParkingTemplate(null,"",ParkingState.Undef,0);
+          event.previousContainer.data.type = new ParkingTemplate("", null,"",ParkingState.Undef,0);
         }
       }
     }
   }
 
   public fillCells():void {
-    this.cells.length = 0;
+    this.parkingCells.length = 0;
     for (let index = 0; index < this.parkingMap.getSize(); index++) {
-      this.cells.push(new ParkingCell(new ParkingTemplate(null,"",ParkingState.Undef,0),index));
+      this.parkingCells.push(new ParkingCell(new ParkingTemplate("", null,"",ParkingState.Undef,0),index));
     }
 
-    this.linksToCellList.length = 0;
+    this.linksToParkingCells.length = 0;
     for (let index = 0; index < this.getParkingMap().getSize(); index++) {
-      this.linksToCellList.push(this.getNameOfGridList()+index);
+      this.linksToParkingCells.push(this.getNameOfGridList()+index);
     }
   }  
 }
