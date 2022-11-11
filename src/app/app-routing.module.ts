@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { DesignerComponent } from './designer/designer.component';
 import { HomeComponent } from './home/home.component';
+import { ManagerComponent } from './manager/manager.component';
 import { NfComponent } from './nf/nf.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "auth", component: AuthComponent},
   { path: "administrator", component: AdministratorComponent},
   { path: "designer", component: DesignerComponent},
+  { path: "manager", component: ManagerComponent},
   { path: "**", component: NfComponent},
   
 ];

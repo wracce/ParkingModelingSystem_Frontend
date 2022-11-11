@@ -1,5 +1,6 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import {
+  // ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
@@ -17,6 +18,7 @@ import { ParkingTemplateGroup } from '../../models/parking-template-group';
   selector: 'app-designer-parking',
   templateUrl: './designer-parking.component.html',
   styleUrls: ['./designer-parking.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DesignerParkingComponent implements OnInit {
   @ViewChild('board', { static: false })
@@ -52,6 +54,10 @@ export class DesignerParkingComponent implements OnInit {
     this.cells = this.designerService.getCells();
     this.nameOfIdList = this.designerService.getNameOfGridList();
     this.valueListConnectedTo.push(this.designerService.getNameOfObjsList());
+  }
+
+  trackByFn(index: number, cell: ParkingCell) {
+    return cell;
   }
 
   drop(event: CdkDragDrop<any>) {

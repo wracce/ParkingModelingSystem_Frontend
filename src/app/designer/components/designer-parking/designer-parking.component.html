@@ -9,7 +9,7 @@
     [style.margin-top]="marginTop + 'px'"
     [style.margin-left]="marginLeft + 'px'"
   >
-    <mat-grid-tile role="listitem" *ngFor="let cell of cells; let i = index">
+    <mat-grid-tile role="listitem" *ngFor="let cell of cells; let i = index; trackBy: trackByFn">
       <div
         class="cell"
         cdkDropList

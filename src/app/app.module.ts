@@ -38,6 +38,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { AdministratorComponent } from './administrator/administrator.component';
+import { ManagerComponent } from './manager/manager.component';
 
 
 
@@ -57,7 +58,8 @@ import { AdministratorComponent } from './administrator/administrator.component'
     DesignerParkingComponent,
     DesignerSetupComponent,
     DesignerTemplatesComponent,
-    AdministratorComponent
+    AdministratorComponent,
+    ManagerComponent
     
   ],
   imports: [
