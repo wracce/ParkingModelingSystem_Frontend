@@ -32,16 +32,18 @@ $accent-palette: map.get($color-config, 'accent');
   border-radius: 10px 10px 0 0px;
   min-height: calc(100vh - 64px - 72px - 64px - 32px);
   max-height: calc(100vh - 64px - 72px - 64px - 32px);
-  width: 25%;
+  width: 240px;
+  margin: 0 5px 0 5px;
 }
 
 .scaleButtons{
-  min-height: 64px;
-  max-height: 64px;
-  width: 25%;
+  height: 64px;
+  width: 240px;
+  margin: 0 5px 0 5px;
   border-radius: 0 0 10px 10px;
-  background-color: mat.get-color-from-palette($primary-palette,darker);
-  display: flex;
+  // background-color: mat.get-color-from-palette($primary-palette,darker);
+  background: rgb(0,100,114);
+  background: linear-gradient(43deg, rgba(0,100,114,1) 29%, rgba(32,154,215,0.7269999186197917) 92%);  display: flex;
   justify-content: center;
   align-items: center;
 }

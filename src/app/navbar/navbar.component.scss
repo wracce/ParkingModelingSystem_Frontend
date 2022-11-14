@@ -9,6 +9,11 @@ $primary-palette: map.get($color-config, 'primary');
   flex: 1 1 auto;
 }
 
+.mat-toolbar {
+  background: rgb(138,132,239);
+  background: linear-gradient(49deg, rgba(138,132,239,1) 10%, rgba(0,129,143,1) 84%);
+}
+
 .activeLink {
   background-color: mat.get-color-from-palette($primary-palette, darker);
 }

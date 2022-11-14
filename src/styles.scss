@@ -1,8 +1,9 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
-@import './variables.scss';
+@use "sass:map";
+@use "@angular/material" as mat;
+@import "./variables.scss";
+@import "./custom-palettes.scss";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -17,8 +18,44 @@
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;min-width: 640px; min-height: 480px;}
+$color-config: mat.get-color-config($defaultTheme);
+$accent-palette: map.get($color-config, "accent");
+$warn-palette: map.get($color-config, "warn");
+
+$board-color: #EDEDED;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-width: 640px;
+  min-height: 480px;
+}
+
+::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: mat.get-color-from-palette($accent-palette, default);
+    background-clip: padding-box;
+    border: solid transparent;
+    border-radius: 10px;
+}
+
+*:not(.geScrollable)::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
 
 // ::-webkit-scrollbar {
 //     width: 4px;

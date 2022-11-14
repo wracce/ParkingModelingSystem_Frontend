@@ -6,6 +6,8 @@ $color-config: mat.get-color-config($defaultTheme);
 $accent-palette: map.get($color-config, "accent");
 $warn-palette: map.get($color-config, "warn");
 
+$board-color: #EDEDED;
+
 img {
   object-fit: contain;
   object-position: center;
@@ -14,23 +16,29 @@ img {
 }
 
 .board {
-
   overflow: scroll;
   height: calc(100vh - 64px - 72px - 32px);
   width: 100%;
 
-  border: 2px solid #444cf7;
-  background-image:  linear-gradient(#444cf7 2px, transparent 2px), linear-gradient(90deg, #444cf7 2px, transparent 2px), linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(90deg, #444cf7 1px,white 1px);
-  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
-  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-  background-attachment: local;
+  border: 2px solid $board-color;
+  opacity: 1;
+  background-image: linear-gradient($board-color 3.2px, transparent 3.2px),
+    linear-gradient(90deg, $board-color 3.2px, transparent 3.2px),
+    linear-gradient($board-color 1.6px, transparent 1.6px),
+    linear-gradient(90deg, $board-color 1.6px, #ffffff 1.6px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  background-position: -3.2px -3.2px, -3.2px -3.2px, -1.6px -1.6px,
+    -1.6px -1.6px;
+
+}
+
+::-webkit-scrollbar-corner,*:not(.geScrollable)::-webkit-scrollbar{
+  background-color: $board-color;
 }
 
 mat-grid-list {
   padding: 0 !important;
-
 }
-
 
 .cdk-drag {
   width: 100%;

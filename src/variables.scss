@@ -1,4 +1,4 @@
-@import "~@angular/material/theming";
+@import "@angular/material/theming";
 @import './custom-palettes.scss';
 
 $ParkingModelingSystem_Frontend-primary: mat.define-palette($primary-palette, 500,50,800);
