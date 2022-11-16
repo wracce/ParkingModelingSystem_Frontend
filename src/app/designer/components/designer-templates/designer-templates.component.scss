@@ -33,6 +33,10 @@ cdk-virtual-scroll-viewport{
   width:calc(100% - 1px); /*we calcule 100% -the "gap" of the mat-grid-list*/
   height:calc(100% - 1px)
 }
+.cdk-drag-preview{
+  opacity: 70%;
+}
+
 
 .cell >div {
   width: 100%;

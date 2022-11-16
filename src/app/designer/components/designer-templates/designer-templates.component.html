@@ -1,33 +1,26 @@
-  <cdk-virtual-scroll-viewport itemSize="50">
-    <div class="container">
-    <mat-accordion class="example-headers-align" multi>
-      <mat-expansion-panel *ngFor="let type of types.getGroupList()">
-        <mat-expansion-panel-header>
-          <mat-panel-title> {{ type }} </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="sideWrapper">
-          <div class="side">
-            <mat-grid-list cols="4" gutterSize="0" [class.mat-elevation-z2]>
-              <mat-grid-tile *ngFor="let template of types.getGroup(type)">
-                <div
-                  class="cell"
-                  cdkDropList
-                  [id]="nameOfIdList"
-                  [cdkDropListData]="template"
-                  [cdkDropListConnectedTo]="valueListConnectedTo"
-                  (cdkDropListDropped)="drop($event)"
-                >
-                  <div cdkDrag>
-                    <img [src]="template.src" width="100%" />
-                    <div *cdkDragPlaceholder></div>
-                  </div>
-                </div>
-              </mat-grid-tile>
-            </mat-grid-list>
-          </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
+<cdk-virtual-scroll-viewport itemSize="50">
+  <div class="container">
+    <div class="sideWrapper">
+      <div class="side">
+        <mat-grid-list cols="4" gutterSize="0" [class.mat-elevation-z2]>
+          <mat-grid-tile *ngFor="let template of types.getParkingTemplates()"      [colspan]="template.cols"
+          [rowspan]="template.rows">
+            <div
+              class="cell"
+              cdkDropList
+              [id]="nameOfIdList"
+              [cdkDropListData]="template"
+              [cdkDropListConnectedTo]="valueListConnectedTo"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div cdkDrag>
+                <img [src]="template.src" />
+                <div *cdkDragPlaceholder></div>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
   </div>
-
-  </cdk-virtual-scroll-viewport>
+</cdk-virtual-scroll-viewport>

@@ -13,13 +13,13 @@ import { ParkingTemplateGroup } from '../models/parking-template-group';
 export class DesignerService {
   private linkOfParkingCell!: string;
   private linkOfParkingTemplate!: string;
-  private linksToParkingCells!:string[];
+  private linksToParkingCells!: string[];
   private parkingMap!: ParkingMap;
   private parkingTemplateGroup!: ParkingTemplateGroup;
   private setupParkingForm!: FormGroup;
 
   constructor() {
-    this.linksToParkingCells =[];
+    this.linksToParkingCells = [];
     this.parkingMap = new ParkingMap('', 6, 6, 'top', 1);
     this.linkOfParkingCell = 'designerCellList';
     this.linkOfParkingTemplate = 'designerObjsList';
@@ -62,15 +62,18 @@ export class DesignerService {
         if (event.previousContainer.data instanceof ParkingTemplate) {
           // from side to board
           event.container.data.type = event.previousContainer.data;
+          if (event.previousContainer.data.cols > 1 ||event.previousContainer.data.rows > 1)
+            this.parkingMap.configurateNeighbours(event.container.data);
         } else {
           // from board to board
           event.container.data.type = event.previousContainer.data.type;
           event.previousContainer.data.type = new ParkingTemplate(
             '',
             null,
-            '',
             ParkingState.Undef,
-            0
+            0,
+            1,
+            1
           );
         }
       }
@@ -78,7 +81,9 @@ export class DesignerService {
   }
 
   public resetLinksToParkingCells() {
-    let links = this.parkingMap.getParkingCells().map(cell => this.linkOfParkingCell + cell.id);
+    let links = this.parkingMap
+      .getParkingCells()
+      .map((cell) => this.linkOfParkingCell + cell.id);
     this.linksToParkingCells.length = 0;
     this.linksToParkingCells.push(...links);
   }

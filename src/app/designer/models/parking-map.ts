@@ -52,16 +52,14 @@ export class ParkingMap {
       let undefTemplate: ParkingTemplate = new ParkingTemplate(
         '',
         null,
-        '',
         ParkingState.Undef,
-        0
+        0, 1,1
       );
       let roadTemplate: ParkingTemplate = new ParkingTemplate(
         '',
         null,
-        '',
         ParkingState.Road,
-        0
+        0, 1,1
       );
 
       this.parkingCells.length = 0;
@@ -165,5 +163,12 @@ export class ParkingMap {
 
   public at(x:number,y:number):ParkingTemplate {
     return this.parkingCells[y*this.cols+x].type;
+  }
+
+  public configurateNeighbours(cell: ParkingCell) {
+    for (let i = 1; i < cell.type.cols*cell.type.rows; i++) {
+      this.parkingCells[cell.id+(i%cell.type.cols)+this.cols*(Math.floor(i/cell.type.cols))].type = new ParkingTemplate("",null,ParkingState.Undef,0,0,0);
+      
+    }
   }
 }

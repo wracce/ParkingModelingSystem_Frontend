@@ -52,7 +52,7 @@ export class DesignerParkingComponent implements OnInit {
     this.types = this.designerService.getTypes();
     this.cells = this.parkingMap.getCells();
     this.nameOfIdList = this.designerService.getNameOfGridList();
-    // this.valueListConnectedTo.push(this.designerService());
+    this.valueListConnectedTo = this.designerService.getLinksToParkingCells();
   }
 
   drop(event: CdkDragDrop<any>) {

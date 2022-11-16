@@ -1,16 +1,14 @@
-<div #board class="board" cdkDropListGroup>
+<div #board class="board">
   <mat-grid-list
     #grid
     [cols]="parkingMap.cols"
     gutterSize="0"
-    role="list"
     [style.width]="parkingMap.cols * sizeCell + 'px'"
     [style.height]="parkingMap.rows * sizeCell + 'px'"
     [style.margin-top]="marginTop + 'px'"
     [style.margin-left]="marginLeft + 'px'"
   >
     <mat-grid-tile
-      role="listitem"
       *ngFor="let cell of cells; let i = index;"
     >
       <div
@@ -25,9 +23,9 @@
         (mouseout)="indexOver = -1"
         [class.roadCell] = "isRoad(cell)"
       >
-        <div cdkDrag style="bac">
-          <img *ngIf="cell.type.src" [src]="cell.type.src" />
-          <span *ngIf="!cell.type.src"></span>
+        <div cdkDrag style="width: max-content; height: max-content;">
+          <img *ngIf="cell.type.src" [src]="cell.type.src"  [width]="cell.type.cols*sizeCell" [height]="cell.type.rows*sizeCell"/>
+          <!-- <span *ngIf="!cell.type.src">OPS</span> -->
           <div *cdkDragPlaceholder></div>
         </div>
       </div>
