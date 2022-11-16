@@ -9,7 +9,10 @@
     [style.margin-top]="marginTop + 'px'"
     [style.margin-left]="marginLeft + 'px'"
   >
-    <mat-grid-tile role="listitem" *ngFor="let cell of cells; let i = index; trackBy: trackByFn">
+    <mat-grid-tile
+      role="listitem"
+      *ngFor="let cell of cells; let i = index;"
+    >
       <div
         class="cell"
         cdkDropList
@@ -20,8 +23,9 @@
         [class.selected]="i == indexOver"
         (mouseover)="indexOver = i"
         (mouseout)="indexOver = -1"
+        [class.roadCell] = "isRoad(cell)"
       >
-        <div cdkDrag>
+        <div cdkDrag style="bac">
           <img *ngIf="cell.type.src" [src]="cell.type.src" />
           <span *ngIf="!cell.type.src"></span>
           <div *cdkDragPlaceholder></div>

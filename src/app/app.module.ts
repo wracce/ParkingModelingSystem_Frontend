@@ -35,7 +35,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { ManagerComponent } from './manager/manager.component';
@@ -84,6 +84,7 @@ import { ManagerComponent } from './manager/manager.component';
     MatButtonToggleModule,
     MatSelectModule,
     FormsModule,
+    ReactiveFormsModule,
     ScrollingModule
     
 

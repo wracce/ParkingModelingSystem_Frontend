@@ -38,6 +38,8 @@ img {
 
 mat-grid-list {
   padding: 0 !important;
+  background-image: url(/assets/ground_asphalt.png);
+  background-size: 20%;
 }
 
 .cdk-drag {
@@ -48,11 +50,17 @@ mat-grid-list {
   width: 100%;
   height: 100%;
   // background-color: mat.get-color-from-palette($accent-palette,lighter);
-  background-image: url("/assets/rock.png");
-  background-size: contain;
+  // background-image: url("/assets/rock.png");
+  // background-size: contain;
 }
 
 .selected {
   background-color: mat.get-color-from-palette($warn-palette, default);
   background-image: unset;
+}
+
+
+.roadCell{
+  background-image: url(/assets/road.png);
+  background-size: 100%;
 }

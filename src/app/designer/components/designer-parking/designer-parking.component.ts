@@ -13,6 +13,7 @@ import { ParkingTemplate } from '../../models/parking-template';
 import { ParkingCell } from '../../models/parking-cell';
 import { ParkingMap } from '../../models/parking-map';
 import { ParkingTemplateGroup } from '../../models/parking-template-group';
+import { ParkingState } from '../../models/parking-state';
 
 @Component({
   selector: 'app-designer-parking',
@@ -23,8 +24,6 @@ import { ParkingTemplateGroup } from '../../models/parking-template-group';
 export class DesignerParkingComponent implements OnInit {
   @ViewChild('board', { static: false })
   board!: ElementRef;
-  @ViewChild('grid', { static: false })
-  grid!: ElementRef;
 
   zoomScaleProc = 15; //%
   sizePadding: number = 20; //px
@@ -38,7 +37,7 @@ export class DesignerParkingComponent implements OnInit {
   sizeCell: number = this.minSizeCell;
   sizeCellBase: number = this.sizeCell;
 
-  parkingMap: ParkingMap = new ParkingMap();
+  parkingMap!: ParkingMap;
   indexOver: number = -1;
   types!: ParkingTemplateGroup;
   cells: ParkingCell[] = [];
@@ -51,13 +50,9 @@ export class DesignerParkingComponent implements OnInit {
 
   ngOnInit(): void {
     this.types = this.designerService.getTypes();
-    this.cells = this.designerService.getCells();
+    this.cells = this.parkingMap.getCells();
     this.nameOfIdList = this.designerService.getNameOfGridList();
-    this.valueListConnectedTo.push(this.designerService.getNameOfObjsList());
-  }
-
-  trackByFn(index: number, cell: ParkingCell) {
-    return cell;
+    // this.valueListConnectedTo.push(this.designerService());
   }
 
   drop(event: CdkDragDrop<any>) {
@@ -65,7 +60,7 @@ export class DesignerParkingComponent implements OnInit {
   }
 
   public zoomIn(): void {
-    this.sizeCell *= 1+this.zoomScaleProc/100;
+    this.sizeCell *= 1 + this.zoomScaleProc / 100;
 
     if (this.sizeCell < this.minSizeCell)
       this.sizeCell = this.sizeCellBase = this.minSizeCell;
@@ -76,8 +71,10 @@ export class DesignerParkingComponent implements OnInit {
       (this.w - this.sizeCell * this.parkingMap.cols) / 2 + this.sizePadding;
     this.marginTop =
       (this.h - this.sizeCell * this.parkingMap.rows) / 2 + this.sizePadding;
-    if (this.w+2*this.sizePadding < this.sizeCell * this.parkingMap.cols) this.marginLeft = 0;
-    if (this.h+2*this.sizePadding < this.sizeCell * this.parkingMap.rows) this.marginTop = 0;
+    if (this.w + 2 * this.sizePadding < this.sizeCell * this.parkingMap.cols)
+      this.marginLeft = 0;
+    if (this.h + 2 * this.sizePadding < this.sizeCell * this.parkingMap.rows)
+      this.marginTop = 0;
   }
 
   public zoomFree(): void {
@@ -98,12 +95,14 @@ export class DesignerParkingComponent implements OnInit {
       (this.w - this.sizeCell * this.parkingMap.cols) / 2 + this.sizePadding;
     this.marginTop =
       (this.h - this.sizeCell * this.parkingMap.rows) / 2 + this.sizePadding;
-    if (this.w+2*this.sizePadding < this.sizeCell * this.parkingMap.cols) this.marginLeft = 0;
-    if (this.h+2*this.sizePadding < this.sizeCell * this.parkingMap.rows) this.marginTop = 0;
+    if (this.w + 2 * this.sizePadding < this.sizeCell * this.parkingMap.cols)
+      this.marginLeft = 0;
+    if (this.h + 2 * this.sizePadding < this.sizeCell * this.parkingMap.rows)
+      this.marginTop = 0;
   }
 
   public zoomOut(): void {
-    this.sizeCell *= 1-this.zoomScaleProc / 100;
+    this.sizeCell *= 1 - this.zoomScaleProc / 100;
     if (this.sizeCell < this.minSizeCell)
       this.sizeCell = this.sizeCellBase = this.minSizeCell;
     if (this.sizeCell > this.maxSizeCell)
@@ -113,7 +112,13 @@ export class DesignerParkingComponent implements OnInit {
       (this.w - this.sizeCell * this.parkingMap.cols) / 2 + this.sizePadding;
     this.marginTop =
       (this.h - this.sizeCell * this.parkingMap.rows) / 2 + this.sizePadding;
-    if (this.w+2*this.sizePadding < this.sizeCell * this.parkingMap.cols) this.marginLeft = 0;
-    if (this.h+2*this.sizePadding < this.sizeCell * this.parkingMap.rows) this.marginTop = 0;
+    if (this.w + 2 * this.sizePadding < this.sizeCell * this.parkingMap.cols)
+      this.marginLeft = 0;
+    if (this.h + 2 * this.sizePadding < this.sizeCell * this.parkingMap.rows)
+      this.marginTop = 0;
+  }
+
+  public isRoad(cell:ParkingCell):boolean {
+    return cell.type.state === ParkingState.Road;
   }
 }

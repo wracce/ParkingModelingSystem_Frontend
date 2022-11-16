@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { ParkingMap } from '../../models/parking-map';
 import { DesignerService } from '../../services/designer.service';
 
@@ -8,12 +9,15 @@ import { DesignerService } from '../../services/designer.service';
   styleUrls: ['./designer-setup.component.scss'],
 })
 export class DesignerSetupComponent implements OnInit {
-  public parkingMap: ParkingMap = new ParkingMap();
 
+  public parkingMap: ParkingMap = new ParkingMap();
+  public setupParkingForm!: FormGroup;
+  
   constructor(public designerService: DesignerService) {
     this.parkingMap = designerService.getParkingMap();
+    this.setupParkingForm = designerService.getSetupParkingForm();
   }
 
-  ngOnInit(): void {console.log("hi");
+  ngOnInit(): void {
   }
 }

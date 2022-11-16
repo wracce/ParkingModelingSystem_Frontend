@@ -13,7 +13,6 @@ import { DesignerService } from '../../services/designer.service';
 export class DesignerTemplatesComponent implements OnInit {
   indexOver: number = -1;
   types!:ParkingTemplateGroup;
-  cells:ParkingCell[] = [];
   nameOfIdList:string ="";
   valueListConnectedTo:string[] =[];
   
@@ -23,9 +22,8 @@ export class DesignerTemplatesComponent implements OnInit {
 
   ngOnInit(): void {
     this.types = this.designerService.getTypes();
-    this.cells = this.designerService.getCells();
     this.nameOfIdList = this.designerService.getNameOfObjsList();
-    this.valueListConnectedTo =this.designerService.getLinksToCellList();
+     this.valueListConnectedTo =this.designerService.getLinksToParkingCells();
   }
 
   drop(event: CdkDragDrop<any>) {

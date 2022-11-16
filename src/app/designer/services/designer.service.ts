@@ -1,5 +1,6 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ParkingCell } from '../models/parking-cell';
 import { ParkingMap } from '../models/parking-map';
 import { ParkingState } from '../models/parking-state';
@@ -7,70 +8,78 @@ import { ParkingTemplate } from '../models/parking-template';
 import { ParkingTemplateGroup } from '../models/parking-template-group';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DesignerService {
-  private linkOfParkingCell:string ="";
-  private linkOfParkingTemplate:string = "";
-  private linksToParkingCells:string[] = [];
+  private linkOfParkingCell!: string;
+  private linkOfParkingTemplate!: string;
+  private linksToParkingCells!:string[];
+  private parkingMap!: ParkingMap;
+  private parkingTemplateGroup!: ParkingTemplateGroup;
+  private setupParkingForm!: FormGroup;
 
-  private parkingMap: ParkingMap = new ParkingMap();
-  private parkingTemplateGroup!:ParkingTemplateGroup;
-  private parkingCells:ParkingCell[]=[];
-
-  constructor() { 
-    this.parkingMap = new ParkingMap("",6, 6, "left");
-    this.linkOfParkingCell = "designerCellList";
-    this.linkOfParkingTemplate = "designerObjsList";
+  constructor() {
+    this.linksToParkingCells =[];
+    this.parkingMap = new ParkingMap('', 6, 6, 'top', 1);
+    this.linkOfParkingCell = 'designerCellList';
+    this.linkOfParkingTemplate = 'designerObjsList';
     this.parkingTemplateGroup = new ParkingTemplateGroup();
-    this.fillCells();
+    this.setupParkingForm = new FormGroup({
+      name: new FormControl(this.parkingMap.name),
+      cols: new FormControl(this.parkingMap.cols),
+      rows: new FormControl(this.parkingMap.rows),
+      directOfRoad: new FormControl(this.parkingMap.directOfRoad),
+    });
+    this.parkingMap.configurateParking();
   }
   public getParkingMap(): ParkingMap {
     return this.parkingMap;
   }
-  public getTypes():ParkingTemplateGroup {
+  public getTypes(): ParkingTemplateGroup {
     return this.parkingTemplateGroup;
   }
 
-  public getCells():ParkingCell[] {
-    return this.parkingCells;
-  }
-
-  public getNameOfGridList():string {
+  public getNameOfGridList(): string {
     return this.linkOfParkingCell;
   }
 
-  public getLinksToCellList():string[] {
-    return this.linksToParkingCells;
+  public getNameOfObjsList(): string {
+    return this.linkOfParkingTemplate;
   }
 
-  public getNameOfObjsList():string {
-    return this.linkOfParkingTemplate;
+  public getSetupParkingForm(): FormGroup {
+    return this.setupParkingForm;
+  }
+
+  public getLinksToParkingCells(): string[] {
+    return this.linksToParkingCells;
   }
 
   public drop(event: CdkDragDrop<any>) {
     if (event.previousContainer != event.container) {
-
-      if (event.container.data instanceof ParkingCell) { //on board
-        if (event.previousContainer.data instanceof ParkingTemplate) {// from side to board
+      if (event.container.data instanceof ParkingCell) {
+        //on board
+        if (event.previousContainer.data instanceof ParkingTemplate) {
+          // from side to board
           event.container.data.type = event.previousContainer.data;
-        } else {  // from board to board
+        } else {
+          // from board to board
           event.container.data.type = event.previousContainer.data.type;
-          event.previousContainer.data.type = new ParkingTemplate("", null,"",ParkingState.Undef,0);
+          event.previousContainer.data.type = new ParkingTemplate(
+            '',
+            null,
+            '',
+            ParkingState.Undef,
+            0
+          );
         }
       }
     }
   }
 
-  public fillCells():void {
-    this.parkingCells.length = 0;
-    for (let index = 0; index < this.parkingMap.getSize(); index++) {
-      this.parkingCells.push(new ParkingCell(new ParkingTemplate("", null,"",ParkingState.Undef,0),index));
-    }
-
+  public resetLinksToParkingCells() {
+    let links = this.parkingMap.getParkingCells().map(cell => this.linkOfParkingCell + cell.id);
     this.linksToParkingCells.length = 0;
-    for (let index = 0; index < this.getParkingMap().getSize(); index++) {
-      this.linksToParkingCells.push(this.getNameOfGridList()+index);
-    }
-  }  
+    this.linksToParkingCells.push(...links);
+  }
 }

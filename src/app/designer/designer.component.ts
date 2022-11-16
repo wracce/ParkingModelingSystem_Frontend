@@ -1,36 +1,40 @@
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { DesignerParkingComponent } from './components/designer-parking/designer-parking.component';
 import { DesignerService } from './services/designer.service';
 
 @Component({
   selector: 'app-designer',
   templateUrl: './designer.component.html',
-  styleUrls: ['./designer.component.scss']
+  styleUrls: ['./designer.component.scss'],
 })
 export class DesignerComponent implements OnInit {
   @ViewChild(DesignerParkingComponent)
   private designerParkingComponent!: DesignerParkingComponent;
-  constructor(private designerService:DesignerService) { }
+  @ViewChild('setupParkingForm', { static: true })
+  setupParkingForm!: NgForm;
+  constructor(private designerService: DesignerService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  public selectionChange(event:StepperSelectionEvent):void {
-    if (event.previouslySelectedIndex == 0 && event.selectedIndex == 1)
-      this.designerService.fillCells();
+  public selectionChange(event: StepperSelectionEvent): void {
+    if (event.previouslySelectedIndex === 0 && event.selectedIndex === 1) {
+      this.designerService.getParkingMap().configurateParking(this.designerService.getSetupParkingForm());
+      this.designerService.resetLinksToParkingCells();
       this.designerParkingComponent.zoomFree();
+      console.log(this.designerService.getParkingMap().getCells().map((cell) => cell.type.src + " "+ cell.id));
+    }
   }
 
-  public zoomIn():void {
+  public zoomIn(): void {
     this.designerParkingComponent.zoomIn();
   }
 
-  public zoomFree():void {
+  public zoomFree(): void {
     this.designerParkingComponent.zoomFree();
   }
-  public zoomOut():void {
+  public zoomOut(): void {
     this.designerParkingComponent.zoomOut();
   }
-  
 }
