@@ -6,14 +6,13 @@ $color-config: mat.get-color-config($defaultTheme);
 $accent-palette: map.get($color-config, "accent");
 $warn-palette: map.get($color-config, "warn");
 
-$board-color: #EDEDED;
+$board-color: #ededed;
 
 img {
   object-fit: contain;
   object-position: center;
   // height: 100%;
   // width: 100%;
-
 }
 
 .board {
@@ -30,10 +29,10 @@ img {
   background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
   background-position: -3.2px -3.2px, -3.2px -3.2px, -1.6px -1.6px,
     -1.6px -1.6px;
-
 }
 
-::-webkit-scrollbar-corner,*:not(.geScrollable)::-webkit-scrollbar{
+::-webkit-scrollbar-corner,
+*:not(.geScrollable)::-webkit-scrollbar {
   background-color: $board-color;
 }
 
@@ -59,17 +58,63 @@ mat-grid-tile {
   // background-size: contain;
 }
 
-.cdk-drag-preview{
+.roadCell {
+  background-image: url(/assets/road.png);
+  background-size: 100%;
+}
+
+.menu {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 5px 0px;
+  min-width: 100px;
+  max-width: 180px;
+  background-color: rgb(255, 255, 255);
+
+  border-radius: 5px;
+  background: hsla(0, 0%, 100%, 0.333);
+  backdrop-filter: blur(5px);
+}
+
+.menu-item {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+
+  user-select: none;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 16px 0px 16px 0;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex: 1;
+  font-weight: 500;
+  mat-icon {
+    margin-inline-end: 10px;
+  }
+}
+.delete {
+  background-color: rgba(255, 0, 0, 0.698);
+}
+
+.cdk-drag-preview {
   opacity: 70%;
 }
 
-.cdk-drop-list-dragging {
-  background-color: mat.get-color-from-palette($warn-palette, default);
-  background-image: unset;
+.selected {
+  background-color: #ff1e1ebc;
+  // background-image: unset;
+  // opacity: 70%;
+  mix-blend-mode: lighten;
+  // z-index: 999999;
 }
 
+.menu-item:hover {
+  background-color: rgb(208, 208, 208);
+}
 
-.roadCell{
-  background-image: url(/assets/road.png);
-  background-size: 100%;
+.menu-item:active {
+  background-color: rgb(170, 170, 170);
 }

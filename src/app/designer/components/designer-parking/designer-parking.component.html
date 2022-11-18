@@ -11,6 +11,14 @@
     <mat-grid-tile
       *ngFor="let cell of cells; let i = index;"
     >
+    <ng-template #context_menu>
+      <div class="menu" cdkMenu>
+        <button class="menu-item" cdkMenuItem> <mat-icon>cached</mat-icon>Повернуть</button>
+        <button class="menu-item delete" cdkMenuItem> <mat-icon>delete_forever</mat-icon>Удалить</button>
+
+      </div>
+    </ng-template>
+
       <div
         class="cell"
         cdkDropList
@@ -22,8 +30,11 @@
         (mouseover)="indexOver = i"
         (mouseout)="indexOver = -1"
         [class.roadCell] = "isRoad(cell)"
+        [cdkContextMenuTriggerFor]="context_menu"
+        [class.selected]="selectedCells.includes(i)"
+
       >
-        <div cdkDrag style="width: max-content; height: max-content;">
+        <div cdkDrag style="width: max-content; height: max-content;" (cdkDragMoved)="move($event)">
           <img *ngIf="cell.type.src" [src]="cell.type.src"  [width]="cell.type.cols*sizeCell" [height]="cell.type.rows*sizeCell"/>
           <!-- <span *ngIf="!cell.type.src">OPS</span> -->
           <div *cdkDragPlaceholder></div>

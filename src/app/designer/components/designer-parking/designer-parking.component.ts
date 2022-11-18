@@ -1,4 +1,4 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import {
   // ChangeDetectionStrategy,
   Component,
@@ -38,11 +38,13 @@ export class DesignerParkingComponent implements OnInit {
   sizeCellBase: number = this.sizeCell;
 
   parkingMap!: ParkingMap;
-  indexOver: number = -1;
   types!: ParkingTemplateGroup;
   cells: ParkingCell[] = [];
   nameOfIdList: string = '';
   valueListConnectedTo: string[] = [];
+
+  indexOver: number = -1;
+  selectedCells: number[] =[];
 
   constructor(private designerService: DesignerService) {
     this.parkingMap = designerService.getParkingMap();
@@ -56,7 +58,18 @@ export class DesignerParkingComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<any>) {
+    // console.log(event);
+
     this.designerService.drop(event);
+    this.selectedCells = []
+
+  }
+
+  move(event:CdkDragMove<any>){
+    this.selectedCells=this.parkingMap.getCellPositions(event.source.dropContainer.data, this.indexOver);
+    console.log(this.selectedCells);
+    
+    
   }
 
   public zoomIn(): void {

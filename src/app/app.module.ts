@@ -39,6 +39,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { ManagerComponent } from './manager/manager.component';
+import {CdkMenuModule} from '@angular/cdk/menu';
+
 
 
 
@@ -85,7 +87,8 @@ import { ManagerComponent } from './manager/manager.component';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    ScrollingModule
+    ScrollingModule,
+    CdkMenuModule
     
 
   ],
