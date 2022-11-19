@@ -181,7 +181,7 @@ export class ParkingMap {
   }
 
   public getCellPositions(cell: ParkingCell, selId:number):number[] {
-    console.log(cell);
+    // console.log(cell);
     
     let arr:number[] = [];
     for (let i = 0; i < cell.type.cols * cell.type.rows; i++) {

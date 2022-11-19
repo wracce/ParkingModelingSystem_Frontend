@@ -11,9 +11,9 @@
               [id]="nameOfIdList"
               [cdkDropListData]="template"
               [cdkDropListConnectedTo]="valueListConnectedTo"
-              (cdkDropListDropped)="drop($event)"
+              (cdkDropListDropped)="designerService.drop($event)"
             >
-              <div cdkDrag>
+              <div cdkDrag (cdkDragMoved)="designerService.move($event)">
                 <img [src]="template.src" />
                 <div *cdkDragPlaceholder></div>
               </div>

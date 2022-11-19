@@ -36,7 +36,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import {ScrollingModule, CdkScrollableModule} from '@angular/cdk/scrolling';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { ManagerComponent } from './manager/manager.component';
 import {CdkMenuModule} from '@angular/cdk/menu';
@@ -88,7 +88,8 @@ import {CdkMenuModule} from '@angular/cdk/menu';
     FormsModule,
     ReactiveFormsModule,
     ScrollingModule,
-    CdkMenuModule
+    CdkMenuModule,
+    CdkScrollableModule
     
 
   ],

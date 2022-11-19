@@ -1,4 +1,4 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ParkingCell } from '../models/parking-cell';
@@ -11,14 +11,20 @@ import { ParkingTemplateGroup } from '../models/parking-template-group';
   providedIn: 'root',
 })
 export class DesignerService {
-  private linkOfParkingCell!: string;
+  public indexOver!: number;
+  public selectedCells!: number[];
+
   private linkOfParkingTemplate!: string;
   private linksToParkingCells!: string[];
+  private linkOfParkingCell!: string;
+
   private parkingMap!: ParkingMap;
   private parkingTemplateGroup!: ParkingTemplateGroup;
   private setupParkingForm!: FormGroup;
 
   constructor() {
+    this.indexOver = -1;
+    this.selectedCells = [];
     this.linksToParkingCells = [];
     this.parkingMap = new ParkingMap('', 6, 6, 'top', 1);
     this.linkOfParkingCell = 'designerCellList';
@@ -32,6 +38,15 @@ export class DesignerService {
     });
     this.parkingMap.configurateParking();
   }
+
+  public getIndexOver(): Number {
+    return this.indexOver;
+  }
+
+  public getSelectedCells(): number[] {
+    return this.selectedCells;
+  }
+
   public getParkingMap(): ParkingMap {
     return this.parkingMap;
   }
@@ -56,13 +71,17 @@ export class DesignerService {
   }
 
   public drop(event: CdkDragDrop<any>) {
+    
     if (event.previousContainer != event.container) {
       if (event.container.data instanceof ParkingCell) {
         //on board
         if (event.previousContainer.data instanceof ParkingTemplate) {
           // from side to board
           event.container.data.type = event.previousContainer.data;
-          if (event.previousContainer.data.cols > 1 ||event.previousContainer.data.rows > 1)
+          if (
+            event.previousContainer.data.cols > 1 ||
+            event.previousContainer.data.rows > 1
+          )
             this.parkingMap.configurateNeighbours(event.container.data);
         } else {
           // from board to board
@@ -78,6 +97,18 @@ export class DesignerService {
         }
       }
     }
+    this.selectedCells.length = 0;
+  }
+
+  public move(event: CdkDragMove<any>) {
+    console.log(event);
+    
+    let cell: ParkingCell;
+    if (event.source.dropContainer.data instanceof ParkingCell)
+      cell = event.source.dropContainer.data;
+    else cell = new ParkingCell(event.source.dropContainer.data, -1);
+
+    this.selectedCells = this.parkingMap.getCellPositions(cell, this.indexOver);
   }
 
   public resetLinksToParkingCells() {

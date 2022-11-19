@@ -43,11 +43,13 @@ export class DesignerParkingComponent implements OnInit {
   nameOfIdList: string = '';
   valueListConnectedTo: string[] = [];
 
-  indexOver: number = -1;
-  selectedCells: number[] =[];
+  indexOver!:Number;
+  selectedCells!: number[];
 
-  constructor(private designerService: DesignerService) {
+  constructor(public designerService: DesignerService) {
+    this.indexOver = designerService.getIndexOver();
     this.parkingMap = designerService.getParkingMap();
+    this.selectedCells = designerService.getSelectedCells();
   }
 
   ngOnInit(): void {
@@ -55,21 +57,6 @@ export class DesignerParkingComponent implements OnInit {
     this.cells = this.parkingMap.getCells();
     this.nameOfIdList = this.designerService.getNameOfGridList();
     this.valueListConnectedTo = this.designerService.getLinksToParkingCells();
-  }
-
-  drop(event: CdkDragDrop<any>) {
-    // console.log(event);
-
-    this.designerService.drop(event);
-    this.selectedCells = []
-
-  }
-
-  move(event:CdkDragMove<any>){
-    this.selectedCells=this.parkingMap.getCellPositions(event.source.dropContainer.data, this.indexOver);
-    console.log(this.selectedCells);
-    
-    
   }
 
   public zoomIn(): void {
@@ -133,5 +120,9 @@ export class DesignerParkingComponent implements OnInit {
 
   public isRoad(cell:ParkingCell):boolean {
     return cell.type.state === ParkingState.Road;
+  }
+
+  public cellDragable(cell:ParkingCell):boolean {
+    return cell.type.state == ParkingState.Solid;
   }
 }

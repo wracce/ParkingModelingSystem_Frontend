@@ -1,3 +1,11 @@
+<ng-template #context_menu>
+  <div class="menu" cdkMenu>
+    <button class="menu-item" cdkMenuItem> <mat-icon>cached</mat-icon>Повернуть</button>
+    <button class="menu-item delete" cdkMenuItem> <mat-icon>delete_forever</mat-icon>Удалить</button>
+
+  </div>
+</ng-template>
+
 <div #board class="board">
   <mat-grid-list
     #grid
@@ -7,39 +15,38 @@
     [style.height]="parkingMap.rows * sizeCell + 'px'"
     [style.margin-top]="marginTop + 'px'"
     [style.margin-left]="marginLeft + 'px'"
+    cdkScrollable
   >
     <mat-grid-tile
       *ngFor="let cell of cells; let i = index;"
+      cdkScrollable
     >
-    <ng-template #context_menu>
-      <div class="menu" cdkMenu>
-        <button class="menu-item" cdkMenuItem> <mat-icon>cached</mat-icon>Повернуть</button>
-        <button class="menu-item delete" cdkMenuItem> <mat-icon>delete_forever</mat-icon>Удалить</button>
-
-      </div>
-    </ng-template>
-
+    <div class="cell-wrapper" [style]="'width: ' + (sizeCell) + 'px; height: ' + (sizeCell) +'px;'">
       <div
         class="cell"
         cdkDropList
         [id]="nameOfIdList + i"
         [cdkDropListData]="cell"
         [cdkDropListConnectedTo]="valueListConnectedTo"
-        (cdkDropListDropped)="drop($event)"
-        [class.selected]="i == indexOver"
-        (mouseover)="indexOver = i"
-        (mouseout)="indexOver = -1"
+        (cdkDropListDropped)="designerService.drop($event)"
+        [class.selected]="i == designerService.indexOver"
+        (mouseover)="designerService.indexOver = i"
+        (mouseout)="designerService.indexOver = -1"
         [class.roadCell] = "isRoad(cell)"
         [cdkContextMenuTriggerFor]="context_menu"
-        [class.selected]="selectedCells.includes(i)"
-
+        [class.selected]="designerService.selectedCells.includes(i)"
+        cdkScrollable
+        [style]="'z-index: '+ (1+cells.length-i)  +';'"
+        
       >
-        <div cdkDrag style="width: max-content; height: max-content;" (cdkDragMoved)="move($event)">
-          <img *ngIf="cell.type.src" [src]="cell.type.src"  [width]="cell.type.cols*sizeCell" [height]="cell.type.rows*sizeCell"/>
+        <div  [cdkDragDisabled]="cellDragable(cell)"  cdkDrag cdkScrollable    (cdkDragMoved)="designerService.move($event)">
+          <img cdkDragRootElement *ngIf="cell.type.src" [src]="cell.type.src"  [width]="cell.type.cols*sizeCell" [height]="cell.type.rows*sizeCell"/>
           <!-- <span *ngIf="!cell.type.src">OPS</span> -->
           <div *cdkDragPlaceholder></div>
         </div>
       </div>
+    </div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
+<!-- [style]="'width: ' + (cell.type.cols*sizeCell) + 'px; height: ' + (cell.type.rows*sizeCell) +'px;'" -->

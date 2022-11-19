@@ -1,4 +1,4 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ParkingCell } from '../../models/parking-cell';
 import { ParkingTemplate } from '../../models/parking-template';
@@ -11,23 +11,20 @@ import { DesignerService } from '../../services/designer.service';
   styleUrls: ['./designer-templates.component.scss']
 })
 export class DesignerTemplatesComponent implements OnInit {
-  indexOver: number = -1;
   types!:ParkingTemplateGroup;
   nameOfIdList:string ="";
   valueListConnectedTo:string[] =[];
   
   panelOpenState = false;
+  parkingMap: any;
 
-  constructor(private designerService:DesignerService) {}
+  selectedCells!: number[];
+  constructor(public designerService:DesignerService) {}
 
   ngOnInit(): void {
+    this.selectedCells = this.designerService.getSelectedCells();
     this.types = this.designerService.getTypes();
     this.nameOfIdList = this.designerService.getNameOfObjsList();
      this.valueListConnectedTo =this.designerService.getLinksToParkingCells();
   }
-
-  drop(event: CdkDragDrop<any>) {
-    this.designerService.drop(event);
-  }
-
 }
