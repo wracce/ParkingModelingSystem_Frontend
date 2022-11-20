@@ -12,7 +12,9 @@ import { ParkingTemplateGroup } from '../models/parking-template-group';
 })
 export class DesignerService {
   public indexOver!: number;
+  public deltaOver!:number;
   public selectedCells!: number[];
+  public isDragging!:boolean;
 
   private linkOfParkingTemplate!: string;
   private linksToParkingCells!: string[];
@@ -24,6 +26,8 @@ export class DesignerService {
 
   constructor() {
     this.indexOver = -1;
+    this.deltaOver = -2;
+    this.isDragging = false;
     this.selectedCells = [];
     this.linksToParkingCells = [];
     this.parkingMap = new ParkingMap('', 6, 6, 'top', 1);
@@ -71,44 +75,49 @@ export class DesignerService {
   }
 
   public drop(event: CdkDragDrop<any>) {
+    this.isDragging = false;
     
     if (event.previousContainer != event.container) {
       if (event.container.data instanceof ParkingCell) {
         //on board
         if (event.previousContainer.data instanceof ParkingTemplate) {
           // from side to board
-          event.container.data.type = event.previousContainer.data;
-          if (
-            event.previousContainer.data.cols > 1 ||
-            event.previousContainer.data.rows > 1
-          )
-            this.parkingMap.configurateNeighbours(event.container.data);
+          this.parkingMap.setCell(this.indexOver, event.previousContainer.data);
+          // event.container.data.type = event.previousContainer.data;
         } else {
           // from board to board
-          event.container.data.type = event.previousContainer.data.type;
-          event.previousContainer.data.type = new ParkingTemplate(
-            '',
-            null,
-            ParkingState.Undef,
-            0,
-            1,
-            1
-          );
+          // event.container.data.type = event.previousContainer.data.type;
+          let template:ParkingTemplate = event.previousContainer.data.type;
+          this.parkingMap.deleteCell(event.previousContainer.data.id);
+          this.parkingMap.setCell(this.indexOver-(this.deltaOver<0?0:this.deltaOver), event.previousContainer.data.type);
         }
       }
     }
     this.selectedCells.length = 0;
+    this.deltaOver = -2;
   }
 
   public move(event: CdkDragMove<any>) {
-    console.log(event);
+    this.isDragging = true;
     
     let cell: ParkingCell;
-    if (event.source.dropContainer.data instanceof ParkingCell)
+    if (event.source.dropContainer.data instanceof ParkingCell){
       cell = event.source.dropContainer.data;
-    else cell = new ParkingCell(event.source.dropContainer.data, -1);
+      console.log(cell.id,this.indexOver);
+      // костыль чтобы пермещеать клетку за нижнию часть поравильно
+      if (this.deltaOver ==-2)
+        this.deltaOver++;
+        else if (this.deltaOver == -1){
+        this.deltaOver = this.indexOver - event.source.dropContainer.data.id;
+      } 
 
-    this.selectedCells = this.parkingMap.getCellPositions(cell, this.indexOver);
+    }else cell = new ParkingCell(event.source.dropContainer.data, -1, -1);
+
+    // console.log(this.deltaOver);
+    // arrHeight.add(Math.floor(index / this.cols));
+    // arrWidth.add(index % this.cols)
+    
+    this.selectedCells = this.parkingMap.getCellPositions(this.indexOver-(this.deltaOver<0?0:this.deltaOver), cell.type);
   }
 
   public resetLinksToParkingCells() {

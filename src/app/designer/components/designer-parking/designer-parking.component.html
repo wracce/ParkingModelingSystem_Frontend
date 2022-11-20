@@ -1,7 +1,12 @@
-<ng-template #context_menu>
+<ng-template #context_menu cdkMen>
   <div class="menu" cdkMenu>
-    <button class="menu-item" cdkMenuItem> <mat-icon>cached</mat-icon>Повернуть</button>
-    <button class="menu-item delete" cdkMenuItem> <mat-icon>delete_forever</mat-icon>Удалить</button>
+    <button [disabled]="isBufferEmpty()" (click)="pasteCell(idMenu)" class="menu-item" cdkMenuItem> <mat-icon>content_paste</mat-icon>Вставить</button>
+    <button *ngIf="isCellSetable(idMenu)" (click)="copyCell(idMenu)" class="menu-item" cdkMenuItem> <mat-icon>content_copy</mat-icon>Копировать</button>
+    <button *ngIf="isCellSetable(idMenu)" (click)="cutCell(idMenu)" class="menu-item" cdkMenuItem> <mat-icon>content_cut</mat-icon>Вырезать</button>
+    <mat-divider *ngIf="isCellSetable(idMenu)">
+    </mat-divider>
+    <button *ngIf="isCellSetable(idMenu)" (click)="turnCell(idMenu)" class="menu-item" cdkMenuItem> <mat-icon>cached</mat-icon>Повернуть</button>
+    <button *ngIf="isCellSetable(idMenu)" (click)="deleteCell(idMenu)" class="menu-item delete" cdkMenuItem> <mat-icon>delete_forever</mat-icon>Удалить</button>
 
   </div>
 </ng-template>
@@ -30,19 +35,24 @@
         [cdkDropListConnectedTo]="valueListConnectedTo"
         (cdkDropListDropped)="designerService.drop($event)"
         [class.selected]="i == designerService.indexOver"
-        (mouseover)="designerService.indexOver = i"
+        (mouseover)="setIndexOver(i)"
         (mouseout)="designerService.indexOver = -1"
         [class.roadCell] = "isRoad(cell)"
         [cdkContextMenuTriggerFor]="context_menu"
+        [cdkContextMenuDisabled]="isRoad(cell)"
+        (cdkContextMenuOpened)="idMenu = designerService.indexOver"
         [class.selected]="designerService.selectedCells.includes(i)"
         cdkScrollable
-        [style]="'z-index: '+ (1+cells.length-i)  +';'"
+        [style]="'z-index: '+ (designerService.isDragging?1+cells.length+i:1+cells.length-i)  +'; transform: rotate(' + cell.angle+ 'deg);'"
+        [class.borderCell] = "isOneBoardCell(cell)"
         
       >
-        <div  [cdkDragDisabled]="cellDragable(cell)"  cdkDrag cdkScrollable    (cdkDragMoved)="designerService.move($event)">
-          <img cdkDragRootElement *ngIf="cell.type.src" [src]="cell.type.src"  [width]="cell.type.cols*sizeCell" [height]="cell.type.rows*sizeCell"/>
-          <!-- <span *ngIf="!cell.type.src">OPS</span> -->
-          <div *cdkDragPlaceholder></div>
+        <div class="cdkDragWrapper" [class.borderCell] = "isMoreBoardCell(cell)" [style]="'width: ' + (cell.type.cols*sizeCell) + 'px; height: ' + (cell.type.rows*sizeCell) +'px;'">
+          <div  [cdkDragDisabled]="isRoad(cell)"  cdkDrag (cdkDragMoved)="designerService.move($event)">
+            <img cdkDragRootElement *ngIf="cell.type.src" [src]="cell.type.src"  [width]="cell.type.cols*sizeCell" [height]="cell.type.rows*sizeCell"/>
+            <!-- <span *ngIf="!cell.type.src">OPS</span> -->
+            <div *cdkDragPlaceholder></div>
+          </div>
         </div>
       </div>
     </div>

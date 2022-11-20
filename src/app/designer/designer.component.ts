@@ -23,7 +23,7 @@ export class DesignerComponent implements OnInit {
       this.designerService.getParkingMap().configurateParking(this.designerService.getSetupParkingForm());
       this.designerService.resetLinksToParkingCells();
       this.designerParkingComponent.zoomFree();
-      console.log(this.designerService.getParkingMap().getCells().map((cell) => cell.type.src + " "+ cell.id));
+      
     }
   }
 

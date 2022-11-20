@@ -6,10 +6,10 @@ export class ParkingTemplateGroup {
 
   constructor (){
     this.parkingTemplates = [
-        new ParkingTemplate("", '/assets/p11.png',ParkingState.Park,0, 1,1),
-        new ParkingTemplate("", '/assets/p12.png',ParkingState.Park,0, 2,1),
-        new ParkingTemplate("", '/assets/p21.png',ParkingState.Park,0, 1,2),
-        new ParkingTemplate("", '/assets/tree/tree1.png',ParkingState.Solid,0, 1,1),
+        new ParkingTemplate("", '/assets/p11.png',ParkingState.Park, 1,1),
+        new ParkingTemplate("", '/assets/p12.png',ParkingState.Park, 2,1),
+        new ParkingTemplate("", '/assets/p21.png',ParkingState.Park, 1,2),
+        new ParkingTemplate("", '/assets/tree/tree1.png',ParkingState.Solid, 1,1),
 
         
       ];

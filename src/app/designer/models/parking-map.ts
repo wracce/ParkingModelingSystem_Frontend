@@ -53,7 +53,6 @@ export class ParkingMap {
         '',
         null,
         ParkingState.Undef,
-        0,
         1,
         1
       );
@@ -61,7 +60,6 @@ export class ParkingMap {
         '',
         null,
         ParkingState.Road,
-        0,
         1,
         1
       );
@@ -70,6 +68,7 @@ export class ParkingMap {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
           let templateType!: ParkingTemplate;
+          let angle!: number;
           if (
             (this.directOfRoad.localeCompare('left') == 0 && j == 0) ||
             (this.directOfRoad.localeCompare('right') == 0 &&
@@ -77,13 +76,19 @@ export class ParkingMap {
             (this.directOfRoad.localeCompare('top') == 0 && i == 0) ||
             (this.directOfRoad.localeCompare('bottom') == 0 &&
               i == this.rows - 1)
-          )
+          ) {
             templateType = roadTemplate;
-          else {
+            angle =
+              this.directOfRoad.localeCompare('top') == 0 ||
+              this.directOfRoad.localeCompare('bottom') == 0
+                ? 90
+                : 0;
+          } else {
             templateType = undefTemplate;
           }
           this.parkingCells[i * this.cols + j] = new ParkingCell(
             templateType,
+            angle,
             this.cols * i + j
           );
         }
@@ -166,31 +171,94 @@ export class ParkingMap {
     );
   }
 
-  public at(x: number, y: number): ParkingTemplate {
-    return this.parkingCells[y * this.cols + x].type;
+  public at(id: number): ParkingCell {
+    return this.parkingCells[id];
   }
 
-  public configurateNeighbours(cell: ParkingCell) {
-    for (let i = 1; i < cell.type.cols * cell.type.rows; i++) {
-      this.parkingCells[
-        cell.id +
-          (i % cell.type.cols) +
-          this.cols * Math.floor(i / cell.type.cols)
-      ].type = new ParkingTemplate('', null, ParkingState.Undef, 0, 0, 0);
+  public getCellPositions(id: number, template?: ParkingTemplate): number[] {
+    let arr: number[] = [];
+
+    if (id < 0) return arr;
+
+    if (template === undefined) {
+      let index: number = this.at(id).id;
+      arr.push(...this.getCellPositions(index, this.parkingCells[index].type));
+      return arr;
     }
-  }
 
-  public getCellPositions(cell: ParkingCell, selId:number):number[] {
-    // console.log(cell);
-    
-    let arr:number[] = [];
-    for (let i = 0; i < cell.type.cols * cell.type.rows; i++) {
+    for (let i = 0; i < template.cols * template.rows; i++) {
       arr.push(
-        selId +
-          (i % cell.type.cols) +
-          this.cols * Math.floor(i / cell.type.cols)
+        id + (i % template.cols) + this.cols * Math.floor(i / template.cols)
       );
     }
+
+    // проверка
+    let arrHeight = new Set<number>();
+    let arrWidth = new Set<number>();
+    for (const index of arr) {
+      if (
+        this.parkingCells[id].type.state == ParkingState.Road ||
+        index >= this.getSize()
+      ) {
+        arr.length = 0;
+        return arr;
+      }
+      arrHeight.add(Math.floor(index / this.cols));
+      arrWidth.add(index % this.cols);
+    }
+    if (arrHeight.size != template.rows || arrWidth.size != template.cols)
+      arr.length = 0;
+
     return arr;
+  }
+
+  public deleteCell(id: number): ParkingTemplate {
+    let arr: number[] = this.getCellPositions(id);
+    let template: ParkingTemplate = this.parkingCells[arr[0]].type;
+    for (const index of arr) {
+      this.parkingCells[index] = new ParkingCell(
+        new ParkingTemplate('', null, ParkingState.Undef, 1, 1),
+        0,
+        index
+      );
+    }
+
+    return template;
+  }
+
+  public setCell(id: number, template?: ParkingTemplate) {
+    if (id < 0) return;
+
+    if (template === undefined) {
+      //TODO Реализацоватть установку на пустую ячейку
+      return;
+    }
+
+    let positions: number[] = this.getCellPositions(id, template);
+
+    for (const index of positions) {
+      this.deleteCell(index);
+    }
+
+    for (const index of positions) {
+      this.parkingCells[index] = new ParkingCell(
+        index == id
+          ? template
+          : new ParkingTemplate('', null, ParkingState.Undef, 0, 0),
+        0,
+        id
+      );
+    }
+  }
+
+  public rotateCell(id: number) {
+    let cell: ParkingCell = this.at(id);
+    let size: number = cell.type.cols * cell.type.rows;
+
+    if (size <= 0) return;
+
+    cell.angle += size == 1 ? 90 : 180;
+
+    if (cell.angle >= 360) cell.angle -= 360;
   }
 }

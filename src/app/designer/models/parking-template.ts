@@ -5,7 +5,6 @@ export class ParkingTemplate {
     public name: string,
     public src: any,
     public state: ParkingState,
-    public angle: number,
     public cols: number,
     public rows: number
   ) {}

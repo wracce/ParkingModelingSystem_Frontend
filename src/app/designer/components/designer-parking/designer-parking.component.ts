@@ -1,3 +1,4 @@
+
 import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import {
   // ChangeDetectionStrategy,
@@ -8,7 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DesignerService } from '../../services/designer.service';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { buffer, fromEvent, Observable, Subscription } from 'rxjs';
 import { ParkingTemplate } from '../../models/parking-template';
 import { ParkingCell } from '../../models/parking-cell';
 import { ParkingMap } from '../../models/parking-map';
@@ -43,11 +44,13 @@ export class DesignerParkingComponent implements OnInit {
   nameOfIdList: string = '';
   valueListConnectedTo: string[] = [];
 
-  indexOver!:Number;
   selectedCells!: number[];
 
+  idMenu!: number;
+  buffer?: ParkingTemplate;
+
   constructor(public designerService: DesignerService) {
-    this.indexOver = designerService.getIndexOver();
+    this.idMenu = -1;
     this.parkingMap = designerService.getParkingMap();
     this.selectedCells = designerService.getSelectedCells();
   }
@@ -57,6 +60,12 @@ export class DesignerParkingComponent implements OnInit {
     this.cells = this.parkingMap.getCells();
     this.nameOfIdList = this.designerService.getNameOfGridList();
     this.valueListConnectedTo = this.designerService.getLinksToParkingCells();
+  }
+
+  public setIndexOver(id:number) {
+    this.designerService.indexOver = id;
+    // console.log(this.designerService.indexOver);
+    
   }
 
   public zoomIn(): void {
@@ -122,7 +131,41 @@ export class DesignerParkingComponent implements OnInit {
     return cell.type.state === ParkingState.Road;
   }
 
-  public cellDragable(cell:ParkingCell):boolean {
-    return cell.type.state == ParkingState.Solid;
+  public isCellSetable(id: number):boolean{
+    return this.designerService.getParkingMap().at(id).type.state !== ParkingState.Undef;
+  }
+
+  public isBufferEmpty():boolean{
+    return this.buffer == null;
+  }
+
+  public isOneBoardCell(cell:ParkingCell):boolean{
+    return cell.type.cols*cell.type.rows==1 && !this.isRoad(cell);
+  }
+
+  public isMoreBoardCell(cell:ParkingCell):boolean{
+    return cell.type.cols*cell.type.rows>1;
+  }
+
+  public deleteCell(id:number) {
+    this.designerService.getParkingMap().deleteCell(id);
+  }
+
+  public copyCell(id:number) {
+    this.buffer = this.designerService.getParkingMap().at(id).type;
+  }
+
+  public cutCell(id:number) {
+
+  }
+
+  public pasteCell(id:number) {
+  this.designerService.getParkingMap().setCell(id,this.buffer);
+
+  }
+
+  public turnCell(id:number) {
+    if (this.designerService.getParkingMap().at(id).type.state !== ParkingState.Park)
+    this.designerService.getParkingMap().rotateCell(id);
   }
 }
