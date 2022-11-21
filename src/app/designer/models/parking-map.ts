@@ -44,7 +44,7 @@ export class ParkingMap {
   }
 
   public configurateParking(form?: FormGroup) {
-    if (!arguments.length) {
+    if (form === undefined) {
       // new parking
       // let m: number = this.rows;
       // let n: number = this.cols;
@@ -87,9 +87,9 @@ export class ParkingMap {
             templateType = undefTemplate;
           }
           this.parkingCells[i * this.cols + j] = new ParkingCell(
+            this.cols * i + j,
             templateType,
-            angle,
-            this.cols * i + j
+            angle
           );
         }
       }
@@ -149,10 +149,10 @@ export class ParkingMap {
         for (let i = i0; i < i0 + newParkingMap.getParkingRows(); i++) {
           for (let j = j0; j < j0 + newParkingMap.getParkingCols(); j++) {
             // debugger;
-            newParkingMap.getCells()[i * n + j].type =
+            newParkingMap.getCells()[i * n + j].template =
               clearParkingCells[
                 (i - i0) * this.getParkingCols() + (j - j0)
-              ].type;
+              ].template;
           }
         }
 
@@ -167,7 +167,7 @@ export class ParkingMap {
 
   public getParkingCells(): ParkingCell[] {
     return this.parkingCells.filter(
-      (cell) => cell.type.state !== ParkingState.Road
+      (cell) => cell.template.state !== ParkingState.Road
     );
   }
 
@@ -182,7 +182,9 @@ export class ParkingMap {
 
     if (template === undefined) {
       let index: number = this.at(id).id;
-      arr.push(...this.getCellPositions(index, this.parkingCells[index].type));
+      arr.push(
+        ...this.getCellPositions(index, this.parkingCells[index].template)
+      );
       return arr;
     }
 
@@ -192,12 +194,12 @@ export class ParkingMap {
       );
     }
 
-    // проверка
+    // проверка на выход заграницы
     let arrHeight = new Set<number>();
     let arrWidth = new Set<number>();
     for (const index of arr) {
       if (
-        this.parkingCells[id].type.state == ParkingState.Road ||
+        this.parkingCells[id].template.state == ParkingState.Road ||
         index >= this.getSize()
       ) {
         arr.length = 0;
@@ -214,46 +216,48 @@ export class ParkingMap {
 
   public deleteCell(id: number): ParkingTemplate {
     let arr: number[] = this.getCellPositions(id);
-    let template: ParkingTemplate = this.parkingCells[arr[0]].type;
+    // TODO баг связанный с изменением направления дороги, и перемещением ячейки в нижний левый угол
+    let template: ParkingTemplate = this.parkingCells[arr[0]].template;
     for (const index of arr) {
       this.parkingCells[index] = new ParkingCell(
+        index,
         new ParkingTemplate('', null, ParkingState.Undef, 1, 1),
-        0,
-        index
+        0
       );
     }
 
     return template;
   }
 
-  public setCell(id: number, template?: ParkingTemplate) {
+  public setCell(id: number, template: ParkingTemplate, angle?: number) {
+    console.log('angle ' + angle);
+
     if (id < 0) return;
 
-    if (template === undefined) {
-      //TODO Реализацоватть установку на пустую ячейку
-      return;
+    if (angle == undefined) {
+      console.log(1);
+
+      angle = 0;
     }
-
     let positions: number[] = this.getCellPositions(id, template);
-
     for (const index of positions) {
       this.deleteCell(index);
     }
 
     for (const index of positions) {
       this.parkingCells[index] = new ParkingCell(
+        id,
         index == id
           ? template
           : new ParkingTemplate('', null, ParkingState.Undef, 0, 0),
-        0,
-        id
+        angle
       );
     }
   }
 
   public rotateCell(id: number) {
     let cell: ParkingCell = this.at(id);
-    let size: number = cell.type.cols * cell.type.rows;
+    let size: number = cell.template.cols * cell.template.rows;
 
     if (size <= 0) return;
 

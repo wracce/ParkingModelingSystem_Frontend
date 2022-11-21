@@ -87,9 +87,10 @@ export class DesignerService {
         } else {
           // from board to board
           // event.container.data.type = event.previousContainer.data.type;
-          let template:ParkingTemplate = event.previousContainer.data.type;
+          let oldDemplate:ParkingTemplate = event.previousContainer.data.template;
+          let oldAngle:number = event.previousContainer.data.angle;
           this.parkingMap.deleteCell(event.previousContainer.data.id);
-          this.parkingMap.setCell(this.indexOver-(this.deltaOver<0?0:this.deltaOver), event.previousContainer.data.type);
+          this.parkingMap.setCell(this.indexOver-(this.deltaOver<0?0:this.deltaOver), oldDemplate, oldAngle);
         }
       }
     }
@@ -111,13 +112,13 @@ export class DesignerService {
         this.deltaOver = this.indexOver - event.source.dropContainer.data.id;
       } 
 
-    }else cell = new ParkingCell(event.source.dropContainer.data, -1, -1);
+    }else cell = new ParkingCell(-1,event.source.dropContainer.data, 0);
 
     // console.log(this.deltaOver);
     // arrHeight.add(Math.floor(index / this.cols));
     // arrWidth.add(index % this.cols)
     
-    this.selectedCells = this.parkingMap.getCellPositions(this.indexOver-(this.deltaOver<0?0:this.deltaOver), cell.type);
+    this.selectedCells = this.parkingMap.getCellPositions(this.indexOver-(this.deltaOver<0?0:this.deltaOver), cell.template);
   }
 
   public resetLinksToParkingCells() {

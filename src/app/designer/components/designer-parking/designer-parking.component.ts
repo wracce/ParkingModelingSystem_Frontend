@@ -1,4 +1,3 @@
-
 import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import {
   // ChangeDetectionStrategy,
@@ -47,9 +46,11 @@ export class DesignerParkingComponent implements OnInit {
   selectedCells!: number[];
 
   idMenu!: number;
-  buffer?: ParkingTemplate;
+  buffer?: ParkingCell;
+  isCut!: boolean;
 
   constructor(public designerService: DesignerService) {
+    this.isCut = false;
     this.idMenu = -1;
     this.parkingMap = designerService.getParkingMap();
     this.selectedCells = designerService.getSelectedCells();
@@ -62,10 +63,9 @@ export class DesignerParkingComponent implements OnInit {
     this.valueListConnectedTo = this.designerService.getLinksToParkingCells();
   }
 
-  public setIndexOver(id:number) {
+  public setIndexOver(id: number) {
     this.designerService.indexOver = id;
     // console.log(this.designerService.indexOver);
-    
   }
 
   public zoomIn(): void {
@@ -127,45 +127,62 @@ export class DesignerParkingComponent implements OnInit {
       this.marginTop = 0;
   }
 
-  public isRoad(cell:ParkingCell):boolean {
-    return cell.type.state === ParkingState.Road;
+  public isRoad(cell: ParkingCell): boolean {
+    return cell.template.state === ParkingState.Road;
   }
 
-  public isCellSetable(id: number):boolean{
-    return this.designerService.getParkingMap().at(id).type.state !== ParkingState.Undef;
+  public isCellSetable(id: number): boolean {
+    return (
+      this.designerService.getParkingMap().at(id).template.state !==
+      ParkingState.Undef
+    );
   }
 
-  public isBufferEmpty():boolean{
+  public isBufferEmpty(): boolean {
     return this.buffer == null;
   }
 
-  public isOneBoardCell(cell:ParkingCell):boolean{
-    return cell.type.cols*cell.type.rows==1 && !this.isRoad(cell);
+  public isOneBoardCell(cell: ParkingCell): boolean {
+    return cell.template.cols * cell.template.rows == 1 && !this.isRoad(cell);
   }
 
-  public isMoreBoardCell(cell:ParkingCell):boolean{
-    return cell.type.cols*cell.type.rows>1;
+  public isMoreBoardCell(cell: ParkingCell): boolean {
+    return cell.template.cols * cell.template.rows > 1;
   }
 
-  public deleteCell(id:number) {
+  public deleteCell(id: number) {
     this.designerService.getParkingMap().deleteCell(id);
   }
 
-  public copyCell(id:number) {
-    this.buffer = this.designerService.getParkingMap().at(id).type;
+  public copyCell(id: number) {
+    if (this.isCut && this.buffer !== undefined) {
+      this.pasteCell(this.buffer?.id);
+      console.log(3);
+    }
+    let cell: ParkingCell = this.designerService.getParkingMap().at(id);
+    this.buffer = new ParkingCell(cell.id, cell.template, cell.angle);
   }
 
-  public cutCell(id:number) {
-
+  public cutCell(id: number) {
+    this.copyCell(id);
+    this.deleteCell(id);
+    this.isCut = true;
   }
 
-  public pasteCell(id:number) {
-  this.designerService.getParkingMap().setCell(id,this.buffer);
+  public pasteCell(id: number) {
+    if (this.buffer === undefined) return;
 
+    this.designerService
+      .getParkingMap()
+      .setCell(id, this.buffer.template, this.buffer?.angle);
+    if (this.isCut) this.isCut = false;
   }
 
-  public turnCell(id:number) {
-    if (this.designerService.getParkingMap().at(id).type.state !== ParkingState.Park)
-    this.designerService.getParkingMap().rotateCell(id);
+  public turnCell(id: number) {
+    if (
+      this.designerService.getParkingMap().at(id).template.state !==
+      ParkingState.Park
+    )
+      this.designerService.getParkingMap().rotateCell(id);
   }
 }

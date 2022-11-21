@@ -43,13 +43,13 @@
         (cdkContextMenuOpened)="idMenu = designerService.indexOver"
         [class.selected]="designerService.selectedCells.includes(i)"
         cdkScrollable
-        [style]="'z-index: '+ (designerService.isDragging?1+cells.length+i:1+cells.length-i)  +'; transform: rotate(' + cell.angle+ 'deg);'"
+        [style]="'z-index: '+ (designerService.isDragging?1+cells.length+i:1+cells.length-i)  +'; transform: rotate(' + (isRoad(cell)?cell.angle:0)+ 'deg);'"
         [class.borderCell] = "isOneBoardCell(cell)"
         
       >
-        <div class="cdkDragWrapper" [class.borderCell] = "isMoreBoardCell(cell)" [style]="'width: ' + (cell.type.cols*sizeCell) + 'px; height: ' + (cell.type.rows*sizeCell) +'px;'">
-          <div  [cdkDragDisabled]="isRoad(cell)"  cdkDrag (cdkDragMoved)="designerService.move($event)">
-            <img cdkDragRootElement *ngIf="cell.type.src" [src]="cell.type.src"  [width]="cell.type.cols*sizeCell" [height]="cell.type.rows*sizeCell"/>
+        <div class="cdkDragWrapper" [class.borderCell] = "isMoreBoardCell(cell)" [style]="'width: ' + (cell.template.cols*sizeCell) + 'px; height: ' + (cell.template.rows*sizeCell) +'px;'">
+          <div  [cdkDragDisabled]="isRoad(cell)"  cdkDrag (cdkDragMoved)="designerService.move($event)" [style]="'transform: rotate(' + cell.angle+ 'deg);'">
+            <img cdkDragRootElement *ngIf="cell.template.src" [src]="cell.template.src"  [width]="cell.template.cols*sizeCell" [height]="cell.template.rows*sizeCell"/>
             <!-- <span *ngIf="!cell.type.src">OPS</span> -->
             <div *cdkDragPlaceholder></div>
           </div>
