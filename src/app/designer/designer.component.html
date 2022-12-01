@@ -1,5 +1,5 @@
 
-<mat-horizontal-stepper linear (selectionChange)="selectionChange($event)">
+<mat-horizontal-stepper #stepper linear (selectionChange)="selectionChange($event)" [selectedIndex]="selectedId">
   <mat-step label="Настройка" >
     <div class="container">
       <div class="content"><app-designer-setup></app-designer-setup></div>
@@ -11,13 +11,13 @@
         <app-designer-templates></app-designer-templates>
       </div>
       <div class="scaleButtons">
-        <button class="btnZoomOut" mat-button (click)="zoomOut()">
+        <button class="btnZoomOut" mat-button (click)="designerParkingComponent.zoomOut()">
           <mat-icon>zoom_out</mat-icon>
         </button>
-        <button class="btnZoomFree" mat-button (click)="zoomFree()">
+        <button class="btnZoomFree" mat-button (click)="designerParkingComponent.zoomFree()">
           <mat-icon>crop_free</mat-icon>
         </button>
-        <button class="btnZoomIn" mat-button (click)="zoomIn()">
+        <button class="btnZoomIn" mat-button (click)="designerParkingComponent.zoomIn()">
           <mat-icon>zoom_in</mat-icon>
         </button>
       </div>
@@ -26,6 +26,10 @@
       </div>
     </div>
   </mat-step>
-  <mat-step label="Подтверждение" completed="true"> </mat-step>
+  <mat-step label="Подтверждение" completed="true">
+    <app-designer-confirm></app-designer-confirm>
+  </mat-step>
+
+  <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />
 
 </mat-horizontal-stepper>

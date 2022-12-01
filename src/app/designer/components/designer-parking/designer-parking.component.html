@@ -1,13 +1,47 @@
 <ng-template #context_menu cdkMen>
   <div class="menu" cdkMenu>
-    <button [disabled]="isBufferEmpty()" (click)="pasteCell(idMenu)" class="menu-item" cdkMenuItem> <mat-icon>content_paste</mat-icon>Вставить</button>
-    <button *ngIf="isCellSetable(idMenu)" (click)="copyCell(idMenu)" class="menu-item" cdkMenuItem> <mat-icon>content_copy</mat-icon>Копировать</button>
-    <button *ngIf="isCellSetable(idMenu)" (click)="cutCell(idMenu)" class="menu-item" cdkMenuItem> <mat-icon>content_cut</mat-icon>Вырезать</button>
-    <mat-divider *ngIf="isCellSetable(idMenu)">
-    </mat-divider>
-    <button *ngIf="isCellSetable(idMenu)" (click)="turnCell(idMenu)" class="menu-item" cdkMenuItem> <mat-icon>cached</mat-icon>Повернуть</button>
-    <button *ngIf="isCellSetable(idMenu)" (click)="deleteCell(idMenu)" class="menu-item delete" cdkMenuItem> <mat-icon>delete_forever</mat-icon>Удалить</button>
-
+    <button
+      [disabled]="isBufferEmpty()"
+      (click)="pasteCell(idMenu)"
+      class="menu-item"
+      cdkMenuItem
+    >
+      <mat-icon>content_paste</mat-icon>Вставить
+    </button>
+    <button
+      *ngIf="isCellSetable(idMenu)"
+      (click)="copyCell(idMenu)"
+      class="menu-item"
+      cdkMenuItem
+    >
+      <mat-icon>content_copy</mat-icon>Копировать
+    </button>
+    <button
+      *ngIf="isCellSetable(idMenu)"
+      (click)="cutCell(idMenu)"
+      class="menu-item"
+      cdkMenuItem
+    >
+      <mat-icon>content_cut</mat-icon>Вырезать
+    </button>
+    <mat-divider *ngIf="isCellSetable(idMenu)"> </mat-divider>
+    <button
+      [disabled]="isParking(idMenu)"
+      *ngIf="isCellSetable(idMenu)"
+      (click)="turnCell(idMenu)"
+      class="menu-item"
+      cdkMenuItem
+    >
+      <mat-icon>cached</mat-icon>Повернуть
+    </button>
+    <button
+      *ngIf="isCellSetable(idMenu)"
+      (click)="deleteCell(idMenu)"
+      class="menu-item delete"
+      cdkMenuItem
+    >
+      <mat-icon>delete_forever</mat-icon>Удалить
+    </button>
   </div>
 </ng-template>
 
@@ -22,40 +56,81 @@
     [style.margin-left]="marginLeft + 'px'"
     cdkScrollable
   >
-    <mat-grid-tile
-      *ngFor="let cell of cells; let i = index;"
-      cdkScrollable
-    >
-    <div class="cell-wrapper" [style]="'width: ' + (sizeCell) + 'px; height: ' + (sizeCell) +'px;'">
+    <mat-grid-tile *ngFor="let cell of cells; let i = index" cdkScrollable>
       <div
-        class="cell"
-        cdkDropList
-        [id]="nameOfIdList + i"
-        [cdkDropListData]="cell"
-        [cdkDropListConnectedTo]="valueListConnectedTo"
-        (cdkDropListDropped)="designerService.drop($event)"
-        [class.selected]="i == designerService.indexOver"
-        (mouseover)="setIndexOver(i)"
-        (mouseout)="designerService.indexOver = -1"
-        [class.roadCell] = "isRoad(cell)"
-        [cdkContextMenuTriggerFor]="context_menu"
-        [cdkContextMenuDisabled]="isRoad(cell)"
-        (cdkContextMenuOpened)="idMenu = designerService.indexOver"
-        [class.selected]="designerService.selectedCells.includes(i)"
-        cdkScrollable
-        [style]="'z-index: '+ (designerService.isDragging?1+cells.length+i:1+cells.length-i)  +'; transform: rotate(' + (isRoad(cell)?cell.angle:0)+ 'deg);'"
-        [class.borderCell] = "isOneBoardCell(cell)"
-        
+        class="cell-wrapper"
+        [style]="'width: ' + sizeCell + 'px; height: ' + sizeCell + 'px;'"
       >
-        <div class="cdkDragWrapper" [class.borderCell] = "isMoreBoardCell(cell)" [style]="'width: ' + (cell.template.cols*sizeCell) + 'px; height: ' + (cell.template.rows*sizeCell) +'px;'">
-          <div  [cdkDragDisabled]="isRoad(cell)"  cdkDrag (cdkDragMoved)="designerService.move($event)" [style]="'transform: rotate(' + cell.angle+ 'deg);'">
-            <img cdkDragRootElement *ngIf="cell.template.src" [src]="cell.template.src"  [width]="cell.template.cols*sizeCell" [height]="cell.template.rows*sizeCell"/>
-            <!-- <span *ngIf="!cell.type.src">OPS</span> -->
-            <div *cdkDragPlaceholder></div>
+        <div
+          class="cell"
+          cdkDropList
+          [id]="nameOfIdList + i"
+          [cdkDropListData]="cell"
+          [cdkDropListConnectedTo]="valueListConnectedTo"
+          (cdkDropListDropped)="designerService.drop($event)"
+          (mouseover)="setIndexOver(i)"
+          (mouseout)="designerService.indexOver = -1"
+          [class.roadCell]="isRoad(cell)"
+          [cdkContextMenuTriggerFor]="context_menu"
+          [cdkContextMenuDisabled]="isRoad(cell)"
+          (cdkContextMenuOpened)="idMenu = designerService.indexOver"
+          [class.selected]="designerService.selectedCells.includes(i)"
+          cdkScrollable
+          [style]="
+            'z-index: ' +
+            (designerService.isDragging
+              ? 1 + cells.length + i
+              : 1 + cells.length - i) +
+            '; transform: rotate(' +
+            (isRoad(cell) ? cell.angle : 0) +
+            'deg);'
+          "
+          [class.borderCell]="isOneBoardCell(cell)"
+        >
+          <div
+            class="cdkDragWrapper"
+            [class.borderCell]="isMoreBoardCell(cell)"
+            [style]="
+              'width: ' +
+              cell.template.cols * sizeCell +
+              'px; height: ' +
+              cell.template.rows * sizeCell +
+              'px;'
+            "
+          >
+            <div
+              [cdkDragDisabled]="isRoad(cell) || !isCellSetable(cell.id)"
+              class="cdk-drag"
+              cdkDrag
+              (cdkDragMoved)="designerService.move($event)"
+              [style]="
+              'width: ' +
+              cell.template.cols * sizeCell +
+              'px; height: ' +
+              cell.template.rows * sizeCell +
+              'px;'
+            "
+            >
+              <img
+                *ngIf="cell.template.src"
+                [src]="cell.template.src"
+                [style]="
+                'width: ' +
+                cell.template.cols * sizeCell +
+                'px; height: ' +
+                cell.template.rows * sizeCell +
+                'px;' +
+                'transform: rotate(' +
+                cell.angle +
+                'deg);'
+              "
+              />
+              <!-- <span *ngIf="!cell.type.src">OPS</span> -->
+              <div *cdkDragPlaceholder></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

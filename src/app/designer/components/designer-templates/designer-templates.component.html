@@ -2,7 +2,7 @@
   <div class="container">
     <div class="sideWrapper">
       <div class="side">
-        <mat-grid-list cols="4" gutterSize="0" [class.mat-elevation-z2]>
+        <mat-grid-list cols="4" gutterSize="3" [class.mat-elevation-z2]>
           <mat-grid-tile *ngFor="let template of types.getParkingTemplates()"      [colspan]="template.cols"
           [rowspan]="template.rows">
             <div
@@ -13,9 +13,11 @@
               [cdkDropListConnectedTo]="valueListConnectedTo"
               (cdkDropListDropped)="designerService.drop($event)"
             >
-              <div cdkDrag (cdkDragMoved)="designerService.move($event)">
-                <img [src]="template.src" />
-                <div *cdkDragPlaceholder></div>
+              <div class ="cdk-drag-wrapper">
+                <div cdkDrag (cdkDragMoved)="designerService.move($event)">
+                  <img [src]="template.src" />
+                  <div *cdkDragPlaceholder></div>
+                </div>
               </div>
             </div>
           </mat-grid-tile>

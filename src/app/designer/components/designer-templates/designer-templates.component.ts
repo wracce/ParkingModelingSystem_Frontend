@@ -1,6 +1,7 @@
 import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ParkingCell } from '../../models/parking-cell';
+import { ParkingState } from '../../models/parking-state';
 import { ParkingTemplate } from '../../models/parking-template';
 import { ParkingTemplateGroup } from '../../models/parking-template-group';
 import { DesignerService } from '../../services/designer.service';
@@ -26,5 +27,9 @@ export class DesignerTemplatesComponent implements OnInit {
     this.types = this.designerService.getTypes();
     this.nameOfIdList = this.designerService.getNameOfObjsList();
      this.valueListConnectedTo =this.designerService.getLinksToParkingCells();
+  }
+
+  isPark(template:ParkingTemplate):boolean {
+    return template.state === ParkingState.Park;
   }
 }

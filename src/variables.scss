@@ -1,11 +1,12 @@
 @import "@angular/material/theming";
 @import './custom-palettes.scss';
+@import 'mat-palette-gen.scss';
 
 $ParkingModelingSystem_Frontend-primary: mat.define-palette($primary-palette, 500,50,800);
 $ParkingModelingSystem_Frontend-accent: mat.define-palette($accent-palette, A400,A100,800);
 $ParkingModelingSystem_Frontend-warn: mat.define-palette(mat.$red-palette);
 
-$ParkingModelingSystem_Frontend-theme: mat.define-light-theme((
+$ParkingModelingSystem_Frontend-theme1: mat.define-light-theme((
   color: (
     primary: $ParkingModelingSystem_Frontend-primary,
     accent: $ParkingModelingSystem_Frontend-accent,
@@ -13,4 +14,29 @@ $ParkingModelingSystem_Frontend-theme: mat.define-light-theme((
   )
 ));
 
-$defaultTheme: $ParkingModelingSystem_Frontend-theme;
+
+
+
+$primary-color2: #00818f;
+$accent-color2: #8a84ef;
+
+ 
+$primary-palette2: createPalette($primary-color2);
+$accent-palette2: createPalette($accent-color2);
+
+$ParkingModelingSystem_Frontend-primary2: mat.define-palette($primary-palette2, 500,50,800);
+$ParkingModelingSystem_Frontend-accent2: mat.define-palette($accent-palette2, 500,A100,800);
+
+$warn2: mat-palette($mat-red);
+$primary2: mat-palette($primary-palette2);
+$accent2: mat-palette($accent-palette2);
+ 
+$ParkingModelingSystem_Frontend-theme2: mat.define-light-theme((
+  color: (
+    primary: $ParkingModelingSystem_Frontend-primary2,
+    accent: $ParkingModelingSystem_Frontend-accent2,
+    warn: $warn2,
+  )
+));
+
+$defaultTheme: $ParkingModelingSystem_Frontend-theme2;//$ParkingModelingSystem_Frontend-theme1;

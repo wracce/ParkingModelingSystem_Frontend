@@ -131,6 +131,11 @@ export class DesignerParkingComponent implements OnInit {
     return cell.template.state === ParkingState.Road;
   }
 
+  public isParking(id:number): boolean {
+    return this.designerService.getParkingMap().at(id).template.state === ParkingState.Park;
+  }
+
+
   public isCellSetable(id: number): boolean {
     return (
       this.designerService.getParkingMap().at(id).template.state !==
@@ -185,4 +190,6 @@ export class DesignerParkingComponent implements OnInit {
     )
       this.designerService.getParkingMap().rotateCell(id);
   }
+
+  
 }

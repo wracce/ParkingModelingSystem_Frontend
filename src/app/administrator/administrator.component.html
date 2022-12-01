@@ -3,18 +3,6 @@
     <mat-grid-list cols="6" rowHeight="fit">
       <mat-grid-tile rowspan="2" colspan="3">
         <div class="userBlock">
-          <div class="header">Администратор</div>
-          <div class="userBlockContent">
-            
-            ФИО: <b>Иванов Иван Иванович</b> <br />
-            ЛОГИН: <b>solniwko_ivan</b><br />
-          </div>
-        </div>
-      </mat-grid-tile>
-
-      <mat-grid-tile rowspan="2" colspan="3">
-        <mat-divider vertical> </mat-divider>
-        <div class="userBlock">
           <div class="userBlockContent topology">
             <button mat-raised-button color="accent" routerLink="/designer">
               Создать топологию
@@ -26,17 +14,37 @@
         </div>
       </mat-grid-tile>
 
-      <mat-grid-tile rowspan="6" colspan="6">
+      <mat-grid-tile rowspan="2" colspan="3">
+        <mat-divider vertical> </mat-divider>
         <div class="userBlock">
-        <mat-tab-group mat-align-tabs="center">
-          <mat-tab label="Шаблоны">
-            <app-designer-templates></app-designer-templates>
-          </mat-tab>
-          <mat-tab label="Аккаунты"></mat-tab>
-        </mat-tab-group>
+          <div class="header">Администратор</div>
+          <div class="userBlockContent">
+            ФИО: <b>Иванов Иван Иванович</b> <br />
+            ЛОГИН: <b>solniwko_ivan</b><br />
+          </div>
         </div>
       </mat-grid-tile>
 
+      <mat-grid-tile rowspan="6" colspan="6">
+        <div class="accountsBlock mat-elevation-z2">
+          <div class="accountsBlockHeader mat-elevation-z1">
+            <mat-icon class="accountsBlockHeaderIcon">account_circle</mat-icon>
+            <div class="accountsBlockHeaderHeader">Пользователи</div>
+            <button class="accountsBlockHeaderButton" mat-icon-button color="accent">
+              <mat-icon>person_add</mat-icon>
+            </button>
+          </div>
+          <mat-list class="accountsBlockItems">
+            <mat-list-item
+              class="accountsBlockItem"
+              *ngFor="let item of usersList"
+              ><div class="accountsBlockItemText" color="primary">{{ item }}</div>
+              <button mat-icon-button><mat-icon color="warn">delete</mat-icon></button>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-grid-tile>
     </mat-grid-list>
   </div>
 </div>

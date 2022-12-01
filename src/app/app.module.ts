@@ -40,6 +40,8 @@ import {ScrollingModule, CdkScrollableModule} from '@angular/cdk/scrolling';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { ManagerComponent } from './manager/manager.component';
 import {CdkMenuModule} from '@angular/cdk/menu';
+import { DesignerConfirmComponent } from './designer/components/designer-confirm/designer-confirm.component';
+import {MatListModule} from '@angular/material/list';
 
 
 
@@ -61,7 +63,8 @@ import {CdkMenuModule} from '@angular/cdk/menu';
     DesignerSetupComponent,
     DesignerTemplatesComponent,
     AdministratorComponent,
-    ManagerComponent
+    ManagerComponent,
+    DesignerConfirmComponent
     
   ],
   imports: [
@@ -89,7 +92,8 @@ import {CdkMenuModule} from '@angular/cdk/menu';
     ReactiveFormsModule,
     ScrollingModule,
     CdkMenuModule,
-    CdkScrollableModule
+    CdkScrollableModule,
+    MatListModule
     
 
   ],

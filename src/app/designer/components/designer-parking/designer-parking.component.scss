@@ -9,8 +9,8 @@ $warn-palette: map.get($color-config, "warn");
 $board-color: #ededed;
 
 img {
-  object-fit: contain;
-  object-position: center;
+  // object-fit: contain;
+  // object-position: center;
 }
 
 .board {
@@ -43,20 +43,28 @@ mat-grid-list {
 
 mat-grid-tile {
   overflow: visible;
-}
-
-.cdk-drag {
-
-  position: relative;
   box-sizing: border-box;
 }
 
-.cdkDragWrapper{
+.cdk-drag {
+  padding: 0 !important;
+  margin: 0 !important;
   width: max-content;
   height:  max-content;
+  position: relative;
+  box-sizing: border-box;
+
+}
+
+.cdkDragWrapper{
+  padding: 0 !important;
+  width: max-content;
+  height:  max-content;
+  box-sizing: border-box;
 }
 .cell {
   // width: max-content; height: max-content;
+  box-sizing: border-box;
    width: 100%;
    height: 100%;overflow: visible;
    position: relative;
@@ -68,6 +76,7 @@ mat-grid-tile {
 .roadCell {
   background-image: url(/assets/road.png);
   background-size: 100%;
+  box-sizing: border-box;
 }
 
 .menu {
@@ -76,11 +85,11 @@ mat-grid-tile {
   padding: 5px 0px;
   min-width: 100px;
   max-width: 180px;
-  background-color: rgb(255, 255, 255);
+  // background-color: rgb(255, 255, 255);
 
   border-radius: 5px;
-  background: hsla(0, 0%, 100%, 0.333);
-  backdrop-filter: blur(5px);
+  background: hsla(0, 0%, 100%, 0.391);
+  backdrop-filter: blur(3px);
 }
 
 .menu-item {
@@ -111,10 +120,10 @@ mat-grid-tile {
 }
 
 .selected {
-  background-color: #ff1e1ebc;
+  background-color: #ff1e1e5c;
   // background-image: unset;
   // opacity: 70%;
-  mix-blend-mode: lighten;
+  // mix-blend-mode: difference;
   // z-index: 999999;
 }
 
@@ -128,5 +137,4 @@ mat-grid-tile {
 
 .borderCell {
   border: 1px solid rgba(255, 255, 255, 0.457);
-  box-sizing: border-box;
 }

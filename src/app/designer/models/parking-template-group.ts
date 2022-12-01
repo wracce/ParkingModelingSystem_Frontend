@@ -6,12 +6,13 @@ export class ParkingTemplateGroup {
 
   constructor (){
     this.parkingTemplates = [
-        new ParkingTemplate("", '/assets/p11.png',ParkingState.Park, 1,1),
-        new ParkingTemplate("", '/assets/p12.png',ParkingState.Park, 2,1),
-        new ParkingTemplate("", '/assets/p21.png',ParkingState.Park, 1,2),
-        new ParkingTemplate("", '/assets/tree/tree1.png',ParkingState.Solid, 1,1),
-
-        
+        new ParkingTemplate("Парковочное место", '/assets/p11.png',ParkingState.Park, 1,1),
+        new ParkingTemplate("Парковочное место", '/assets/p12.png',ParkingState.Park, 2,1),
+        new ParkingTemplate("Парковочное место", '/assets/p21.png',ParkingState.Park, 1,2),
+        new ParkingTemplate("Дерево", '/assets/tree.png',ParkingState.Solid, 1,1),
+        new ParkingTemplate("Стена", '/assets/wall90.png',ParkingState.Solid, 1,1),
+        new ParkingTemplate("Стена", '/assets/wall180.png',ParkingState.Solid, 1,1),
+        new ParkingTemplate("Стелка", '/assets/arrow.png',ParkingState.Solid, 1,1),
       ];
   }
   public add(parkingTemplate: ParkingTemplate): void {

@@ -21,8 +21,8 @@ mat-grid-list {
 }
 
 .userBlock {
-  width: 99%;
-  height: 99%;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
 }
 .userBlock > .header {
@@ -58,11 +58,82 @@ mat-grid-list {
   }
 }
 
-.templates {
-  width: 100%;
+mat-divider[vertical] {
+  margin-top: 5%;
   height: 100%;
 }
 
-mat-divider[vertical] {
-  height: 100%;
+// ACCOUNTS
+.accountsBlock {
+  flex-basis: 95%;
+  height: 95%;
+
+  background: #ffffff73;
+  backdrop-filter: blur(10px);
+  border-radius: 3px;
+
+  > .accountsBlockHeader {
+    width: 100%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.37);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    > .accountsBlockHeaderIcon {
+      $size: 35px;
+      height: $size;
+      width: $size;
+      font-size: $size;
+      margin-left: 10px;
+      color: rgba(0, 0, 0, 0.761) !important;
+    }
+
+    > .accountsBlockHeaderHeader {
+      height: fit-content;
+      flex: 1 1 auto;
+      // text-align: center;
+      font-weight: 300;
+      font-size: 16pt;
+      margin-left: 10px;
+      
+    }
+
+    > .accountsBlockHeaderButton {
+      
+      height: 100%;
+      margin-right: 10px;
+      
+      
+      mat-icon{
+        $size: 30px;
+        height: $size !important;
+        width: $size !important;
+        font-size: $size !important;
+        line-height: $size !important;
+        font-weight: 500;
+        
+      }
+    }
+  }
+  > .accountsBlockItems {
+    max-height: calc(100% - 40px);
+    overflow: auto;
+    padding: 0;
+
+    > .accountsBlockItem {
+      color: rgba(0, 0, 0, 0.566);
+
+      ::ng-deep .mat-list-item-content {
+        justify-content: space-between;
+      }
+
+    }
+  }
 }
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
