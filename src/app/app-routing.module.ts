@@ -8,14 +8,16 @@ import { DesignerComponent } from './designer/designer.component';
 import { HomeComponent } from './home/home.component';
 import { ManagerComponent } from './manager/manager.component';
 import { NfComponent } from './nf/nf.component';
+import { SimulationComponent } from './simulation/simulation.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "about", component: AboutComponent},
   { path: "auth", component: AuthComponent},
   { path: "administrator", component: AdministratorComponent},
-  { path: "designer", component: DesignerComponent},
+  { path: "administrator/designer", component: DesignerComponent},
   { path: "manager", component: ManagerComponent},
+  { path: "manager/simulation", component: SimulationComponent},
   { path: "**", component: NfComponent},
   
 ];

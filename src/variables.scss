@@ -14,6 +14,7 @@ $ParkingModelingSystem_Frontend-theme1: mat.define-light-theme((
   )
 ));
 
+$defaultTheme: $ParkingModelingSystem_Frontend-theme1;
 
 
 
@@ -39,4 +40,4 @@ $ParkingModelingSystem_Frontend-theme2: mat.define-light-theme((
   )
 ));
 
-$defaultTheme: $ParkingModelingSystem_Frontend-theme2;//$ParkingModelingSystem_Frontend-theme1;
+$defaultTheme: $ParkingModelingSystem_Frontend-theme2;

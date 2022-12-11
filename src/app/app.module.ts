@@ -5,13 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-
-
-
 import { NavbarComponent } from './navbar/navbar.component';
 import { DesignerComponent } from './designer/designer.component';
 import { AuthComponent } from './auth/auth.component';
@@ -42,8 +41,8 @@ import { ManagerComponent } from './manager/manager.component';
 import {CdkMenuModule} from '@angular/cdk/menu';
 import { DesignerConfirmComponent } from './designer/components/designer-confirm/designer-confirm.component';
 import {MatListModule} from '@angular/material/list';
-
-
+import { SimulationComponent } from './simulation/simulation.component';
+import { SimulationSetupComponent } from './simulation/components/simulation-setup/simulation-setup.component';
 
 
 
@@ -64,7 +63,9 @@ import {MatListModule} from '@angular/material/list';
     DesignerTemplatesComponent,
     AdministratorComponent,
     ManagerComponent,
-    DesignerConfirmComponent
+    DesignerConfirmComponent,
+    SimulationComponent,
+    SimulationSetupComponent,
     
   ],
   imports: [
@@ -93,8 +94,8 @@ import {MatListModule} from '@angular/material/list';
     ScrollingModule,
     CdkMenuModule,
     CdkScrollableModule,
-    MatListModule
-    
+    MatListModule,
+    NgxMaterialTimepickerModule
 
   ],
   providers: [DesignerService],

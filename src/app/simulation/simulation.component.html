@@ -1,0 +1,36 @@
+
+<mat-horizontal-stepper #stepper linear (selectionChange)="selectionChange($event)" [selectedIndex]="selectedId">
+    <mat-step label="Настройка" >
+      <div class="container">
+        <div class="content"><app-designer-setup></app-designer-setup></div>
+      </div>
+    </mat-step>
+    <mat-step label="Заполнение" completed="true">
+      <div class="container">
+        <div class="app-park-objectsWrapper">
+          <app-designer-templates></app-designer-templates>
+        </div>
+        <div class="scaleButtons">
+          <button class="btnZoomOut" mat-button >
+            <mat-icon>zoom_out</mat-icon>
+          </button>
+          <button class="btnZoomFree" mat-button >
+            <mat-icon>crop_free</mat-icon>
+          </button>
+          <button class="btnZoomIn" mat-button >
+            <mat-icon>zoom_in</mat-icon>
+          </button>
+        </div>
+        <div class="app-park-designerWrapper">
+          <app-designer-parking></app-designer-parking>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step label="Подтверждение" completed="true">
+      <app-designer-confirm></app-designer-confirm>
+    </mat-step>
+  
+    <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />
+  
+  </mat-horizontal-stepper>
+  

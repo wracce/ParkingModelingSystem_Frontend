@@ -1,0 +1,69 @@
+.container {
+    height: calc(100vh - 66px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .content {
+    border-radius: 5px;
+    height: 120px;
+    width: 480px;
+    background: rgb(238, 174, 202);
+    background: linear-gradient(
+      19deg,
+      rgba(238, 174, 202, 1) 25%,
+      rgba(148, 187, 233, 1) 100%
+    );
+  }
+  
+  mat-grid-list {
+    height: 100%;
+  }
+  
+  .userBlock {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+  .userBlock > .header {
+    text-align: center;
+    font-size: 2em;
+    padding: 5px;
+    font-weight: 300;
+  }
+  
+  .userBlock .userBlockContent {
+    inset-inline: 20px;
+    vertical-align: middle;
+    padding: 10px;
+    font-weight: 100;
+    font-size: 1em;
+  
+    b {
+      font-weight: 500;
+    }
+  }
+  .userBlock > mat-divider {
+    margin: 0px 10px 0px 10px;
+  }
+  
+  .userBlock > .topology {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    button {
+      width: 170px;
+    }
+  }
+  
+  mat-divider[vertical] {
+    margin: 15px 0 15px 0;
+    height: 80%;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  

@@ -15,7 +15,6 @@ export class DesignerSetupComponent implements OnInit {
   
   constructor(public designerService: DesignerService) {
     this.parkingMap = designerService.getParkingMap();
-    this.setupParkingForm = designerService.getSetupParkingForm();
   }
 
   ngOnInit(): void {
