@@ -1,29 +1,29 @@
 <div class="container">
-    <form class="content" [formGroup]="setupSimulationForm">
+    <form class="content">
       <div class="box">
         <label class="boxLabel">Название топологии</label>
         <mat-form-field appearance="outline" floatLabel='never'>
-          <input type="text" matInput placeholder="Ул. Мичурина 148" formControlName="name"  name="name" required/>
+          <input type="text" matInput placeholder="Ул. Мичурина 148"  name="name"/>
         </mat-form-field>
       </div>
       <mat-divider></mat-divider>
       <div class="box">
         <label class="boxLabel">Кол-во строк</label>
-        <label class="sliderBoxLabelValue">{{setupSimulationForm.value.rows}}</label>
-        <mat-slider #rows min="5" max="100" formControlName="rows" name="rows" thumbLabel> </mat-slider>
+        <label class="sliderBoxLabelValue">XX</label>
+        <mat-slider #rows min="5" max="100" thumbLabel> </mat-slider>
       </div>
       <mat-divider></mat-divider>
       <div class="box">
         <label class="boxLabel">Кол-во стобцов</label>
-        <label class="sliderBoxLabelValue">{{setupSimulationForm.value.cols}}</label>
-        <mat-slider #cols min="5" max="100" formControlName="cols" name="cols" thumbLabel> </mat-slider>
+        <label class="sliderBoxLabelValue"></label>
+        <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
       </div>
       
       <mat-divider></mat-divider>
       <div class="box">
         <label class="boxLabel">Расположение дороги</label>
         <div class="roadDirectionBox">
-          <mat-button-toggle-group formControlName="directOfRoad" name="directOfRoad" required>
+          <mat-button-toggle-group required>
             <mat-button-toggle value="left" aria-label="Text align left">
               <mat-icon>border_left</mat-icon>
             </mat-button-toggle>

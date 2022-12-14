@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DesignerService } from 'src/app/designer/services/designer.service';
 
 @Component({
   selector: 'app-simulation-setup',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./simulation-setup.component.scss']
 })
 export class SimulationSetupComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(public designerService: DesignerService) {
+  }
 
   ngOnInit(): void {
   }
