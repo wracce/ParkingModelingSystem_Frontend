@@ -5,7 +5,6 @@ import {UserInfo} from "../model/model";
 import {Observable} from "rxjs";
 import {JwtResponse} from "../model/jwt-response";
 
-
 @Injectable()
 export class LoginService {
   private loginUrl = environment.apiBaseUrl + '/auth/login';
@@ -13,7 +12,7 @@ export class LoginService {
   public isLoggedIn: boolean;
 
   constructor(private http: HttpClient) {
-    this.isLoggedIn = false;
+    this.isLoggedIn = true;
   }
 
   auth(userInfo: UserInfo): Observable<JwtResponse> {

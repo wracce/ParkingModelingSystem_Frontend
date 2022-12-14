@@ -43,6 +43,9 @@ import { DesignerConfirmComponent } from './designer/components/designer-confirm
 import {MatListModule} from '@angular/material/list';
 import { SimulationComponent } from './simulation/simulation.component';
 import { SimulationSetupComponent } from './simulation/components/simulation-setup/simulation-setup.component';
+import {LoginService} from "./core/service/login.service";
+import {AuthGuard} from "./core/guard/auth.guard";
+import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
 
 
 
@@ -66,7 +69,7 @@ import { SimulationSetupComponent } from './simulation/components/simulation-set
     DesignerConfirmComponent,
     SimulationComponent,
     SimulationSetupComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -95,10 +98,15 @@ import { SimulationSetupComponent } from './simulation/components/simulation-set
     CdkMenuModule,
     CdkScrollableModule,
     MatListModule,
-    NgxMaterialTimepickerModule
-
+    NgxMaterialTimepickerModule,
+    HttpClientModule
   ],
-  providers: [DesignerService],
+  providers: [
+    DesignerService,
+    LoginService,
+    AuthGuard,
+    HttpClient,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
