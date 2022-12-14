@@ -3,7 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {UserInfo} from "../model/model";
 import {Observable} from "rxjs";
-import {JwtResponse} from "../auth-model/jwt-response";
+import {JwtResponse} from "../model/jwt-response";
 
 
 @Injectable()
