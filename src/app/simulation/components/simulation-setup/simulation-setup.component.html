@@ -28,17 +28,23 @@
     <mat-divider></mat-divider>
     <div class="box">
       <label class="boxLabel">Настройка потока</label>
-      <mat-form-field appearance="fill">
-        <mat-label>Pokemon</mat-label>
-        <mat-select [formControl]="pokemonControl">
-          <mat-option>-- None --</mat-option>
-          <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
-                        [disabled]="group.disabled">
-            <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
-              {{pokemon.viewValue}}
-            </mat-option>
-          </mat-optgroup>
-        </mat-select>
-    </div>
+      <div class="box box_distributions">
+        <button class="list_distributions" mat-button [matMenuTriggerFor]="distributionsTypes">XXX</button>
+        <button class="setting_distribution" mat-button>S</button>
+      </div>   </div>
   </form>
 </div>
+
+<mat-menu #distributionsTypes="matMenu">
+  <button mat-menu-item>Детериминированое</button>
+  <button mat-menu-item [matMenuTriggerFor]="distributionsRandom">
+    Случайное
+  </button>
+</mat-menu>
+
+<mat-menu #distributionsRandom="matMenu">
+  <button mat-menu-item>Равномерное</button>
+  <button mat-menu-item>Нормальное</button>
+  <button mat-menu-item>Экспонециальное</button>
+</mat-menu>
+
