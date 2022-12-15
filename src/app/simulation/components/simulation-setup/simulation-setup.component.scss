@@ -54,24 +54,32 @@ mat-slider {
   overflow: auto;
 }
 
-mat-form-field{
-    margin-top: 15px;
-    width:  100%;
+mat-form-field {
+  margin-top: 15px;
+  width: 100%;
 }
 
 :host ::ng-deep .mat-form-field-infix {
-    border-top: 0px!important;
- }
+  border-top: 0px !important;
+}
 
- input{
-    vertical-align: middle;
- }
+input {
+  vertical-align: middle;
+}
 
-
- .box_distributions {
+.box_distributions {
   display: flex;
+  padding: 3px;
 
-  label{ flex-basis: 100%;}
-  .setting_distribution{}
-  .list_distributions{}
- }
+  label {
+    flex-basis: 100%;
+  }
+  .list_distributions {
+    flex-basis: 100%;
+    background: mat.get-color-from-palette($accent-palette, default);
+    text-align: left;
+  }
+  .setting_distribution {
+    color: mat.get-color-from-palette($accent-palette, 900);
+  }
+}

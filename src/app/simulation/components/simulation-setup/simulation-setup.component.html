@@ -29,9 +29,52 @@
     <div class="box">
       <label class="boxLabel">Настройка потока</label>
       <div class="box box_distributions">
-        <button class="list_distributions" mat-button [matMenuTriggerFor]="distributionsTypes">XXX</button>
-        <button class="setting_distribution" mat-button>S</button>
-      </div>   </div>
+        <button
+          class="list_distributions"
+          mat-stroked-button
+          [matMenuTriggerFor]="distributionsTypes"
+        >
+          VALUE<mat-icon style="float: right; margin-top: 5px"
+            >expand_more</mat-icon
+          >
+        </button>
+        <button class="setting_distribution" mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+
+      <label class="boxLabel">Настройка вероятности заезда</label>
+      <div class="box box_distributions">
+        <button
+          class="list_distributions"
+          mat-stroked-button
+          [matMenuTriggerFor]="distributionsTypes"
+        >
+          VALUE<mat-icon style="float: right; margin-top: 5px"
+            >expand_more</mat-icon
+          >
+        </button>
+        <button class="setting_distribution" mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+
+      <label class="boxLabel">Настройка времени стоянки</label>
+      <div class="box box_distributions">
+        <button
+          class="list_distributions"
+          mat-stroked-button
+          [matMenuTriggerFor]="distributionsTypes"
+        >
+          VALUE<mat-icon style="float: right; margin-top: 5px"
+            >expand_more</mat-icon
+          >
+        </button>
+        <button class="setting_distribution" mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+    </div>
   </form>
 </div>
 
@@ -47,4 +90,3 @@
   <button mat-menu-item>Нормальное</button>
   <button mat-menu-item>Экспонециальное</button>
 </mat-menu>
-
