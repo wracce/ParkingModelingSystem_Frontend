@@ -53,6 +53,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogConfigurateUserComponent } from './administrator/dialog-configurate-user/dialog-configurate-user.component';
 import { SimulationProcessComponent } from './simulation/components/simulation-process/simulation-process.component';
+import {ManagerService} from "./core/service/manager.service";
 
 
 
@@ -121,6 +122,7 @@ import { SimulationProcessComponent } from './simulation/components/simulation-p
     AuthService,
     AuthGuard,
     HttpClient,
+    ManagerService
     ],
   bootstrap: [AppComponent]
 })
