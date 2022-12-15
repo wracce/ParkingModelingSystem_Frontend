@@ -1,10 +1,14 @@
 <div class="content">
+  <form [formGroup]="form">
   <mat-tab-group dynamicHeight>
     <!-- ВХОД -->
     <mat-tab label="ВХОД">
       <mat-form-field appearance="outline">
         <mat-label>Логин</mat-label>
-        <input matInput placeholder="Введите ваш логин" />
+        <input
+          matInput
+          [formControlName]="'login'"
+          placeholder="Введите ваш логин" />
         <button mat-icon-button matPrefix disabled>
           <mat-icon>person</mat-icon>
         </button>
@@ -13,12 +17,14 @@
         <mat-label>Пароль</mat-label>
         <input
           matInput
+          [formControlName]="'password'"
           [type]="hide ? 'password' : 'text'"
           placeholder="Введите ваш пароль"
         />
         <button
           mat-icon-button
           matPrefix
+
           (click)="hide = !hide"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide"
@@ -27,7 +33,7 @@
         </button>
       </mat-form-field>
       <mat-checkbox>Запомнить?</mat-checkbox>
-      <button mat-button (click)="(onClicked)">Войти</button>
+      <button mat-button (click)="(onLoginClicked())">Войти</button>
       <div class="clearfix"></div>
     </mat-tab>
 
@@ -88,4 +94,5 @@
       <div class="clearfix"></div>
     </mat-tab>
   </mat-tab-group>
+  </form>
 </div>

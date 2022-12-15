@@ -43,12 +43,13 @@ import { DesignerConfirmComponent } from './designer/components/designer-confirm
 import {MatLegacyListModule as MatListModule} from '@angular/material/legacy-list';
 import { SimulationComponent } from './simulation/simulation.component';
 import { SimulationSetupComponent } from './simulation/components/simulation-setup/simulation-setup.component';
-import {LoginService} from "./core/service/login.service";
+import {AuthService} from "./core/service/auth.service";
 import {AuthGuard} from "./core/guard/auth.guard";
 import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
-import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';  
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 
@@ -106,11 +107,12 @@ import {MatMenuModule} from '@angular/material/menu';
     HttpClientModule,
     NgxMatTimepickerModule,
     NgxMatTimepickerModule.setLocale('ru'),
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule
   ],
   providers: [
     DesignerService,
-    LoginService,
+    AuthService,
     AuthGuard,
     HttpClient,
     ],
