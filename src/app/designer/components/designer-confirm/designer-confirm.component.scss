@@ -6,7 +6,13 @@
 }
 
 .content {
-    width: 100px;
-    height: 200px;
-    background-color: red;
+    width: 200px;
+    height: 100px;
+    background: rgb(238, 174, 202);
+    background: linear-gradient(
+      40deg,
+      rgba(238, 174, 202, 1) 15%,
+      rgba(148, 187, 233, 1) 100%
+    );
+    border-radius: 5px;
 }

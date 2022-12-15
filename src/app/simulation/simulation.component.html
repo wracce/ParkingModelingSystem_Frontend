@@ -6,7 +6,11 @@
       </div>
     </mat-step>
     <mat-step label="Заполнение" completed="true">
+      
       <div class="container">
+        <div class="app-park-designerWrapper">
+          <app-simulation-process></app-simulation-process>
+        </div>
         <div class="app-park-objectsWrapper">
           <app-designer-templates></app-designer-templates>
         </div>
@@ -21,16 +25,11 @@
             <mat-icon>zoom_in</mat-icon>
           </button>
         </div>
-        <div class="app-park-designerWrapper">
-          <app-designer-parking></app-designer-parking>
-        </div>
       </div>
     </mat-step>
     <mat-step label="Подтверждение" completed="true">
       <app-designer-confirm></app-designer-confirm>
     </mat-step>
   
-    <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />
-  
-  </mat-horizontal-stepper>
+  </mat-horizontal-stepper>   
   

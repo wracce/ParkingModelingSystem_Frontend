@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DesignerService } from 'src/app/designer/services/designer.service';
 
 @Component({
   selector: 'app-dialog-configurate-user',
@@ -8,11 +9,4 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class DialogConfigurateUserComponent {
   settingsUserForm!:FormGroup;
-  constructor(){
-    this.settingsUserForm = new FormGroup({
-      fio: new FormControl(),
-      login: new FormControl(),
-      password: new FormControl(),
-    });
-  }
 }

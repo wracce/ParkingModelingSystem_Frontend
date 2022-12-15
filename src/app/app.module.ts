@@ -52,6 +52,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogConfigurateUserComponent } from './administrator/dialog-configurate-user/dialog-configurate-user.component';
+import { SimulationProcessComponent } from './simulation/components/simulation-process/simulation-process.component';
 
 
 
@@ -77,6 +78,7 @@ import { DialogConfigurateUserComponent } from './administrator/dialog-configura
     SimulationComponent,
     SimulationSetupComponent,
     DialogConfigurateUserComponent,
+    SimulationProcessComponent,
 
   ],
   imports: [

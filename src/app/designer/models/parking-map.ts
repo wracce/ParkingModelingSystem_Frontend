@@ -17,6 +17,7 @@ export class ParkingMap {
     this.parkingCells = [];
   }
 
+  
   public getCells(): ParkingCell[] {
     return this.parkingCells;
   }

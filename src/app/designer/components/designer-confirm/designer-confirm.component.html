@@ -1,5 +1,9 @@
 <div class="container">
     <div class="content">
-        Сохранить?
+        Сохранить топологию?
+        <button mat-raised-button color="accent" (click)="saveAsTopology()">Сохранить
+        </button>
     </div>
 </div>
+
+<input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()" />

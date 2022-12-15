@@ -19,9 +19,10 @@ export class DesignerService {
   private linkOfParkingTemplate!: string;
   private linksToParkingCells!: string[];
   private linkOfParkingCell!: string;
+  
+  private parkingTemplateGroup!: ParkingTemplateGroup;
 
   private parkingMap!: ParkingMap;
-  private parkingTemplateGroup!: ParkingTemplateGroup;
   private setupParkingForm!: FormGroup;
 
   constructor() {
@@ -53,6 +54,9 @@ export class DesignerService {
 
   public getParkingMap(): ParkingMap {
     return this.parkingMap;
+  }
+  public setParkingMap(parkingMap:ParkingMap):void {
+    this.parkingMap = parkingMap;
   }
   public getTypes(): ParkingTemplateGroup {
     return this.parkingTemplateGroup;

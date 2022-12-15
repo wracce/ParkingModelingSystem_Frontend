@@ -12,39 +12,19 @@ import { DesignerService } from './services/designer.service';
   styleUrls: ['./designer.component.scss'],
 })
 export class DesignerComponent implements OnInit {
+
   @ViewChild(DesignerParkingComponent)
   public designerParkingComponent!: DesignerParkingComponent;
   @ViewChild('setupParkingForm', { static: true })
   setupParkingForm!: NgForm;
-  @ViewChild('stepper') 
+  @ViewChild('stepper')
   stepper!: MatStepper;
-  
-  @ViewChild('fileInput')
-  fileInput!: ElementRef;
 
-  file: File | null = null;
+  selectedId: number = 0;
 
-  selectedId:number = 0;
+  constructor(private designerService: DesignerService) {}
 
-  onClickFileInputButton(): void {
-    this.fileInput.nativeElement.click();
-  }
-
-  onChangeFileInput(): void {
-    const files: { [key: string]: File } = this.fileInput.nativeElement.files;
-    this.file = files[0];
-  }
-
-
-  constructor(private designerService: DesignerService) {
-  }
-
-
-  
-
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     // this.stepper.selectionChange.unsubscribe();
@@ -53,14 +33,15 @@ export class DesignerComponent implements OnInit {
   }
 
   public selectionChange(event: StepperSelectionEvent): void {
-    if (event.previouslySelectedIndex === (0 &&1)) {
-
-      this.designerService.getParkingMap().configurateParking(this.designerService.getSetupParkingForm());
+    if (event.previouslySelectedIndex === (0 && 1)) {
+      this.designerService
+        .getParkingMap()
+        .configurateParking(this.designerService.getSetupParkingForm());
       this.designerService.resetLinksToParkingCells();
       this.designerParkingComponent.zoomFree();
     }
-      if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
-      this.onClickFileInputButton();
+    if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
     }
   }
+
 }
