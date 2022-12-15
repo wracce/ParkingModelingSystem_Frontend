@@ -50,6 +50,8 @@ import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogConfigurateUserComponent } from './administrator/dialog-configurate-user/dialog-configurate-user.component';
 
 
 
@@ -74,6 +76,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     DesignerConfirmComponent,
     SimulationComponent,
     SimulationSetupComponent,
+    DialogConfigurateUserComponent,
 
   ],
   imports: [
@@ -108,7 +111,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     NgxMatTimepickerModule,
     NgxMatTimepickerModule.setLocale('ru'),
     MatMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [
     DesignerService,

@@ -1,0 +1,47 @@
+<form [formGroup]="settingsUserForm">
+  <mat-form-field appearance="outline">
+    <mat-label>ФИО</mat-label>
+    <input
+      matInput
+      placeholder="Введите ваш ФИО"
+      formControlName="fio"
+      name="fio"
+    />
+    <button mat-icon-button matPrefix disabled>
+      <mat-icon>person</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Логин</mat-label>
+    <input
+      matInput
+      placeholder="Введите ваш логин"
+      formControlName="login"
+      name="login"
+    />
+    <button mat-icon-button matPrefix disabled>
+      <mat-icon>person</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Пароль</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="Введите ваш пароль"
+      formControlName="password"
+      name="password"
+    />
+    <button mat-icon-button matPrefix disabled>
+      <mat-icon>vpn_key</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="clearfix"></div>
+</form>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Отмена</button>
+  <button mat-button [mat-dialog-close]="settingsUserForm" cdkFocusInitial>
+    Зарегистрировать
+  </button>
+</mat-dialog-actions>
