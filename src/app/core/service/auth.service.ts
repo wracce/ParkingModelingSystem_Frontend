@@ -6,13 +6,13 @@ import {Observable} from "rxjs";
 import {JwtResponse} from "../model/jwt-response";
 
 @Injectable()
-export class LoginService {
+export class AuthService {
   private loginUrl = environment.apiBaseUrl + '/auth/login';
   private registerUrl = environment.apiBaseUrl + '/auth/register';
   public isLoggedIn: boolean;
 
   constructor(private http: HttpClient) {
-    this.isLoggedIn = true;
+    this.isLoggedIn = false;
   }
 
   auth(userInfo: UserInfo): Observable<JwtResponse> {

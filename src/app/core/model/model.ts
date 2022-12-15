@@ -1,8 +1,9 @@
-export type UserType = "ADMINISTRATOR" | "MANAGER";
+export type UserType = "ROLE_ADMINISTRATOR" | "ROLE_MANAGER";
 
 export interface UserInfo {
   username: string;
   password: string;
+  userRole: string;
 }
 
 
