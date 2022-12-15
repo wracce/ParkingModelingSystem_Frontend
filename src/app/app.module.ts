@@ -46,6 +46,7 @@ import { SimulationSetupComponent } from './simulation/components/simulation-set
 import {LoginService} from "./core/service/login.service";
 import {AuthGuard} from "./core/guard/auth.guard";
 import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';  
 
 
 
@@ -99,7 +100,9 @@ import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
     CdkScrollableModule,
     MatListModule,
     NgxMaterialTimepickerModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMatTimepickerModule,
+    NgxMatTimepickerModule.setLocale('de')
   ],
   providers: [
     DesignerService,
