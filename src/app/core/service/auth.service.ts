@@ -12,7 +12,7 @@ export class AuthService {
   public isLoggedIn: boolean;
 
   constructor(private http: HttpClient) {
-    this.isLoggedIn = true;
+    this.isLoggedIn = false;
   }
 
   auth(userInfo: UserInfo): Observable<JwtResponse> {

@@ -52,6 +52,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogConfigurateUserComponent } from './administrator/dialog-configurate-user/dialog-configurate-user.component';
+import {ManagerService} from "./core/service/manager.service";
 
 
 
@@ -119,6 +120,7 @@ import { DialogConfigurateUserComponent } from './administrator/dialog-configura
     AuthService,
     AuthGuard,
     HttpClient,
+    ManagerService
     ],
   bootstrap: [AppComponent]
 })
