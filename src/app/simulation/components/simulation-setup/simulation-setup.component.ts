@@ -11,6 +11,7 @@ export class SimulationSetupComponent implements OnInit {
   setupSimulationForm!:FormGroup;
 
   constructor(public designerService: DesignerService) {
+    
     this.setupSimulationForm = new FormGroup({
       selectedTime: new FormControl(),
       cols: new FormControl(),

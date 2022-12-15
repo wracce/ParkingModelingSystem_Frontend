@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -47,6 +47,9 @@ import {LoginService} from "./core/service/login.service";
 import {AuthGuard} from "./core/guard/auth.guard";
 import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';  
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 
@@ -102,7 +105,8 @@ import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
     NgxMaterialTimepickerModule,
     HttpClientModule,
     NgxMatTimepickerModule,
-    NgxMatTimepickerModule.setLocale('de')
+    NgxMatTimepickerModule.setLocale('ru'),
+    MatMenuModule
   ],
   providers: [
     DesignerService,

@@ -13,39 +13,32 @@
         />
       </mat-form-field>
       <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="box">
-      <label class="boxLabel">Кол-во строк</label>
-      <label class="sliderBoxLabelValue">XX</label>
+
+      <label class="boxLabel">Цена за час дневного тарифа</label>
+      <label class="sliderBoxLabelValue"></label>
       <mat-slider #rows min="5" max="100" thumbLabel> </mat-slider>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="box">
-      <label class="boxLabel">Кол-во стобцов</label>
+      <label class="boxLabel">Цена за час ночного тарифа</label>
+      <label class="sliderBoxLabelValue"></label>
+      <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
+      <label class="boxLabel">Процент грузовых автомобилей</label>
       <label class="sliderBoxLabelValue"></label>
       <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
     </div>
 
     <mat-divider></mat-divider>
     <div class="box">
-      <label class="boxLabel">Расположение дороги</label>
-      <div class="roadDirectionBox">
-        <mat-button-toggle-group required>
-          <mat-button-toggle value="left" aria-label="Text align left">
-            <mat-icon>border_left</mat-icon>
-          </mat-button-toggle>
-          <mat-button-toggle value="top" aria-label="Text align center">
-            <mat-icon>border_top</mat-icon>
-          </mat-button-toggle>
-          <mat-button-toggle value="right" aria-label="Text align right">
-            <mat-icon>border_right</mat-icon>
-          </mat-button-toggle>
-          <mat-button-toggle value="bottom" aria-label="Text align justify">
-            <mat-icon>border_bottom</mat-icon>
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
+      <label class="boxLabel">Настройка потока</label>
+      <mat-form-field appearance="fill">
+        <mat-label>Pokemon</mat-label>
+        <mat-select [formControl]="pokemonControl">
+          <mat-option>-- None --</mat-option>
+          <mat-optgroup *ngFor="let group of pokemonGroups" [label]="group.name"
+                        [disabled]="group.disabled">
+            <mat-option *ngFor="let pokemon of group.pokemon" [value]="pokemon.value">
+              {{pokemon.viewValue}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
     </div>
   </form>
 </div>
