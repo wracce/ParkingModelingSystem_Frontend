@@ -22,6 +22,7 @@ export class ManagerService {
   }
 
   public createManager(userInfo: UserInfo): Observable<UserInfo> {
+    alert(userInfo.password);
     return this.http.post<UserInfo>(this.apiUrl, userInfo, {
       headers: new HttpHeaders({
         authtoken: this.userStorage.getToken(),

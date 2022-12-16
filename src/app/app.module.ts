@@ -55,7 +55,7 @@ import { DialogConfigurateUserComponent } from './administrator/dialog-configura
 import { SimulationProcessComponent } from './simulation/components/simulation-process/simulation-process.component';
 import {ManagerService} from "./core/service/manager.service";
 import { MatTableModule } from '@angular/material/table'  
-
+import {DataShareService} from "./core/service/data-share.service";
 
 
 
@@ -124,7 +124,9 @@ import { MatTableModule } from '@angular/material/table'
     AuthService,
     AuthGuard,
     HttpClient,
-    ManagerService
+    ManagerService,
+    DataShareService,
+
     ],
   bootstrap: [AppComponent]
 })

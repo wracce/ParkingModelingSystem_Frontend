@@ -6,6 +6,7 @@ import {AuthService} from "../core/service/auth.service";
 import {UserStorageService} from "../core/service/user-storage.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {DataShareService} from "../core/service/data-share.service";
 
 @Component({
   selector: 'app-auth',
@@ -20,13 +21,15 @@ export class AuthComponent implements OnInit {
     password: new FormControl(),
   });
 
-  userInfo: UserInfo;
+  public userInfo: UserInfo;
 
   constructor(
     private authService: AuthService,
     private userStorage: UserStorageService,
     private snackBar: MatSnackBar,
     private router: Router,
+    private dataShareService: DataShareService,
+
   ) {
     this.userInfo = {} as UserInfo;
   }
@@ -38,12 +41,14 @@ export class AuthComponent implements OnInit {
     this.userInfo.username = this.form.controls["login"].value;
     this.userInfo.password = this.form.controls["password"].value;
     this.authService.auth(this.userInfo).subscribe(r => {
-      // alert(r.token + "\n" + r.username + "\n" + r.userRole)
+      //alert(r.token + "\n" + r.username + "\n" + r.userRole + r.fio + "\n" + r.id + "\n")
       if (r.token && r.username && r.userRole) {
         this.userStorage.saveToken(r.token);
         this.userStorage.saveUsername(r.username);
         this.userStorage.saveAuthorities(r.userRole);
         this.userInfo.userRole = r.userRole;
+        this.userInfo.fio = r.fio;
+        this.dataShareService.setUserInfo(this.userInfo);
         this.auth();
       }
     }, error => {
