@@ -5,7 +5,7 @@ import { ParkingState } from './parking-state';
 import { ParkingTemplate } from './parking-template';
 
 export class ParkingMap {
-  private parkingCells!: ParkingCell[];
+  public parkingCells!: ParkingCell[];
 
   constructor(
     public name: string = '',

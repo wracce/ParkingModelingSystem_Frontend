@@ -20,37 +20,50 @@ $accent-palette: map.get($color-config, 'accent');
   width: 100%;
 }
 
-.app-park-designerWrapper{
+.app-park-infoWrapper{
+  padding: 10px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height:90px;
+  width: 320px;
+  margin-bottom: 10px;
+  background-color: mat.get-color-from-palette($primary-palette,300);
+}
 
+.app-park-simulationWrapper{
   min-height: calc(100vh - 64px - 72px - 32px);
   max-height: calc(100vh - 64px - 72px - 32px);
-  width: 70%;
+  width: 60%;
 }
 
-.app-park-objectsWrapper {
+.app-park-tableWrapper {
   background-color: mat.get-color-from-palette($primary-palette,lighter);
-  border-radius: 10px 10px 0 0px;
-  min-height: calc(100vh - 64px - 72px - 64px - 32px);
-  max-height: calc(100vh - 64px - 72px - 64px - 32px);
-  width: 240px;
+  height: calc(100vh - 64px - 72px - 100px - 32px - 2 * 60px);
+  width: 320px;
   margin: 0 5px 0 5px;
 }
 
-.scaleButtons{
-  height: 64px;
-  width: 240px;
+.buttonsWrapper{
+  height: 60px;
+  width: 320px;
   margin: 0 5px 0 5px;
   border-radius: 0 0 10px 10px;
-  // background-color: mat.get-color-from-palette($primary-palette,darker);
-  background: rgb(0,100,114);
-  background: linear-gradient(43deg, rgba(0,100,114,1) 29%, rgba(32,154,215,0.7269999186197917) 92%);  display: flex;
+  background-color: mat.get-color-from-palette($primary-palette,300);
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.buttonsPlayersWrapper{
+  background: mat.get-color-from-palette($primary-palette,300) ;
+  border-radius: 0;
+}
+
 .btnZoomOut{
   flex-basis: 15%;
-  background-color: mat.get-color-from-palette($accent-palette,default);
+  background-color: mat.get-color-from-palette($accent-palette,darker);
   border-radius: 8px 0 0 8px;
   height: 70%;
   margin-right: 2px;
@@ -58,7 +71,7 @@ $accent-palette: map.get($color-config, 'accent');
 
 .btnZoomFree{
   flex-basis: 15%;
-  background-color: mat.get-color-from-palette($accent-palette,default);
+  background-color: mat.get-color-from-palette($accent-palette,darker);
   border-radius: 0 0 0 0;
   height: 70%;
   margin-right: 2px;
@@ -66,8 +79,22 @@ $accent-palette: map.get($color-config, 'accent');
 
 .btnZoomIn{
   flex-basis: 15%;
-  background-color: mat.get-color-from-palette($accent-palette,default);
+  background-color: mat.get-color-from-palette($accent-palette,darker);
   border-radius: 0 8px 8px 0;
   height: 70%;
 }
 
+.example-container {
+  height: 100%;
+  width: 320px;
+  overflow: auto;
+}
+
+table {
+  background: mat.get-color-from-palette($primary-palette,lighter) ;
+  width: 100%;
+}
+
+.playerButton{
+  margin: 0px 5px 0px 5px;
+}

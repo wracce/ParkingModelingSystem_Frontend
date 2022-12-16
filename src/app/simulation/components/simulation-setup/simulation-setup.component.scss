@@ -83,3 +83,13 @@ input {
     color: mat.get-color-from-palette($accent-palette, 900);
   }
 }
+
+.example-container {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}

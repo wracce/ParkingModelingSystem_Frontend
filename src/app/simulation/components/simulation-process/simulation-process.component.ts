@@ -12,6 +12,7 @@ import { DesignerService } from "src/app/designer/services/designer.service";
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimulationProcessComponent implements OnInit {
+  
   @ViewChild('board', { static: false })
   board!: ElementRef;
 

@@ -1,35 +1,76 @@
+<mat-horizontal-stepper
+  #stepper
+  linear
+  (selectionChange)="selectionChange($event)"
+  [selectedIndex]="selectedId"
+>
+  <mat-step label="Настройка">
+    <div class="container">
+      <div class="content"><app-simulation-setup></app-simulation-setup></div>
+    </div>
+  </mat-step>
+  <mat-step label="Симуляция" completed="true">
+    <div class="container">
+      <div class="app-park-simulationWrapper">
+        <app-simulation-process></app-simulation-process>
+      </div>
+      <div class="app-park-infoWrapper">
+        <div>Свободных мест: <b>VALUE</b></div>
+        <div>Текущее время: <b>VALUE</b></div>
+      </div>
+      <div class="app-park-tableWrapper">
+        <table mat-table [dataSource]="dataSource">
 
-<mat-horizontal-stepper #stepper linear (selectionChange)="selectionChange($event)" [selectedIndex]="selectedId">
-    <mat-step label="Настройка" >
-      <div class="container">
-        <div class="content"><app-simulation-setup></app-simulation-setup></div>
-      </div>
-    </mat-step>
-    <mat-step label="Заполнение" completed="true">
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> № </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
       
-      <div class="container">
-        <div class="app-park-designerWrapper">
-          <app-simulation-process></app-simulation-process>
-        </div>
-        <div class="app-park-objectsWrapper">
-          <app-designer-templates></app-designer-templates>
-        </div>
-        <div class="scaleButtons">
-          <button class="btnZoomOut" mat-button >
-            <mat-icon>zoom_out</mat-icon>
-          </button>
-          <button class="btnZoomFree" mat-button >
-            <mat-icon>crop_free</mat-icon>
-          </button>
-          <button class="btnZoomIn" mat-button >
-            <mat-icon>zoom_in</mat-icon>
-          </button>
-        </div>
+          <!-- Name Column -->
+          <ng-container matColumnDef="timeIn">
+            <th mat-header-cell *matHeaderCellDef> Время въезда </th>
+            <td mat-cell *matCellDef="let element"> {{element.timeIn}} </td>
+          </ng-container>
+      
+          <!-- Weight Column -->
+          <ng-container matColumnDef="timeOut">
+            <th mat-header-cell *matHeaderCellDef> Время выезда </th>
+            <td mat-cell *matCellDef="let element"> {{element.timeOut}} </td>
+          </ng-container>
+      
+          <!-- Weight Column -->
+          <ng-container matColumnDef="cost">
+            <th mat-header-cell *matHeaderCellDef> Стоимость </th>
+            <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
       </div>
-    </mat-step>
-    <mat-step label="Подтверждение" completed="true">
-      <app-designer-confirm></app-designer-confirm>
-    </mat-step>
-  
-  </mat-horizontal-stepper>   
-  
+      <div class="buttonsPlayersWrapper buttonsWrapper ">
+        <button  mat-mini-fab>
+          <mat-icon>stop</mat-icon>
+        </button>
+        <button class="playerButton" mat-mini-fab>
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-mini-fab>
+          <mat-icon>pause</mat-icon>
+        </button>
+      </div>
+      <div class="buttonsWrapper" *ngIf="true">
+        <button class="btnZoomOut" mat-button>
+          <mat-icon>zoom_out</mat-icon>
+        </button>
+        <button class="btnZoomFree" mat-button>
+          <mat-icon>crop_free</mat-icon>
+        </button>
+        <button class="btnZoomIn" mat-button>
+          <mat-icon>zoom_in</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

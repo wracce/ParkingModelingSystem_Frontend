@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { DesignerParkingComponent } from '../designer/components/designer-parking/designer-parking.component';
 import { DesignerService } from '../designer/services/designer.service';
+import { SimulationProcessComponent } from './components/simulation-process/simulation-process.component';
 
 @Component({
   selector: 'app-simulation',
@@ -11,9 +12,14 @@ import { DesignerService } from '../designer/services/designer.service';
   styleUrls: ['./simulation.component.scss']
 })
 export class SimulationComponent implements OnInit {
+  @ViewChild(SimulationProcessComponent)
+  public simulationProcessComponent!: SimulationProcessComponent;
+
   selectedId: number = 0;
 
-  
+  displayedColumns = ['position', 'timeIn', 'timeOut', 'cost'];
+  dataSource = ELEMENT_DATA;
+
   constructor(public designerService:DesignerService){}
 
   public selectionChange(event: StepperSelectionEvent): void {
@@ -21,7 +27,7 @@ export class SimulationComponent implements OnInit {
 
       //this.designerService.getParkingMap().configurateParking(this.designerService.getSetupParkingForm());
       //this.designerService.resetLinksToParkingCells();
-      //this.designerParkingComponent.zoomFree();
+      this.simulationProcessComponent.zoomFree();
       
     }
       if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
@@ -30,4 +36,11 @@ export class SimulationComponent implements OnInit {
   }
 
   ngOnInit(){}
+
+  
 }
+
+export const ELEMENT_DATA: Object[] = [
+  {position: 1, timeIn: '12:00', timeOut: '12:05', cost: 2500},
+
+]

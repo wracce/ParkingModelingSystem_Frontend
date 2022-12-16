@@ -79,46 +79,6 @@ mat-grid-tile {
   box-sizing: border-box;
 }
 
-.menu {
-  display: inline-flex;
-  flex-direction: column;
-  padding: 5px 0px;
-  min-width: 100px;
-  max-width: 180px;
-  // background-color: rgb(255, 255, 255);
-
-  border-radius: 5px;
-  background: hsla(0, 0%, 100%, 0.391);
-  backdrop-filter: blur(3px);
-}
-
-.menu-item {
-  background-color: transparent;
-  cursor: pointer;
-  border: none;
-
-  user-select: none;
-  min-width: 64px;
-  line-height: 36px;
-  padding: 0 16px 0px 16px 0;
-
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex: 1;
-  font-weight: 500;
-  mat-icon {
-    margin-inline-end: 10px;
-  }
-}
-.delete {
-  background-color: rgba(255, 0, 0, 0.698);
-}
-
-.cdk-drag-preview {
-  opacity: 70%;
-}
-
 .selected {
   background-color: #ff1e1e5c;
   // background-image: unset;
@@ -127,14 +87,6 @@ mat-grid-tile {
   // z-index: 999999;
 }
 
-.menu-item:hover {
-  background-color: rgb(208, 208, 208);
-}
-
-.menu-item:active {
-  background-color: rgb(170, 170, 170);
-}
-
 .borderCell {
-  border: 1px solid rgba(255, 255, 255, 0.457);
+  //border: 1px solid rgba(255, 255, 255, 0.457);
 }
