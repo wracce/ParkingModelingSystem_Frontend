@@ -41,6 +41,7 @@ export class UserStorageService {
     window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
 
+
   public getAuthorities(): string {
     this.role = "";
 
