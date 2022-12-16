@@ -1,0 +1,46 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+@import "/src/variables.scss";
+
+$color-config: mat.get-color-config($defaultTheme);
+$primary-palette: map.get($color-config, "primary");
+$accent-palette: map.get($color-config, "accent");
+
+.content {
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: min-content;
+}
+header{
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.739);
+  font-size: 25px;
+}
+::ng-deep .mat-tab-body-content {
+  overflow: hidden !important;
+}
+
+mat-form-field {
+  display: block;
+}
+
+mat-checkbox {
+  padding-top: 5px;
+  margin-left: 10px;
+}
+
+mat-icon {
+  color: mat.get-color-from-palette($accent-palette, default);
+}
+
+button[disabled] mat-icon {
+  color: mat.get-color-from-palette($primary-palette, darker);
+}
+
+
+.clearfix {
+  overflow: auto;
+}

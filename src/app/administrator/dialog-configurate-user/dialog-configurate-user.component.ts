@@ -1,7 +1,8 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DesignerService } from 'src/app/designer/services/designer.service';
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
+import { AdministratorService } from '../services/administrator.service';
 
 @Component({
   selector: 'app-dialog-configurate-user',
@@ -10,11 +11,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class DialogConfigurateUserComponent {
   settingsUserForm!:FormGroup;
-  constructor(public dialogRef: MatDialogRef<DialogConfigurateUserComponent>,) {
-    this.settingsUserForm = new FormGroup({
-      fio: new FormControl(),
-      login: new FormControl(),
-      password: new FormControl(),
-    });
+  constructor(@Inject(MAT_DIALOG_DATA) public data: string, administratorService:AdministratorService) {
+    this.settingsUserForm = administratorService.settingsUserForm;
   }
 }
