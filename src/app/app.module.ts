@@ -56,6 +56,7 @@ import { SimulationProcessComponent } from './simulation/components/simulation-p
 import {ManagerService} from "./core/service/manager.service";
 import { MatTableModule } from '@angular/material/table'  
 import {DataShareService} from "./core/service/data-share.service";
+import { ReferenceComponent } from './reference/reference.component';
 
 
 
@@ -81,6 +82,7 @@ import {DataShareService} from "./core/service/data-share.service";
     SimulationSetupComponent,
     DialogConfigurateUserComponent,
     SimulationProcessComponent,
+    ReferenceComponent,
 
   ],
   imports: [

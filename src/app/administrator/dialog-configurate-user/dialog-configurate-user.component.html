@@ -18,7 +18,7 @@
       <input
         matInput
         placeholder="Введите ваш логин"
-        formControlName="fill"
+        formControlName="login"
         name="login"
       />
       <button mat-icon-button matPrefix disabled>
@@ -43,13 +43,13 @@
 
 <mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="false">Отмена</button>
-  <button *ngIf=" data === 'add'" mat-raised-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>
+  <button *ngIf=" data == 'add'" mat-raised-button color="accent" [mat-dialog-close]=true cdkFocusInitial>
     Зарегистрировать
   </button>
-  <button *ngIf=" data === 'edit'" mat-raised-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>
+  <button *ngIf=" data === 'edit'" mat-raised-button color="accent" [mat-dialog-close]=true cdkFocusInitial>
     Редактировать
   </button>
-  <button *ngIf=" data === 'delete'" mat-raised-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>
+  <button *ngIf=" data === 'delete'" mat-raised-button color="warn" [mat-dialog-close]=true cdkFocusInitial>
     Удалить
   </button>
 </mat-dialog-actions>

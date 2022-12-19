@@ -20,7 +20,7 @@ export class AdministratorComponent implements OnInit {
     public dialog: MatDialog,
     private managerService: ManagerService,
     private dataShareService: DataShareService,
-    public administratorService:AdministratorService
+    public administratorService: AdministratorService
   ) {
     this.managerService.getAll().subscribe((r: UserInfo[]) => {
       this.usersList = r;
@@ -35,24 +35,77 @@ export class AdministratorComponent implements OnInit {
   ngOnInit(): void {}
 
   addManager() {
-    const dialogRef = this.dialog.open(DialogConfigurateUserComponent,{data: "edit"});
+    // Очистим форму
+    this.administratorService.settingsUserForm.setValue({
+      login: '',
+      password: '',
+      fio: '',
+    });
+    
+    // передадим в диалоговое окно "add" чтобы показать окно добавления
+    const dialogRef = this.dialog.open(DialogConfigurateUserComponent, {
+      data: 'add',
+    });
 
     dialogRef.afterClosed().subscribe((data) => {
-      // если нажата кнопка принять
       if (data === true) {
         let userInfo = {} as UserInfo;
-        // Очистим форму
-        this.administratorService.settingsUserForm.setValue({login: '', password: '', fio: ''});
-        // форма будет теперь храниться в сервисе, чтобы не передавать через Input Output
-        userInfo.username = this.administratorService.settingsUserForm.controls['login'].value;
-        userInfo.password = this.administratorService.settingsUserForm.controls['password'].value;
-        userInfo.fio = this.administratorService.settingsUserForm.controls['fio'].value;
+        // форма будет теперь храниться в сервисе, чтобы не передавать через Input Output в компонент
+        userInfo.username = this.administratorService.settingsUserForm.value['login'];
+        userInfo.password = this.administratorService.settingsUserForm.value['password'];
+        userInfo.fio = this.administratorService.settingsUserForm.value['fio'];
         this.managerService.createManager(userInfo).subscribe((r: UserInfo) => {
           this.usersList.push(r);
         });
       }
     });
   }
-  editManager(id: number) {}
-  deleteManager(id: number) {}
+  editManager(id: number) {
+        let userInfo = {} as UserInfo; // TODO: БЭК: getUser(id):UserInfo; Надо получить объект  по ID 
+
+        this.administratorService.settingsUserForm.setValue({
+          login: userInfo.username,
+          password: userInfo.password,
+          fio: userInfo.fio,
+        });
+        
+        const dialogRef = this.dialog.open(DialogConfigurateUserComponent, {
+          data: 'edit',
+        });
+    
+        dialogRef.afterClosed().subscribe((data) => {
+          if (data === true) {
+            userInfo.username = this.administratorService.settingsUserForm.value['login'];
+            userInfo.password = this.administratorService.settingsUserForm.value['password'];
+            userInfo.fio = this.administratorService.settingsUserForm.value['fio'];
+            // TODO: БЭК: Изменить пользователя на сервере
+            // this.managerService.createManager(userInfo).subscribe((r: UserInfo) => {
+            //   this.usersList.push(r);
+            // });
+          }
+        });
+  }
+  deleteManager(id: number) {
+    let userInfo = {} as UserInfo; // TODO: БЭК: getUser(id):UserInfo; Надо получить объект  по ID 
+
+    // TODO: ФРОНТ: добавить ФИО/Логин удаляемого пользователя в диалоговое окно
+    this.administratorService.settingsUserForm.setValue({
+      login: userInfo.username,
+      password: userInfo.password,
+      fio: userInfo.fio,
+    });
+    
+    const dialogRef = this.dialog.open(DialogConfigurateUserComponent, {
+      data: 'delete',
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data === true) {
+        // TODO: БЭК: Удалить пользователя на сервере
+        // this.managerService.createManager(userInfo).subscribe((r: UserInfo) => {
+        //   this.usersList.push(r);
+        // });
+      }
+    });
+  }
 }
