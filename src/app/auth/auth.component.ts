@@ -22,6 +22,7 @@ export class AuthComponent implements OnInit {
   });
 
   public userInfo: UserInfo;
+  public userRole: string;
 
   constructor(
     private authService: AuthService,
@@ -46,8 +47,7 @@ export class AuthComponent implements OnInit {
         this.userStorage.saveToken(r.token);
         this.userStorage.saveUsername(r.username);
         this.userStorage.saveAuthorities(r.userRole);
-        this.userInfo.userRole = r.userRole;
-        this.userInfo.fio = r.fio;
+        this.userRole = r.userRole;
         this.dataShareService.setUserInfo(this.userInfo);
         this.auth();
       }
@@ -60,7 +60,7 @@ export class AuthComponent implements OnInit {
 
   auth() {
     this.authService.isLoggedIn = true;
-    if (this.userInfo.userRole === "ROLE_ADMINISTRATOR") {
+    if (this.userRole === "ROLE_ADMINISTRATOR") {
       this.router.navigate(['/administrator']);
     } else {
       this.router.navigate(['/manager']);

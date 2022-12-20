@@ -35,11 +35,11 @@
           <mat-list class="accountsBlockItems">
             <mat-list-item
               class="accountsBlockItem"
-              *ngFor="let item of usersList"
-              ><div class="accountsBlockItemText" color="primary">{{ item.fio }}</div>
+              *ngFor="let item of usersList">
+              <div class="accountsBlockItemText" color="primary">{{ item.fio }}</div>
               <div>
-                <button mat-icon-button><mat-icon color="accent">edit</mat-icon></button>
-                <button mat-icon-button><mat-icon color="warn">delete</mat-icon></button>
+                <button mat-icon-button><mat-icon color="accent" (click)="editManager(item)">edit</mat-icon></button>
+                <button mat-icon-button><mat-icon color="warn" (click)="deleteManager(item)">delete</mat-icon></button>
               </div>
               <mat-divider></mat-divider>
             </mat-list-item>

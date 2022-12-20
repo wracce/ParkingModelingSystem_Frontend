@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DesignerService } from 'src/app/designer/services/designer.service';
 import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 import { AdministratorService } from '../services/administrator.service';
+import {UserInfo} from "../../core/model/model";
 
 @Component({
   selector: 'app-dialog-configurate-user',
