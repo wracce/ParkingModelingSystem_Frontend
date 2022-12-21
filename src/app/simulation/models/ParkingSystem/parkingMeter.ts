@@ -9,7 +9,7 @@ import { SimulationMap } from "../simulation-map";
 
 export class ParkingMeter {
   public parkingPlaces!: ParkingPlace[];
-  
+
   constructor(
     public simulationMap: SimulationMap, public parkingMeterCell:ParkingCell
   ) {
@@ -18,12 +18,12 @@ export class ParkingMeter {
     ).map(x=> new ParkingPlace(x,true));
   }
 
-  public getAvaibleParkingPlaceForCars(): ParkingPlace|null {
+  public getAvailableParkingPlaceForCars(): ParkingPlace|null {
 
     return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.cols == 1 && x.available == true)[0];
   }
 
-  public getAvaibleParkingPlaceForTrucks(): ParkingPlace|null {
+  public getAvailableParkingPlaceForTrucks(): ParkingPlace|null {
     return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.cols > 1 && x.available == true)[0];
   }
 

@@ -3,8 +3,8 @@
     #grid
     [cols]="simulationMap.cols"
     gutterSize="0"
-    [style.width]="simulationMap.cols * sizeCell + 'px'"
-    [style.height]="simulationMap.rows * sizeCell + 'px'"
+    [style.width]="simulationMap.cols * boardView.sizeCell + 'px'"
+    [style.height]="simulationMap.rows * boardView.sizeCell + 'px'"
     [style.margin-top]="marginTop + 'px'"
     [style.margin-left]="marginLeft + 'px'"
     cdkScrollable
@@ -23,9 +23,9 @@
           [src]="cell.template.src"
           [style]="
             'width: ' +
-            cell.template.cols * sizeCell +
+            cell.template.cols * boardView.sizeCell +
             'px; height: ' +
-            cell.template.rows * sizeCell +
+            cell.template.rows * boardView.sizeCell +
             'px;' +
             'transform: rotate(' +
             cell.angle +
@@ -40,9 +40,9 @@
     [src]="car.template.src"
     [style]="
       'top: ' +
-      car.y + 
+      car.y +
       'px; left: ' +
-      car.x + 
+      car.x +
       'px; width: ' +
       car.template.width +
       'px; height: ' +

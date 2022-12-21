@@ -30,26 +30,26 @@ export class SimulationMap extends ParkingMap {
 
     this.parkingCells.forEach((value, id) => {
       if (value.template.state === ParkingState.Barrier) {
-        let xy = parkingMap.atId(id);
+        let xy = this.atId(id);
         let isNearParkingMeter = false;
-
-        for (const i of [1, -1]) {
-          for (const j of [1, -1]) {
-            if (
-              this.parkingMeter.parkingMeterCell ==
-              this.parkingCells[this.atXYid(xy.x + i, xy.y + j)]
-            )
-              isNearParkingMeter = true;
-          }
+        if (this.parkingMeter.parkingMeterCell ===
+          this.parkingCells[this.atXYid(xy.xPos - 1, xy.yPos)]) {
+          isNearParkingMeter = true;
+        } else if (this.parkingMeter.parkingMeterCell ===
+          this.parkingCells[this.atXYid(xy.xPos, xy.yPos - 1)]) {
+          isNearParkingMeter = true;
+        } else if (this.parkingMeter.parkingMeterCell ===
+          this.parkingCells[this.atXYid(xy.xPos + 1, xy.yPos)]) {
+          isNearParkingMeter = true;
+        } else if (this.parkingMeter.parkingMeterCell ===
+          this.parkingCells[this.atXYid(xy.xPos, xy.yPos + 1)]) {
+          isNearParkingMeter = true;
         }
-
         if (isNearParkingMeter)
-            this.startBarrierCell = this.parkingCells[this.atXYid(xy.x,xy.y)];
-        else(isNearParkingMeter)
-            this.endBarrierCell = this.parkingCells[this.atXYid(xy.x,xy.y)];
+            this.startBarrierCell = this.parkingCells[this.atXYid(xy.xPos,xy.yPos)];
+        else
+            this.endBarrierCell = this.parkingCells[this.atXYid(xy.xPos,xy.yPos)];
       }
     });
-
-    console.log(this.endBarrierCell,this.startBarrierCell,this.parkingMeter);
   }
 }

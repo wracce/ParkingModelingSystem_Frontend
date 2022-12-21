@@ -117,11 +117,15 @@ export class AStarFinder {
       });
 
       // Move current node from open list to closed list
+      // @ts-ignore
       currentNode.setIsOnOpenList(false);
       remove(this.openList, currentNode);
 
+      // @ts-ignore
       currentNode.setIsOnClosedList(true);
-      this.closedList.push(currentNode);
+      if (currentNode instanceof Node) {
+        this.closedList.push(currentNode);
+      }
 
       // End of path is reached
       if (currentNode === endNode) {
@@ -129,7 +133,9 @@ export class AStarFinder {
       }
 
       // Get neighbors
+      // @ts-ignore
       const neighbors = this.grid.getSurroundingNodes(
+        // @ts-ignore
         currentNode.position,
         this.diagonalAllowed
       );
@@ -145,8 +151,9 @@ export class AStarFinder {
 
         // Calculate the g value of the neightbor
         const nextGValue =
-          currentNode.getGValue() +
-          (neightbor.position.x !== currentNode.position.x ||
+          // @ts-ignore
+          currentNode.getGValue() +// @ts-ignore
+          (neightbor.position.x !== currentNode.position.x ||// @ts-ignore
           neightbor.position.y! == currentNode.position.y
             ? this.weight
             : this.weight * 1.41421);
@@ -157,7 +164,7 @@ export class AStarFinder {
           !neightbor.getIsOnOpenList() ||
           nextGValue < neightbor.getGValue()
         ) {
-          neightbor.setGValue(nextGValue);
+          neightbor.setGValue(nextGValue);// @ts-ignore
           neightbor.setParent(currentNode);
 
           if (!neightbor.getIsOnOpenList()) {
@@ -165,6 +172,7 @@ export class AStarFinder {
             this.openList.push(neightbor);
           } else {
             // okay this is a better way, so change the parent
+            // @ts-ignore
             neightbor.setParent(currentNode);
           }
         }

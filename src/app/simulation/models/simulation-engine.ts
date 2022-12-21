@@ -39,7 +39,6 @@ export class SimulationEngine {
       }
     );
     console.log("GI");
-
   }
 
 }

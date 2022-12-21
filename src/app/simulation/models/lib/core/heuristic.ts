@@ -19,8 +19,11 @@ import { Heuristic } from '../types/astar.types';
  */
 export function calculateHeuristic(
   heuristicFunction: Heuristic,
+  //@ts-ignore
   pos0,
+  //@ts-ignore
   pos1,
+  //@ts-ignore
   weight
 ): number {
   const dx = Math.abs(pos1.x - pos0.x);

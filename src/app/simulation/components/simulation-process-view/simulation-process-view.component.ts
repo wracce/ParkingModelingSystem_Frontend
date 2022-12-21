@@ -8,6 +8,7 @@ import { DesignerService } from "src/app/designer/services/designer.service";
 import { Car } from "../../models/car";
 import { SimulationMap } from "../../models/simulation-map";
 import { SimulationService } from "../../services/simulation.service";
+import {BoardView} from "../../models/board-view";
 
 @Component({
   selector: 'app-simulation-process-view',
@@ -15,7 +16,7 @@ import { SimulationService } from "../../services/simulation.service";
   styleUrls:  ['./simulation-process-view.component.scss']
 })
 export class SimulationProcessViewComponent implements OnInit {
-  
+
   @ViewChild('board', { static: false })
   board!: ElementRef;
 
@@ -26,19 +27,22 @@ export class SimulationProcessViewComponent implements OnInit {
 
   marginTop: number = 0; //px
   marginLeft: number = 0; //px
-  h: number = 0;
-  w: number = 0;
-  sizeCell: number = this.minSizeCell;
-  sizeCellBase: number = this.sizeCell;
+  sizeCellBase!: number;
 
   simulationMap!: SimulationMap;
   cells!: ParkingCell[];
   cars!: Car[];
 
+  boardView!:BoardView;
+
 
   constructor(public simulationService: SimulationService) {
     this.simulationMap = simulationService.simulationMap;
     this.cars = simulationService.simulationEngine.cars;
+    this.boardView = simulationService.boardView;
+    this.boardView.sizeCell = this.minSizeCell;
+    this.sizeCellBase = this.minSizeCell;
+
   }
 
   ngOnInit(): void {
@@ -47,65 +51,65 @@ export class SimulationProcessViewComponent implements OnInit {
   }
 
   public zoomIn(): void {
-    this.sizeCell *= 1 + this.zoomScaleProc / 100;
+    this.boardView.sizeCell *= 1 + this.zoomScaleProc / 100;
 
-    if (this.sizeCell < this.minSizeCell)
-      this.sizeCell = this.sizeCellBase = this.minSizeCell;
-    if (this.sizeCell > this.maxSizeCell)
-      this.sizeCell = this.sizeCellBase = this.maxSizeCell;
+    if (this.boardView.sizeCell < this.minSizeCell)
+      this.boardView.sizeCell = this.sizeCellBase = this.minSizeCell;
+    if (this.boardView.sizeCell > this.maxSizeCell)
+      this.boardView.sizeCell = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.w - this.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
+      (this.boardView.w - this.boardView.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.h - this.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
-    if (this.w + 2 * this.sizePadding < this.sizeCell * this.simulationMap.cols)
+      (this.boardView.h - this.boardView.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.boardView.w + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.h + 2 * this.sizePadding < this.sizeCell * this.simulationMap.rows)
+    if (this.boardView.h + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.rows)
       this.marginTop = 0;
   }
 
   public zoomFree(): void {
-    this.h = this.board.nativeElement.clientHeight - this.sizePadding * 2;
-    this.w = this.board.nativeElement.clientWidth - this.sizePadding * 2;
+    this.boardView.h = this.board.nativeElement.clientHeight - this.sizePadding * 2;
+    this.boardView.w = this.board.nativeElement.clientWidth - this.sizePadding * 2;
 
-    this.sizeCell = this.sizeCellBase =
-      this.w / this.simulationMap.cols > this.h / this.simulationMap.rows
-        ? this.h / this.simulationMap.rows
-        : this.w / this.simulationMap.cols;
+    this.boardView.sizeCell = this.sizeCellBase =
+      this.boardView.w / this.simulationMap.cols > this.boardView.h / this.simulationMap.rows
+        ? this.boardView.h / this.simulationMap.rows
+        : this.boardView.w / this.simulationMap.cols;
 
-    if (this.sizeCell < this.minSizeCell)
-      this.sizeCell = this.sizeCellBase = this.minSizeCell;
-    if (this.sizeCell > this.maxSizeCell)
-      this.sizeCell = this.sizeCellBase = this.maxSizeCell;
+    if (this.boardView.sizeCell < this.minSizeCell)
+      this.boardView.sizeCell = this.sizeCellBase = this.minSizeCell;
+    if (this.boardView.sizeCell > this.maxSizeCell)
+      this.boardView.sizeCell = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.w - this.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
+      (this.boardView.w - this.boardView.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.h - this.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
-    if (this.w + 2 * this.sizePadding < this.sizeCell * this.simulationMap.cols)
+      (this.boardView.h - this.boardView.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.boardView.w + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.h + 2 * this.sizePadding < this.sizeCell * this.simulationMap.rows)
+    if (this.boardView.h + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.rows)
       this.marginTop = 0;
   }
 
   public zoomOut(): void {
-    this.sizeCell *= 1 - this.zoomScaleProc / 100;
-    if (this.sizeCell < this.minSizeCell)
-      this.sizeCell = this.sizeCellBase = this.minSizeCell;
-    if (this.sizeCell > this.maxSizeCell)
-      this.sizeCell = this.sizeCellBase = this.maxSizeCell;
+    this.boardView.sizeCell *= 1 - this.zoomScaleProc / 100;
+    if (this.boardView.sizeCell < this.minSizeCell)
+      this.boardView.sizeCell = this.sizeCellBase = this.minSizeCell;
+    if (this.boardView.sizeCell > this.maxSizeCell)
+      this.boardView.sizeCell = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.w - this.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
+      (this.boardView.w - this.boardView.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.h - this.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
-    if (this.w + 2 * this.sizePadding < this.sizeCell * this.simulationMap.cols)
+      (this.boardView.h - this.boardView.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.boardView.w + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.h + 2 * this.sizePadding < this.sizeCell * this.simulationMap.rows)
+    if (this.boardView.h + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.rows)
       this.marginTop = 0;
 
     console.log(this.cars);
-    
+
   }
 
   public isRoad(cell: ParkingCell): boolean {

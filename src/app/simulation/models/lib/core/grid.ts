@@ -24,6 +24,7 @@ export class Grid {
 
     // Create and generate the matrix
     this.gridNodes = this.buildGridWithNodes(
+// @ts-ignore
       aParams.matrix || undefined,
       this.width,
       this.height,
@@ -68,6 +69,7 @@ export class Grid {
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
           const rndNumber = Math.floor(Math.random() * 10) + 1;
+          // @ts-ignore
           if (rndNumber > 10 - densityOfObstacles) {
             newGrid[y][x].setIsWalkable(false);
           } else {
@@ -171,7 +173,7 @@ export class Grid {
     for (let y = 0; y < this.gridNodes.length; y++) {
       for (let x = 0; x < this.gridNodes[y].length; x++) {
         this.gridNodes[y][x].setIsOnClosedList(false);
-        this.gridNodes[y][x].setIsOnOpenList(false);
+        this.gridNodes[y][x].setIsOnOpenList(false);// @ts-ignore
         this.gridNodes[y][x].setParent(undefined);
         this.gridNodes[y][x].setFGHValuesToZero();
       }

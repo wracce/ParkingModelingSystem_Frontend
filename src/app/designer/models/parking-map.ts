@@ -4,6 +4,12 @@ import { ParkingCell } from './parking-cell';
 import { ParkingState } from './parking-state';
 import { ParkingTemplate } from './parking-template';
 
+
+export interface Coordinates {
+  xPos: number;
+  yPos: number;
+}
+
 export class ParkingMap {
   public parkingCells!: ParkingCell[];
 
@@ -17,7 +23,7 @@ export class ParkingMap {
     this.parkingCells = [];
   }
 
-  
+
   public getCells(): ParkingCell[] {
     return this.parkingCells;
   }
@@ -172,10 +178,17 @@ export class ParkingMap {
     );
   }
 
-  public atId(id: number): {x:number,y:number} {
-    if (id <0 || id>=this.getSize())
-    return {x:-1,y:-1};
-    return {x: id%this.cols, y:Math.floor(id / this.cols)};
+
+  public atId(id: number): Coordinates {
+    let coords = {} as Coordinates;
+    if (id <0 || id>=this.getSize()) {
+      coords.xPos = -1;
+      coords.yPos = -1;
+    } else {
+      coords.xPos = id % this.cols;
+      coords.yPos = Math.floor(id / this.cols);
+    }
+    return coords;
   }
 
   public atXYid(x: number,y:number): number {

@@ -18,7 +18,7 @@ export class Node {
 
     this.hValue = 0;
     this.gValue = 0;
-    this.fValue = 0;
+    this.fValue = 0;// @ts-ignore
     this.parentNode = undefined;
     this.isOnClosedList = false;
     this.isOnOpenList = false;
