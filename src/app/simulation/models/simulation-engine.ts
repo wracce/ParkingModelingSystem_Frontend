@@ -20,8 +20,8 @@ export class SimulationEngine {
     this.cars.length = 0;
     this.cars.push(new Car(0,0,0, this,true ,this.simulationService.carTemplates[0]));
     this.cars.push(new Car(100,100,0, this,true ,this.simulationService.carTemplates[0]));
-    this.cars.push(new Car(200,100,0, this,true ,this.simulationService.carTemplates[0]));
-    this.cars.push(new Car(300,100,0, this,true ,this.simulationService.carTemplates[0]));
+    this.cars.push(new Car(200,200,0, this,true ,this.simulationService.carTemplates[0]));
+    this.cars.push(new Car(300,300,0, this,true ,this.simulationService.carTemplates[0]));
   }
 
   public async run() {

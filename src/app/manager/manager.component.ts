@@ -34,15 +34,7 @@ export class ManagerComponent implements OnInit {
     let jsonStr: string =
       fileReader.result == null ? 'Unitiled' : fileReader.result.toString();
     let newParkingMap: ParkingMap = JSON.parse(jsonStr);
-    let parkingMap: ParkingMap = simulationService.parkingMap;
-
-    parkingMap.getCells().length = 0;
-    parkingMap.getCells().push(...newParkingMap.parkingCells);
-    parkingMap.name = newParkingMap.name;
-    parkingMap.cols = newParkingMap.cols;
-    parkingMap.widthOfRoad = newParkingMap.widthOfRoad;
-    parkingMap.rows = newParkingMap.rows;
-    parkingMap.directOfRoad = newParkingMap.directOfRoad;
+    simulationService.simulationMap.load(newParkingMap);
 
   }
 

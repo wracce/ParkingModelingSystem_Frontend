@@ -60,4 +60,8 @@ mat-grid-tile {
 
 .car{
   position: absolute;
+  transition-property: top, left;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
 }

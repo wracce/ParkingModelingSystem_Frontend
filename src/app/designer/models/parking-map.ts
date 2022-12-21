@@ -172,8 +172,16 @@ export class ParkingMap {
     );
   }
 
-  public at(id: number): ParkingCell {
-    return this.parkingCells[id];
+  public atId(id: number): {x:number,y:number} {
+    if (id <0 || id>=this.getSize())
+    return {x:-1,y:-1};
+    return {x: id%this.cols, y:Math.floor(id / this.cols)};
+  }
+
+  public atXYid(x: number,y:number): number {
+    if (x<0 || x>=this.cols || y<0|| y>=this.rows )
+      return -1;
+    return y*this.cols + x;
   }
 
   public getCellPositions(id: number, template?: ParkingTemplate): number[] {
@@ -182,7 +190,7 @@ export class ParkingMap {
     if (id < 0) return arr;
 
     if (template === undefined) {
-      let index: number = this.at(id).id;
+      let index: number = this.parkingCells[id].id;
       arr.push(
         ...this.getCellPositions(index, this.parkingCells[index].template)
       );
@@ -257,7 +265,7 @@ export class ParkingMap {
   }
 
   public rotateCell(id: number) {
-    let cell: ParkingCell = this.at(id);
+    let cell: ParkingCell = this.parkingCells[id];
     let size: number = cell.template.cols * cell.template.rows;
 
     if (size <= 0) return;

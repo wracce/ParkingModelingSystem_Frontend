@@ -132,13 +132,13 @@ export class DesignerParkingComponent implements OnInit {
   }
 
   public isParking(id:number): boolean {
-    return this.designerService.getParkingMap().at(id).template.state === ParkingState.Park;
+    return this.designerService.getParkingMap().parkingCells[id].template.state === ParkingState.Park;
   }
 
 
   public isCellSetable(id: number): boolean {
     return (
-      this.designerService.getParkingMap().at(id).template.state !==
+      this.designerService.getParkingMap().parkingCells[id].template.state !==
       ParkingState.Undef
     );
   }
@@ -164,7 +164,7 @@ export class DesignerParkingComponent implements OnInit {
       this.pasteCell(this.buffer?.id);
       console.log(3);
     }
-    let cell: ParkingCell = this.designerService.getParkingMap().at(id);
+    let cell: ParkingCell = this.designerService.getParkingMap().parkingCells[id];
     this.buffer = new ParkingCell(cell.id, cell.template, cell.angle);
   }
 
@@ -185,7 +185,7 @@ export class DesignerParkingComponent implements OnInit {
 
   public turnCell(id: number) {
     if (
-      this.designerService.getParkingMap().at(id).template.state !==
+      this.designerService.getParkingMap().parkingCells[id].template.state !==
       ParkingState.Park
     )
       this.designerService.getParkingMap().rotateCell(id);

@@ -3,16 +3,17 @@ import { ParkingMap } from 'src/app/designer/models/parking-map';
 import { Car } from '../models/car';
 import { CarTemplate } from '../models/car-template';
 import { SimulationEngine } from '../models/simulation-engine';
+import { SimulationMap } from '../models/simulation-map';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SimulationService {
-  public parkingMap!:ParkingMap;
+  public simulationMap!:SimulationMap;
   public simulationEngine!:SimulationEngine;
   public carTemplates!: CarTemplate[];
   constructor() { 
-    this.parkingMap = new ParkingMap('', 6, 6, 'top', 1);
+    this.simulationMap = new SimulationMap();
     this.simulationEngine = new SimulationEngine(this);
     this.carTemplates = [
       new CarTemplate('/assets/cars/car1.png',145,86),

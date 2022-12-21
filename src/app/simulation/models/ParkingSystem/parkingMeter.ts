@@ -4,28 +4,27 @@ import {ParkingPlace} from "./parkingPlace";
 import {SimulationEngine} from "../simulation-engine";
 import {SimulationService} from "../../services/simulation.service";
 import {ParkingState} from "../../../designer/models/parking-state";
+import { SimulationMap } from "../simulation-map";
 
 
 export class ParkingMeter {
+  public parkingPlaces!: ParkingPlace[];
+  
   constructor(
-    private parkingPlaces: ParkingPlace[],
-    private simService: SimulationService
+    public simulationMap: SimulationMap, public parkingMeterCell:ParkingCell
   ) {
-    let cells:ParkingCell[] = this.simService.parkingMap.parkingCells.find(
+    this.parkingPlaces = this.simulationMap.parkingCells.filter(
       x => x.template.state === ParkingState.Park
-    );
-    cells.forEach(x=>x.id%simService.parkingMap.rows)
-    )
-
+    ).map(x=> new ParkingPlace(x,true));
   }
 
-  public isCarPlaceFree(): boolean {
+  public getAvaibleParkingPlaceForCars(): ParkingPlace|null {
 
-    return true;
+    return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.cols == 1 && x.available == true)[0];
   }
 
-  public isTruckPlaceFree(): boolean {
-    return true;
+  public getAvaibleParkingPlaceForTrucks(): ParkingPlace|null {
+    return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.cols > 1 && x.available == true)[0];
   }
 
 

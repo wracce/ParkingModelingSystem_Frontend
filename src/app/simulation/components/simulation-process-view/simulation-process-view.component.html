@@ -1,10 +1,10 @@
 <div #board class="board">
   <mat-grid-list
     #grid
-    [cols]="parkingMap.cols"
+    [cols]="simulationMap.cols"
     gutterSize="0"
-    [style.width]="parkingMap.cols * sizeCell + 'px'"
-    [style.height]="parkingMap.rows * sizeCell + 'px'"
+    [style.width]="simulationMap.cols * sizeCell + 'px'"
+    [style.height]="simulationMap.rows * sizeCell + 'px'"
     [style.margin-top]="marginTop + 'px'"
     [style.margin-left]="marginLeft + 'px'"
     cdkScrollable

@@ -6,6 +6,7 @@ import { ParkingState } from "src/app/designer/models/parking-state";
 import { ParkingTemplateGroup } from "src/app/designer/models/parking-template-group";
 import { DesignerService } from "src/app/designer/services/designer.service";
 import { Car } from "../../models/car";
+import { SimulationMap } from "../../models/simulation-map";
 import { SimulationService } from "../../services/simulation.service";
 
 @Component({
@@ -30,18 +31,18 @@ export class SimulationProcessViewComponent implements OnInit {
   sizeCell: number = this.minSizeCell;
   sizeCellBase: number = this.sizeCell;
 
-  parkingMap!: ParkingMap;
+  simulationMap!: SimulationMap;
   cells!: ParkingCell[];
   cars!: Car[];
 
 
   constructor(public simulationService: SimulationService) {
-    this.parkingMap = simulationService.parkingMap;
+    this.simulationMap = simulationService.simulationMap;
     this.cars = simulationService.simulationEngine.cars;
   }
 
   ngOnInit(): void {
-    this.cells = this.parkingMap.getCells();
+    this.cells = this.simulationMap.getCells();
     this.cars = this.simulationService.simulationEngine.cars;
   }
 
@@ -54,12 +55,12 @@ export class SimulationProcessViewComponent implements OnInit {
       this.sizeCell = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.w - this.sizeCell * this.parkingMap.cols) / 2 + this.sizePadding;
+      (this.w - this.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.h - this.sizeCell * this.parkingMap.rows) / 2 + this.sizePadding;
-    if (this.w + 2 * this.sizePadding < this.sizeCell * this.parkingMap.cols)
+      (this.h - this.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.w + 2 * this.sizePadding < this.sizeCell * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.h + 2 * this.sizePadding < this.sizeCell * this.parkingMap.rows)
+    if (this.h + 2 * this.sizePadding < this.sizeCell * this.simulationMap.rows)
       this.marginTop = 0;
   }
 
@@ -68,9 +69,9 @@ export class SimulationProcessViewComponent implements OnInit {
     this.w = this.board.nativeElement.clientWidth - this.sizePadding * 2;
 
     this.sizeCell = this.sizeCellBase =
-      this.w / this.parkingMap.cols > this.h / this.parkingMap.rows
-        ? this.h / this.parkingMap.rows
-        : this.w / this.parkingMap.cols;
+      this.w / this.simulationMap.cols > this.h / this.simulationMap.rows
+        ? this.h / this.simulationMap.rows
+        : this.w / this.simulationMap.cols;
 
     if (this.sizeCell < this.minSizeCell)
       this.sizeCell = this.sizeCellBase = this.minSizeCell;
@@ -78,12 +79,12 @@ export class SimulationProcessViewComponent implements OnInit {
       this.sizeCell = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.w - this.sizeCell * this.parkingMap.cols) / 2 + this.sizePadding;
+      (this.w - this.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.h - this.sizeCell * this.parkingMap.rows) / 2 + this.sizePadding;
-    if (this.w + 2 * this.sizePadding < this.sizeCell * this.parkingMap.cols)
+      (this.h - this.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.w + 2 * this.sizePadding < this.sizeCell * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.h + 2 * this.sizePadding < this.sizeCell * this.parkingMap.rows)
+    if (this.h + 2 * this.sizePadding < this.sizeCell * this.simulationMap.rows)
       this.marginTop = 0;
   }
 
@@ -95,12 +96,12 @@ export class SimulationProcessViewComponent implements OnInit {
       this.sizeCell = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.w - this.sizeCell * this.parkingMap.cols) / 2 + this.sizePadding;
+      (this.w - this.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.h - this.sizeCell * this.parkingMap.rows) / 2 + this.sizePadding;
-    if (this.w + 2 * this.sizePadding < this.sizeCell * this.parkingMap.cols)
+      (this.h - this.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.w + 2 * this.sizePadding < this.sizeCell * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.h + 2 * this.sizePadding < this.sizeCell * this.parkingMap.rows)
+    if (this.h + 2 * this.sizePadding < this.sizeCell * this.simulationMap.rows)
       this.marginTop = 0;
 
     console.log(this.cars);

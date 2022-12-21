@@ -39,7 +39,7 @@ export class SimulationComponent implements OnInit {
   ngOnInit(){}
 
   public startSimulation() {
-    this.simulationService.simulationEngine.init(1000);
+    this.simulationService.simulationEngine.init(2000);
     this.simulationService.simulationEngine.run();
   }
 
