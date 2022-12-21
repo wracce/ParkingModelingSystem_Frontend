@@ -5,7 +5,7 @@ import { Car } from './car';
 export class SimulationEngine {
   private timeId!: NodeJS.Timer;
   private isStart!: boolean;
-  private timeDelay!: number;
+  public timeDelay!: number;
 
   public cars!: Car[];
 
@@ -18,7 +18,10 @@ export class SimulationEngine {
     this.timeDelay = timeDelay;
 
     this.cars.length = 0;
-    this.cars.push(new Car(-30,0,0,this.simulationService.carTemplates[0]));
+    this.cars.push(new Car(0,0,0, this,true ,this.simulationService.carTemplates[0]));
+    this.cars.push(new Car(100,100,0, this,true ,this.simulationService.carTemplates[0]));
+    this.cars.push(new Car(200,100,0, this,true ,this.simulationService.carTemplates[0]));
+    this.cars.push(new Car(300,100,0, this,true ,this.simulationService.carTemplates[0]));
   }
 
   public async run() {
@@ -30,7 +33,13 @@ export class SimulationEngine {
   }
 
   private step() {
+    this.cars.forEach(
+      (car) => {
+        car.step()
+      }
+    );
     console.log("GI");
-    
+
   }
+
 }

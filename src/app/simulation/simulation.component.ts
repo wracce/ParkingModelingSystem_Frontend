@@ -29,7 +29,7 @@ export class SimulationComponent implements OnInit {
       //this.designerService.getParkingMap().configurateParking(this.designerService.getSetupParkingForm());
       //this.designerService.resetLinksToParkingCells();
       this.simulationProcessComponent.zoomFree();
-      
+
     }
       if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
       //this.onClickFileInputButton();
@@ -39,18 +39,18 @@ export class SimulationComponent implements OnInit {
   ngOnInit(){}
 
   public startSimulation() {
-    this.simulationService.simulationEngine.init(500);
+    this.simulationService.simulationEngine.init(1000);
     this.simulationService.simulationEngine.run();
   }
 
   public pauseSimulation() {
-    
+
   }
 
   public stopSimulation() {
     this.simulationService.simulationEngine.stop();
   }
-  
+
 }
 
 export const ELEMENT_DATA: Object[] = [
