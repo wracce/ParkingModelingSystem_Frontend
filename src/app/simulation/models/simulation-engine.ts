@@ -1,16 +1,36 @@
-import { interval, Observable } from "rxjs";
-import { Car } from "./car";
+import { interval, Observable } from 'rxjs';
+import { SimulationService } from '../services/simulation.service';
+import { Car } from './car';
 
 export class SimulationEngine {
-    public timeDelay!:number;
-    engine: Observable<Car>|undefined;
-    constructor(timeDelay:number){this.timeDelay = timeDelay}
+  private timeId!: NodeJS.Timer;
+  private isStart!: boolean;
+  private timeDelay!: number;
 
-    // public start(){
-    //     this.engine = interval(this.timeDelay).pipe(map()))
-    // }
+  public cars!: Car[];
 
-    // private doEvent():void{
+  constructor(public simulationService:SimulationService) {
+    this.cars = [];
+  }
+
+  public init(timeDelay: number) {
+    this.isStart = true;
+    this.timeDelay = timeDelay;
+
+    this.cars.length = 0;
+    this.cars.push(new Car(-30,0,0,this.simulationService.carTemplates[0]));
+  }
+
+  public async run() {
+    this.timeId = setInterval(() => this.step(), this.timeDelay);
+  }
+
+  public stop() {
+    clearInterval(this.timeId);
+  }
+
+  private step() {
+    console.log("GI");
     
-    // }
+  }
 }

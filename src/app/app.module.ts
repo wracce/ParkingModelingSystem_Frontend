@@ -52,7 +52,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogConfigurateUserComponent } from './administrator/dialog-configurate-user/dialog-configurate-user.component';
-import { SimulationProcessComponent } from './simulation/components/simulation-process/simulation-process.component';
+import { SimulationProcessViewComponent } from './simulation/components/simulation-process-view/simulation-process-view.component';
 import {ManagerService} from "./core/service/manager.service";
 import { MatTableModule } from '@angular/material/table'  
 import {DataShareService} from "./core/service/data-share.service";
@@ -81,7 +81,7 @@ import { ReferenceComponent } from './reference/reference.component';
     SimulationComponent,
     SimulationSetupComponent,
     DialogConfigurateUserComponent,
-    SimulationProcessComponent,
+    SimulationProcessViewComponent,
     ReferenceComponent,
 
   ],

@@ -8,16 +8,11 @@ $warn-palette: map.get($color-config, "warn");
 
 $board-color: #ededed;
 
-img {
-  // object-fit: contain;
-  // object-position: center;
-}
-
 .board {
   overflow: scroll;
   height: calc(100vh - 64px - 72px - 32px);
   width: 100%;
-
+  position: relative;
   border: 2px solid $board-color;
   opacity: 1;
   background-image: linear-gradient($board-color 3.2px, transparent 3.2px),
@@ -46,22 +41,6 @@ mat-grid-tile {
   box-sizing: border-box;
 }
 
-.cdk-drag {
-  padding: 0 !important;
-  margin: 0 !important;
-  width: max-content;
-  height:  max-content;
-  position: relative;
-  box-sizing: border-box;
-
-}
-
-.cdkDragWrapper{
-  padding: 0 !important;
-  width: max-content;
-  height:  max-content;
-  box-sizing: border-box;
-}
 .cell {
   // width: max-content; height: max-content;
   box-sizing: border-box;
@@ -79,14 +58,6 @@ mat-grid-tile {
   box-sizing: border-box;
 }
 
-.selected {
-  background-color: #ff1e1e5c;
-  // background-image: unset;
-  // opacity: 70%;
-  // mix-blend-mode: difference;
-  // z-index: 999999;
-}
-
-.borderCell {
-  //border: 1px solid rgba(255, 255, 255, 0.457);
+.car{
+  position: absolute;
 }

@@ -1,0 +1,57 @@
+<div #board class="board">
+  <mat-grid-list
+    #grid
+    [cols]="parkingMap.cols"
+    gutterSize="0"
+    [style.width]="parkingMap.cols * sizeCell + 'px'"
+    [style.height]="parkingMap.rows * sizeCell + 'px'"
+    [style.margin-top]="marginTop + 'px'"
+    [style.margin-left]="marginLeft + 'px'"
+    cdkScrollable
+  >
+    <mat-grid-tile *ngFor="let cell of cells" cdkScrollable>
+      <div
+        class="cell"
+        [class.roadCell]="isRoad(cell)"
+        cdkScrollable
+        [style]="
+          'transform: rotate(' + (isRoad(cell) ? cell.angle : 0) + 'deg);'
+        "
+      >
+        <img
+          *ngIf="cell.template.src"
+          [src]="cell.template.src"
+          [style]="
+            'width: ' +
+            cell.template.cols * sizeCell +
+            'px; height: ' +
+            cell.template.rows * sizeCell +
+            'px;' +
+            'transform: rotate(' +
+            cell.angle +
+            'deg);'
+          "
+        />
+      </div>
+    </mat-grid-tile>
+    <img
+    *ngFor="let car of cars"
+    class="car"
+    [src]="car.template.src"
+    [style]="
+      'top: ' +
+      car.y + 
+      'px; left: ' +
+      car.x + 
+      'px; width: ' +
+      car.template.width +
+      'px; height: ' +
+      car.template.height +
+      'px; transform: rotate(' +
+      car.angle +
+      'deg);'
+    "
+  />
+  </mat-grid-list>
+
+</div>

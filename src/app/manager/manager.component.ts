@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParkingMap } from '../designer/models/parking-map';
-import { DesignerService } from '../designer/services/designer.service';
+import { SimulationService } from '../simulation/services/simulation.service';
 
 @Component({
   selector: 'app-manager',
@@ -21,20 +21,20 @@ export class ManagerComponent implements OnInit {
     this.file = files[0];
     let pLoadTopology = this.loadTopology;
     let pRouter = this.router;
-    let pDesignerService = this.designerService;
+    let pSimulationService = this.simulationService;
     let fileReader = new FileReader();
     fileReader.onload = function () {
-      pLoadTopology(this, pDesignerService);
+      pLoadTopology(this, pSimulationService);
       pRouter.navigate(['/manager/simulation']);
     };
     fileReader.readAsText(this.file);
   }
 
-  loadTopology(fileReader: FileReader, designerService: DesignerService): void {
+  loadTopology(fileReader: FileReader, simulationService: SimulationService): void {
     let jsonStr: string =
       fileReader.result == null ? 'Unitiled' : fileReader.result.toString();
     let newParkingMap: ParkingMap = JSON.parse(jsonStr);
-    let parkingMap: ParkingMap = designerService.getParkingMap();
+    let parkingMap: ParkingMap = simulationService.parkingMap;
 
     parkingMap.getCells().length = 0;
     parkingMap.getCells().push(...newParkingMap.parkingCells);
@@ -44,14 +44,8 @@ export class ManagerComponent implements OnInit {
     parkingMap.rows = newParkingMap.rows;
     parkingMap.directOfRoad = newParkingMap.directOfRoad;
 
-
-    designerService.getSetupParkingForm().value.name = parkingMap.name;
-    designerService.getSetupParkingForm().value.cols = parkingMap.cols;
-    designerService.getSetupParkingForm().value.rows = parkingMap.rows;
-    designerService.getSetupParkingForm().value.directOfRoad =
-      parkingMap.directOfRoad;
   }
 
-  constructor(public designerService: DesignerService, public router: Router) {}
+  constructor(public simulationService: SimulationService, public router: Router) {}
   ngOnInit(): void {}
 }

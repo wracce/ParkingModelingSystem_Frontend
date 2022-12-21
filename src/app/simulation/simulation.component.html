@@ -12,7 +12,7 @@
   <mat-step label="Симуляция" completed="true">
     <div class="container">
       <div class="app-park-simulationWrapper">
-        <app-simulation-process></app-simulation-process>
+        <app-simulation-process-view></app-simulation-process-view>
       </div>
       <div class="app-park-infoWrapper">
         <div>Свободных мест: <b>VALUE</b></div>
@@ -50,24 +50,24 @@
         </table>
       </div>
       <div class="buttonsPlayersWrapper buttonsWrapper ">
-        <button  mat-mini-fab>
+        <button  mat-mini-fab (click)="stopSimulation()">
           <mat-icon>stop</mat-icon>
         </button>
-        <button class="playerButton" mat-mini-fab>
+        <button class="playerButton" mat-mini-fab (click)="startSimulation()">
           <mat-icon>play_arrow</mat-icon>
         </button>
-        <button mat-mini-fab>
+        <button mat-mini-fab (click)="pauseSimulation()">
           <mat-icon>pause</mat-icon>
         </button>
       </div>
       <div class="buttonsWrapper" *ngIf="true">
-        <button class="btnZoomOut" mat-button>
+        <button class="btnZoomOut" mat-button (click)="simulationProcessComponent.zoomOut()">
           <mat-icon>zoom_out</mat-icon>
         </button>
-        <button class="btnZoomFree" mat-button>
+        <button class="btnZoomFree" mat-button (click)="simulationProcessComponent.zoomFree()">
           <mat-icon>crop_free</mat-icon>
         </button>
-        <button class="btnZoomIn" mat-button>
+        <button class="btnZoomIn" mat-button (click)="simulationProcessComponent.zoomIn()">
           <mat-icon>zoom_in</mat-icon>
         </button>
       </div>
