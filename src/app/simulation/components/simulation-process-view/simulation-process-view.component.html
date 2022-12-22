@@ -18,7 +18,7 @@
           'transform: rotate(' + (isRoad(cell) ? cell.angle : 0) + 'deg); border: 2px solid black'
         "
       >
-        {{i}} + [{{i/6}}, {{i%6}}]
+        {{i}}
         <img
           *ngIf="cell.template.src"
           [src]="cell.template.src"
@@ -45,9 +45,9 @@
       'px; left: ' +
       car.x +
       'px; width: ' +
-      car.template.width +
+      boardView.sizeCell +
       'px; height: ' +
-      car.template.height +
+      boardView.sizeCell +
       'px; transform: rotate(' +
       car.angle +
       'deg);'

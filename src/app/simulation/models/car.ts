@@ -1,12 +1,12 @@
 import { CarTemplate } from './car-template';
 import { ICar } from './icar';
 import {SimulationEngine} from "./simulation-engine";
-import {RouteCar} from "./routeCar";
+import {RouteCar} from "./route-car";
 import {Inject} from "@angular/core";
 
 export class Car implements ICar {
   private timeId!: NodeJS.Timer;
-  private path!: number[];
+  private path!: {x:number, y:number}[];
   private isPathEmpty!: boolean;
 
   constructor(
@@ -26,20 +26,20 @@ export class Car implements ICar {
     if(this.isPathEmpty){
       this.path = RouteCar.getPathToDest(
         this.simulationEngine.simulationService.simulationMap,
-        this.simulationEngine.simulationService.simulationMap.getParkingCells()[6],
-        this.simulationEngine.simulationService.simulationMap.getParkingCells()[20]);
+        this.simulationEngine.simulationService.simulationMap.parkingCells[0],
+        this.simulationEngine.simulationService.simulationMap.parkingCells[34]);
+        
       this.isPathEmpty=false;
     }else {
+
       if (this.path.length == 0){
         this.isPathEmpty = true;
         return;
       }
-      let id:number =this.path.shift()!;
-      let xy = this.getXY(id);
+      let id =this.path.shift()!;
+      let xy = this.getCoordinateForPosition(id);
       this.x = xy.x;
       this.y = xy.y;
-      console.log(this.x, this.y);
-      //console.log(this.path);
     }
     //switch ()
   }
@@ -48,13 +48,11 @@ export class Car implements ICar {
     return coord + this.template.width;
   }
 
-  private getXY(id:number):{x:number,y:number} {
-    console.log("id: ", id)
-    let xy = this.simulationEngine.simulationService.simulationMap.atId(id);
+  private getCoordinateForPosition(xy:{x:number, y:number}):{x:number,y:number} {
     let sizecell = this.simulationEngine.simulationService.boardView.sizeCell;
 
-    let newx = sizecell*(xy.xPos - 0.5);
-    let newy = sizecell*(xy.yPos - 0.5);
+    let newx = sizecell*(xy.x);
+    let newy = sizecell*(xy.y);
     return {x:newx,y:newy}
 }
 }

@@ -1,4 +1,5 @@
-import { Heuristic } from '../types/astar.types';
+import { Heuristic } from "../types/astar.types";
+
 
 export interface IAStarFinderConstructor {
   grid: IGridConstructor;

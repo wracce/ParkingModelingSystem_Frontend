@@ -179,18 +179,18 @@ export class ParkingMap {
   }
 
 
-  public atId(id: number): Coordinates {
-    let coords = {} as Coordinates;
+  public atId(id: number): {x:number, y:number} {
+    let x;
+    let y;
     if (id <0 || id>=this.getSize()) {
-      coords.xPos = -1;
-      coords.yPos = -1;
+      x = -1;
+      y = -1;
     } else {
-      coords.xPos = id % this.cols;
-      //TODO
-      coords.yPos = Math.floor(id / this.cols);
+      x = id % this.cols;
+      y = Math.floor(id / this.cols);
 
     }
-    return coords;
+    return {x:x,y:y};
   }
 
   public atXYid(x: number,y:number): number {
