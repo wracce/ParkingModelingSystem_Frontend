@@ -14,25 +14,29 @@ export abstract class RouteCar{
         return matrix;
     }
 
-    public static parkingCellsToWalkables(parkingCells: ParkingCell[]): number[] {
+    public static parkingCellsToWalkables(parkingMap: ParkingMap, distinationCell: ParkingCell, openBarrierCell:ParkingCell): number[] {
       let routeMap:number[] = [];
-      parkingCells.forEach((val) => {
+      parkingMap.parkingCells.forEach((val) => {
         if (val.template.state === ParkingState.Undef
           || val.template.state === ParkingState.NonSolid
-          || val.template.state === ParkingState.Road
-          || val.template.state === ParkingState.Barrier) {
+          || val.template.state === ParkingState.Road) {
           routeMap.push(0);
         } else {
           routeMap.push(1);
         }
       })
+      
+      routeMap[openBarrierCell.id] = 0;
+      console.log("Cells destinition: ",parkingMap.getCellPositions(distinationCell.id));
+      for(const cellId of parkingMap.getCellPositions(distinationCell.id))
+        routeMap[cellId] = 0
       return routeMap;
     }
 
-    public static getPathToDest(map:ParkingMap, sourceCell: ParkingCell, distinationCell: ParkingCell):{x:number,y:number}[] {
+    public static getPathToDest(map:ParkingMap, sourceCell: ParkingCell, distinationCell: ParkingCell, openBarrierCell:ParkingCell):{x:number,y:number}[] {
       let aStarInstance = new AStarFinder({
         grid: {
-          matrix: this.convertArrToMatrix(this.parkingCellsToWalkables(map.parkingCells),map.cols)
+          matrix: this.convertArrToMatrix(this.parkingCellsToWalkables(map,distinationCell,openBarrierCell),map.cols)
         },
         diagonalAllowed: false
       });

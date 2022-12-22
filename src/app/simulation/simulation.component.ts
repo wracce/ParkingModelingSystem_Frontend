@@ -5,6 +5,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { DesignerParkingComponent } from '../designer/components/designer-parking/designer-parking.component';
 import { DesignerService } from '../designer/services/designer.service';
 import { SimulationProcessViewComponent } from './components/simulation-process-view/simulation-process-view.component';
+import { DeterminateDistribution } from './models/distributions/determinate-distribution';
 import { SimulationService } from './services/simulation.service';
 
 @Component({
@@ -39,7 +40,7 @@ export class SimulationComponent implements OnInit {
   ngOnInit(){}
 
   public startSimulation() {
-    this.simulationService.simulationEngine.init(2000);
+    this.simulationService.simulationEngine.init(1000, new DeterminateDistribution(4000), new DeterminateDistribution(2000));
     this.simulationService.simulationEngine.run();
   }
 

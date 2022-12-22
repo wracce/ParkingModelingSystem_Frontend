@@ -23,8 +23,13 @@ export class ParkingMeter {
     return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.cols == 1 && x.available == true)[0];
   }
 
+
   public getAvailableParkingPlaceForTrucks(): ParkingPlace|null {
     return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.cols > 1 && x.available == true)[0];
+  }
+
+  public isAvailablePlace(): boolean {
+    return this.parkingPlaces.filter(x=> x.available == true).length > 0;
   }
 
 
