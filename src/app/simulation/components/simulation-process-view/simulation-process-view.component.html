@@ -15,10 +15,9 @@
         [class.roadCell]="isRoad(cell)"
         cdkScrollable
         [style]="
-          'transform: rotate(' + (isRoad(cell) ? cell.angle : 0) + 'deg); border: 2px solid black'
+          'transform: rotate(' + (isRoad(cell) ? cell.angle : 0) + 'deg);'
         "
       >
-        {{i}}
         <img
           *ngIf="cell.template.src"
           [src]="cell.template.src"

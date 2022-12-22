@@ -10,7 +10,7 @@ export abstract class RouteCar{
         let matrix:number[][] = [];
         while(arr.length) matrix.push(arr.splice(0,cols));
         console.log("MatrixPath: ",matrix);
-        
+
         return matrix;
     }
 
@@ -25,7 +25,7 @@ export abstract class RouteCar{
           routeMap.push(1);
         }
       });
-      
+
       routeMap[openBarrierCell.id] = 0;
       if (distinationCell.id == 41 || distinationCell.id== 41)
         console.log("!!!!Cells destinition: ",parkingMap.getCellPositions(distinationCell.id));
@@ -34,24 +34,21 @@ export abstract class RouteCar{
       return routeMap;
     }
 
-    public static getPathToDest(map:ParkingMap, sourceCell: ParkingCell, distinationCell: ParkingCell, openBarrierCell:ParkingCell):{x:number,y:number}[] {
+    public static getPathToDest(map:ParkingMap, sourceCell: ParkingCell, destinationCell: ParkingCell, barrierCell:ParkingCell):{x:number,y:number}[] {
       let aStarInstance = new AStarFinder({
         grid: {
-          matrix: this.convertArrToMatrix(this.parkingCellsToWalkables(map,distinationCell,openBarrierCell),map.cols)
+          matrix: this.convertArrToMatrix(this.parkingCellsToWalkables(map,destinationCell,barrierCell),map.cols)
         },
         diagonalAllowed: false
       });
-      let startPos:IPoint = map.atId(sourceCell.id) as IPoint ;
-      let endPos:IPoint = map.atId(distinationCell.id) as IPoint ;
+      let startPos:IPoint = map.getPosById(sourceCell.id) as IPoint ;
+      let endPos:IPoint = map.getPosById(destinationCell.id) as IPoint ;
       let path = aStarInstance.findPath(startPos, endPos).map(e=>{return {x:e[0], y:e[1]}});
 
       console.log("Start: ",startPos);
       console.log("End: ",endPos);
       console.log("Path:",path);
-      
-
       return  path;
-
-
     }
+
 }
