@@ -1,7 +1,6 @@
-import { interval, Observable } from 'rxjs';
-import { SimulationService } from '../services/simulation.service';
-import { Car } from './car';
-import { Distribution } from './distributions/distribution';
+import {SimulationService} from '../services/simulation.service';
+import {Car, CarType} from './car';
+import {Distribution} from './distributions/distribution';
 
 export class SimulationEngine {
   private timeId!: NodeJS.Timer;
@@ -52,7 +51,7 @@ export class SimulationEngine {
       this.isStart = true;
       this.countInitTime == 0;
       this.initTimeout = this.initDistribution.nextValue();
-      this.cars.push(new Car(0,0,0, this,true ,this.simulationService.carTemplates[0]));
+      this.cars.push(new Car(0,0,0,0, this,true ,this.simulationService.carTemplates[0], CarType.Car));
     }
 
     this.cars.forEach(
