@@ -16,7 +16,7 @@ import {BoardView} from "../../models/board-view";
   styleUrls:  ['./simulation-process-view.component.scss']
 })
 export class SimulationProcessViewComponent implements OnInit {
-
+ // public  Math:Math;
   @ViewChild('board', { static: false })
   board!: ElementRef;
 

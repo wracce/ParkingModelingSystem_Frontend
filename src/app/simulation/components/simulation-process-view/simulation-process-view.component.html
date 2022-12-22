@@ -9,15 +9,16 @@
     [style.margin-left]="marginLeft + 'px'"
     cdkScrollable
   >
-    <mat-grid-tile *ngFor="let cell of cells" cdkScrollable>
+    <mat-grid-tile *ngFor="let cell of cells; let i = index" cdkScrollable>
       <div
         class="cell"
         [class.roadCell]="isRoad(cell)"
         cdkScrollable
         [style]="
-          'transform: rotate(' + (isRoad(cell) ? cell.angle : 0) + 'deg);'
+          'transform: rotate(' + (isRoad(cell) ? cell.angle : 0) + 'deg); border: 2px solid black'
         "
       >
+        {{i}} + [{{i/6}}, {{i%6}}]
         <img
           *ngIf="cell.template.src"
           [src]="cell.template.src"

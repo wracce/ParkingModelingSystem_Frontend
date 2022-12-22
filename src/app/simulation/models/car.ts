@@ -18,14 +18,16 @@ export class Car implements ICar {
     public template: CarTemplate,
   ) {
     this.isPathEmpty = true;
+    this.path = [];
   }
 
   public step() { // проверка на занятость парковки. Обращение к объекту паркомата
+
     if(this.isPathEmpty){
-      let path: number[] = RouteCar.getPathToDest(
+      this.path = RouteCar.getPathToDest(
         this.simulationEngine.simulationService.simulationMap,
-        this.simulationEngine.simulationService.simulationMap.startBarrierCell,
-        this.simulationEngine.simulationService.simulationMap.endBarrierCell);
+        this.simulationEngine.simulationService.simulationMap.getParkingCells()[6],
+        this.simulationEngine.simulationService.simulationMap.getParkingCells()[20]);
       this.isPathEmpty=false;
     }else {
       if (this.path.length == 0){
@@ -36,7 +38,8 @@ export class Car implements ICar {
       let xy = this.getXY(id);
       this.x = xy.x;
       this.y = xy.y;
-
+      console.log(this.x, this.y);
+      //console.log(this.path);
     }
     //switch ()
   }
@@ -46,12 +49,8 @@ export class Car implements ICar {
   }
 
   private getXY(id:number):{x:number,y:number} {
-    console.log(this.simulationEngine.simulationService.boardView);
+    console.log("id: ", id)
     let xy = this.simulationEngine.simulationService.simulationMap.atId(id);
-    let w = this.simulationEngine.simulationService.boardView.w;
-    let h = this.simulationEngine.simulationService.boardView.h;
-    let cols = this.simulationEngine.simulationService.simulationMap.cols;
-    let rows = this.simulationEngine.simulationService.simulationMap.rows;
     let sizecell = this.simulationEngine.simulationService.boardView.sizeCell;
 
     let newx = sizecell*(xy.xPos - 0.5);

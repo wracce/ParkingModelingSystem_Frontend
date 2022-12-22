@@ -12,15 +12,20 @@ export abstract class RouteCar{
     }
 
     public static getMap(parkingCells: ParkingCell[]): number[] {
-      let routeMap = [];
+
+      const routeMap:number[] = [];
       parkingCells.forEach((val) => {
-        if (val.template.state === ParkingState.Undef
-          || val.template.state === ParkingState.NonSolid) {
-          routeMap.push(0);
-        } else {
-          routeMap.push(1);
-        }
+        // if (val.template.state === ParkingState.Undef
+        //   || val.template.state === ParkingState.NonSolid
+        //   || val.template.state === ParkingState.Road
+        //   || val.template.state === ParkingState.Barrier) {
+        //   routeMap.push(0);
+        // } else {
+        //   routeMap.push(1);
+        // }
+        routeMap.push(0);//TODO
       });
+      console.log(parkingCells,routeMap);
       // @ts-ignore
       return routeMap;
     }
@@ -33,7 +38,9 @@ export abstract class RouteCar{
       });
       let startPos = {x: arr.atId(gate.id).xPos, y: arr.atId(gate.id).yPos}
       let goalPos = {x: arr.atId(cell.id).xPos, y: arr.atId(cell.id).yPos}
+      console.log(aStarInstance.findPath(startPos, goalPos));
       let newArr:number[] = aStarInstance.findPath(startPos, goalPos).flat();
+
       return  newArr;
 
 

@@ -186,7 +186,9 @@ export class ParkingMap {
       coords.yPos = -1;
     } else {
       coords.xPos = id % this.cols;
+      //TODO
       coords.yPos = Math.floor(id / this.cols);
+
     }
     return coords;
   }
