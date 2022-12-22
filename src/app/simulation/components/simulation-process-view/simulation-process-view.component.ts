@@ -40,7 +40,7 @@ export class SimulationProcessViewComponent implements OnInit {
     this.simulationMap = simulationService.simulationMap;
     this.cars = simulationService.simulationEngine.cars;
     this.boardView = simulationService.boardView;
-    this.boardView.sizeCell = this.minSizeCell;
+    this.boardView.cellSize = this.minSizeCell;
     this.sizeCellBase = this.minSizeCell;
 
   }
@@ -51,20 +51,20 @@ export class SimulationProcessViewComponent implements OnInit {
   }
 
   public zoomIn(): void {
-    this.boardView.sizeCell *= 1 + this.zoomScaleProc / 100;
+    this.boardView.cellSize *= 1 + this.zoomScaleProc / 100;
 
-    if (this.boardView.sizeCell < this.minSizeCell)
-      this.boardView.sizeCell = this.sizeCellBase = this.minSizeCell;
-    if (this.boardView.sizeCell > this.maxSizeCell)
-      this.boardView.sizeCell = this.sizeCellBase = this.maxSizeCell;
+    if (this.boardView.cellSize < this.minSizeCell)
+      this.boardView.cellSize = this.sizeCellBase = this.minSizeCell;
+    if (this.boardView.cellSize > this.maxSizeCell)
+      this.boardView.cellSize = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.boardView.w - this.boardView.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
+      (this.boardView.w - this.boardView.cellSize * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.boardView.h - this.boardView.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
-    if (this.boardView.w + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.cols)
+      (this.boardView.h - this.boardView.cellSize * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.boardView.w + 2 * this.sizePadding < this.boardView.cellSize * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.boardView.h + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.rows)
+    if (this.boardView.h + 2 * this.sizePadding < this.boardView.cellSize * this.simulationMap.rows)
       this.marginTop = 0;
   }
 
@@ -72,40 +72,40 @@ export class SimulationProcessViewComponent implements OnInit {
     this.boardView.h = this.board.nativeElement.clientHeight - this.sizePadding * 2;
     this.boardView.w = this.board.nativeElement.clientWidth - this.sizePadding * 2;
 
-    this.boardView.sizeCell = this.sizeCellBase =
+    this.boardView.cellSize = this.sizeCellBase =
       this.boardView.w / this.simulationMap.cols > this.boardView.h / this.simulationMap.rows
         ? this.boardView.h / this.simulationMap.rows
         : this.boardView.w / this.simulationMap.cols;
 
-    if (this.boardView.sizeCell < this.minSizeCell)
-      this.boardView.sizeCell = this.sizeCellBase = this.minSizeCell;
-    if (this.boardView.sizeCell > this.maxSizeCell)
-      this.boardView.sizeCell = this.sizeCellBase = this.maxSizeCell;
+    if (this.boardView.cellSize < this.minSizeCell)
+      this.boardView.cellSize = this.sizeCellBase = this.minSizeCell;
+    if (this.boardView.cellSize > this.maxSizeCell)
+      this.boardView.cellSize = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.boardView.w - this.boardView.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
+      (this.boardView.w - this.boardView.cellSize * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.boardView.h - this.boardView.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
-    if (this.boardView.w + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.cols)
+      (this.boardView.h - this.boardView.cellSize * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.boardView.w + 2 * this.sizePadding < this.boardView.cellSize * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.boardView.h + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.rows)
+    if (this.boardView.h + 2 * this.sizePadding < this.boardView.cellSize * this.simulationMap.rows)
       this.marginTop = 0;
   }
 
   public zoomOut(): void {
-    this.boardView.sizeCell *= 1 - this.zoomScaleProc / 100;
-    if (this.boardView.sizeCell < this.minSizeCell)
-      this.boardView.sizeCell = this.sizeCellBase = this.minSizeCell;
-    if (this.boardView.sizeCell > this.maxSizeCell)
-      this.boardView.sizeCell = this.sizeCellBase = this.maxSizeCell;
+    this.boardView.cellSize *= 1 - this.zoomScaleProc / 100;
+    if (this.boardView.cellSize < this.minSizeCell)
+      this.boardView.cellSize = this.sizeCellBase = this.minSizeCell;
+    if (this.boardView.cellSize > this.maxSizeCell)
+      this.boardView.cellSize = this.sizeCellBase = this.maxSizeCell;
 
     this.marginLeft =
-      (this.boardView.w - this.boardView.sizeCell * this.simulationMap.cols) / 2 + this.sizePadding;
+      (this.boardView.w - this.boardView.cellSize * this.simulationMap.cols) / 2 + this.sizePadding;
     this.marginTop =
-      (this.boardView.h - this.boardView.sizeCell * this.simulationMap.rows) / 2 + this.sizePadding;
-    if (this.boardView.w + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.cols)
+      (this.boardView.h - this.boardView.cellSize * this.simulationMap.rows) / 2 + this.sizePadding;
+    if (this.boardView.w + 2 * this.sizePadding < this.boardView.cellSize * this.simulationMap.cols)
       this.marginLeft = 0;
-    if (this.boardView.h + 2 * this.sizePadding < this.boardView.sizeCell * this.simulationMap.rows)
+    if (this.boardView.h + 2 * this.sizePadding < this.boardView.cellSize * this.simulationMap.rows)
       this.marginTop = 0;
 
     console.log(this.cars);

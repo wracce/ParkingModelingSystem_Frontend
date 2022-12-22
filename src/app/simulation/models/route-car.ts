@@ -6,7 +6,7 @@ import { IPoint } from "./lib/interfaces/astar.interfaces";
 
 export abstract class RouteCar{
 
-    public static convertArrToMatrix(arr:number[], cols:number){
+    private static convertArrToMatrix(arr:number[], cols:number){
         let matrix:number[][] = [];
         while(arr.length) matrix.push(arr.splice(0,cols));
         console.log("MatrixPath: ",matrix);
@@ -14,7 +14,7 @@ export abstract class RouteCar{
         return matrix;
     }
 
-    public static parkingCellsToWalkables(parkingMap: ParkingMap, distinationCell: ParkingCell, openBarrierCell:ParkingCell): number[] {
+    private static parkingCellsToWalkables(parkingMap: ParkingMap, sourceCell: ParkingCell, distinationCell: ParkingCell, openBarrierCell:ParkingCell): number[] {
       let routeMap:number[] = [];
       parkingMap.parkingCells.forEach((val) => {
         if (val.template.state === ParkingState.Undef
@@ -27,17 +27,19 @@ export abstract class RouteCar{
       });
 
       routeMap[openBarrierCell.id] = 0;
-      if (distinationCell.id == 41 || distinationCell.id== 41)
-        console.log("!!!!Cells destinition: ",parkingMap.getCellPositions(distinationCell.id));
+
       for(const cellId of parkingMap.getCellPositions(distinationCell.id))
-      routeMap[cellId] = 0;
+        routeMap[cellId] = 0;
+
+      for(const cellId of parkingMap.getCellPositions(sourceCell.id))
+        routeMap[cellId] = 0;
       return routeMap;
     }
 
     public static getPathToDest(map:ParkingMap, sourceCell: ParkingCell, destinationCell: ParkingCell, barrierCell:ParkingCell):{x:number,y:number}[] {
       let aStarInstance = new AStarFinder({
         grid: {
-          matrix: this.convertArrToMatrix(this.parkingCellsToWalkables(map,destinationCell,barrierCell),map.cols)
+          matrix: this.convertArrToMatrix(this.parkingCellsToWalkables(map, sourceCell, destinationCell, barrierCell),map.cols)
         },
         diagonalAllowed: false
       });
