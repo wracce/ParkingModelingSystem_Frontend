@@ -24,12 +24,13 @@ export abstract class RouteCar{
         } else {
           routeMap.push(1);
         }
-      })
+      });
       
       routeMap[openBarrierCell.id] = 0;
-      console.log("Cells destinition: ",parkingMap.getCellPositions(distinationCell.id));
+      if (distinationCell.id == 41 || distinationCell.id== 41)
+        console.log("!!!!Cells destinition: ",parkingMap.getCellPositions(distinationCell.id));
       for(const cellId of parkingMap.getCellPositions(distinationCell.id))
-        routeMap[cellId] = 0
+      routeMap[cellId] = 0;
       return routeMap;
     }
 

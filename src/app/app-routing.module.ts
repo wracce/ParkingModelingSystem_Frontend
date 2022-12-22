@@ -10,15 +10,16 @@ import { ManagerComponent } from './manager/manager.component';
 import { NfComponent } from './nf/nf.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import {AuthGuard} from "./core/guard/auth.guard";
+import { ReferenceComponent } from './reference/reference.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/auth", pathMatch: 'full'},
-  { path: "about", component: AboutComponent},
   { path: "auth", component: AuthComponent},
   { path: "administrator", component: AdministratorComponent, canActivate: [AuthGuard]},
   { path: "administrator/designer", component: DesignerComponent, canActivate: [AuthGuard]},
   { path: "manager", component: ManagerComponent, canActivate: [AuthGuard]},
   { path: "manager/simulation", component: SimulationComponent, canActivate: [AuthGuard]},
+  { path: "reference", component: ReferenceComponent},
   //{ path: "**", component: NfComponent},
 
 ];

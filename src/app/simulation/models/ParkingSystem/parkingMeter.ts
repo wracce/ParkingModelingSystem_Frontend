@@ -20,12 +20,12 @@ export class ParkingMeter {
 
   public getAvailableParkingPlaceForCars(): ParkingPlace|null {
 
-    return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.cols == 1 && x.available == true)[0];
+    return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.rows == 1 && x.available == true)[0];
   }
 
 
   public getAvailableParkingPlaceForTrucks(): ParkingPlace|null {
-    return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.cols > 1 && x.available == true)[0];
+    return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.rows > 1 && x.available == true)[0];
   }
 
   public isAvailablePlace(): boolean {
