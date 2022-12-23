@@ -13,6 +13,7 @@ export class SimulationService {
   public simulationMap!:SimulationMap;
   public simulationEngine!:SimulationEngine;
   public carTemplates!: CarTemplate[];
+  public truckTemplates!: CarTemplate[];
 
   public boardView!:BoardView;
   constructor() {
@@ -25,7 +26,10 @@ export class SimulationService {
       new CarTemplate('/assets/cars/car4.png',86,145),
       new CarTemplate('/assets/cars/car5.png',86,145),
       new CarTemplate('/assets/cars/car6.png',86,145),
-      new CarTemplate('/assets/cars/car7.png',86,145),
+    ];
+    this.truckTemplates = [
+      new CarTemplate('/assets/cars/truck1.png',145,86),
+      new CarTemplate('/assets/cars/truck2.png',86,145),
     ];
     this.boardView = new BoardView(0,0,0);
   }

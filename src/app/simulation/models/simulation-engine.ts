@@ -73,6 +73,8 @@ export class SimulationEngine {
     if (this.countInitTime >= this.initTimeout) {
       this.countInitTime = 0;
       this.initTimeout = this.initDistribution.nextValue();
+      let rType = Math.random() <0.5?CarType.Car:CarType.Truck;
+      let rTemplate = rType==CarType.Car?this.simulationService.carTemplates[Math.floor((new UniformDistribution(0,5)).nextValue())]:this.simulationService.truckTemplates[Math.floor((new UniformDistribution(0,2)).nextValue())];
       this.cars.push(
         new Car(
           this.spawnCellId,
@@ -80,8 +82,8 @@ export class SimulationEngine {
           this.carAngle,
           this,
           true,
-          this.simulationService.carTemplates[Math.floor((new UniformDistribution(0,6)).nextValue())],
-          CarType.Car));
+          rTemplate,
+          rType));
     }
 
     this.cars = this.cars.filter(
