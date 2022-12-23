@@ -35,7 +35,7 @@
       </div>
     </mat-grid-tile>
     <img
-    *ngFor="let car of cars"
+    *ngFor="let car of simulationService.simulationEngine.cars"
     class="car"
     [src]="car.template.src"
     [style]="

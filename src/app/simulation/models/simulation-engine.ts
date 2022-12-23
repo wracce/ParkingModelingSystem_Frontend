@@ -1,5 +1,5 @@
 import {SimulationService} from '../services/simulation.service';
-import {Car, CarType} from './car';
+import {Car, CarSimulationState, CarType} from './car';
 import {Distribution} from './distributions/distribution';
 import {UniformDistribution} from "./distributions/uniform-distribution";
 
@@ -70,9 +70,8 @@ export class SimulationEngine {
     if(!this.isPlay)
       return
 
-    if (this.countInitTime >= this.initTimeout)
-    {
-      this.countInitTime == 0;
+    if (this.countInitTime >= this.initTimeout) {
+      this.countInitTime = 0;
       this.initTimeout = this.initDistribution.nextValue();
       this.cars.push(
         new Car(
@@ -85,11 +84,20 @@ export class SimulationEngine {
           CarType.Car));
     }
 
-    this.cars.forEach(
+    this.cars = this.cars.filter(
       (car) => {
-        car.step()
+        if (car.state !== CarSimulationState.END) {
+          car.step();
+          return true;
+        }
+        else {
+          return false;
+        }
       }
-    );
+    )
+
+    console.log(this.cars)
+
     this.countInitTime += this.timeDelay;
   }
   private calculateCarSpecs() {

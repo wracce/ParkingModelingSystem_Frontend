@@ -7,7 +7,7 @@ import {ParkingCell} from 'src/app/designer/models/parking-cell';
 import {ParkingPlace} from './ParkingSystem/parkingPlace';
 import {Coordinates} from "../../designer/models/parking-map";
 
-enum CarSimulationState {
+export enum CarSimulationState {
   INIT,
   INIT_TO,
   INIT_FROM,
@@ -24,9 +24,9 @@ export enum CarType {
 export class Car implements ICar {
   private timeId!: NodeJS.Timer;
   private path!: { x: number; y: number }[];
-  private state: CarSimulationState;
   private parkingPlace!: ParkingPlace | null;
   private prevState: CarSimulationState;
+  public state: CarSimulationState;
   public x: number;
   public y: number;
 
@@ -151,4 +151,5 @@ export class Car implements ICar {
       destCell,
       barrierCell);
   }
+
 }
