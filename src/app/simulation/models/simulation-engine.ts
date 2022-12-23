@@ -3,11 +3,12 @@ import {Car, CarType} from './car';
 import {Distribution} from './distributions/distribution';
 
 export class SimulationEngine {
-  private timeId!: NodeJS.Timer;
-  private isStart!: boolean;
   public timeDelay!: number;
-
+  public isPlay!: boolean;
+  public isRun!: boolean;
   public cars!: Car[];
+
+  private timeId!: NodeJS.Timer;
 
   private countInitTime!: number;
   private initTimeout!: number;
@@ -21,7 +22,8 @@ export class SimulationEngine {
   }
 
   public init(timeDelay: number, initDistribution:Distribution, stayDistribution:Distribution) {
-    this.isStart = false;
+    this.isRun = false;
+    this.isPlay = false;
     this.cars.length = 0;
 
     this.countInitTime=0;
@@ -32,23 +34,35 @@ export class SimulationEngine {
     this.timeDelay = timeDelay;
     this.initDistribution = initDistribution;
     this.stayDistribution = stayDistribution;
+
+    this.simulationService.simulationMap.parkingMeter.parkingPlaces.forEach(x=>x.available=true);
   }
 
-  public async run() {
-    if (!this.isStart)
+  public run() {
+    if (!this.isRun)
       this.timeId = setInterval(() => this.step(), this.timeDelay);
+    this.isPlay = true;
+    this.isRun = true;
   }
 
-  public async stop() {
-    console.log("STOP")
-    if (this.isStart)
+  public stop() {
+    if (this.isRun){
       clearInterval(this.timeId);
+      this.isPlay = false;
+      this.isRun = false;
+    }
+  }
+
+  public pause() {
+    this.isPlay = false;
   }
 
   private step() {
+    if(!this.isPlay)
+      return
+
     if (this.countInitTime >= this.initTimeout)
     {
-      this.isStart = true;
       this.countInitTime == 0;
       this.initTimeout = this.initDistribution.nextValue();
       this.cars.push(new Car(0,0,0,0, this,true ,this.simulationService.carTemplates[0], CarType.Car));

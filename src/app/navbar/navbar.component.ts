@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ReferenceComponent } from '../reference/reference.component';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
   @Input() view: string ="";
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -17,6 +19,10 @@ export class NavbarComponent implements OnInit {
 
   setView(view:string): void {
     this.view = view;
+  }
+
+  openDialogReference() {
+    const dialogRef = this.dialog.open(ReferenceComponent);
   }
 }
 

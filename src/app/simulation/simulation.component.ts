@@ -11,7 +11,7 @@ import { SimulationService } from './services/simulation.service';
 @Component({
   selector: 'app-simulation',
   templateUrl: './simulation.component.html',
-  styleUrls: ['./simulation.component.scss']
+  styleUrls: ['./simulation.component.scss'],
 })
 export class SimulationComponent implements OnInit {
   @ViewChild(SimulationProcessViewComponent)
@@ -22,39 +22,43 @@ export class SimulationComponent implements OnInit {
   displayedColumns = ['position', 'timeIn', 'timeOut', 'cost'];
   dataSource = ELEMENT_DATA;
 
-  constructor(public simulationService:SimulationService){}
+  constructor(public simulationService: SimulationService) {}
 
   public selectionChange(event: StepperSelectionEvent): void {
-    if (event.previouslySelectedIndex === (0 &&1)) {
-
+    if (event.previouslySelectedIndex === (0 && 1)) {
       //this.designerService.getParkingMap().configurateParking(this.designerService.getSetupParkingForm());
       //this.designerService.resetLinksToParkingCells();
       this.simulationProcessComponent.zoomFree();
-
     }
-      if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
+    if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
       //this.onClickFileInputButton();
     }
   }
 
-  ngOnInit(){}
+  ngOnInit() {}
 
   public startSimulation() {
-    this.simulationService.simulationEngine.init(1000, new DeterminateDistribution(4000), new DeterminateDistribution(2000));
-    this.simulationService.simulationEngine.run();
+    if (!this.simulationService.simulationEngine.isRun){
+      this.simulationService.simulationEngine.init(
+        1000,
+        new DeterminateDistribution(4000),
+        new DeterminateDistribution(2000)
+      );
+    }
+    
+    if(this.simulationService.simulationEngine.isPlay) {
+      this.simulationService.simulationEngine.pause();
+    } else {
+      this.simulationService.simulationEngine.run();
+    }
   }
 
-  public pauseSimulation() {
-
-  }
 
   public stopSimulation() {
     this.simulationService.simulationEngine.stop();
   }
-
 }
 
 export const ELEMENT_DATA: Object[] = [
-  {position: 1, timeIn: '12:00', timeOut: '12:05', cost: 2500},
-
-]
+  { position: 1, timeIn: '12:00', timeOut: '12:05', cost: 2500 },
+];

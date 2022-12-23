@@ -1,1 +1,33 @@
-<p>reference works!</p>
+<h2 mat-dialog-title>ИНФОРМАЦИЯ О РАЗРАБОТЧИКАХ</h2>
+<mat-dialog-content class="mat-typography">
+  <p style="text-align: center">
+    <i>
+      Лабораторный практикуп по дисциплине:<br />
+      “Технологии программирования”<br />
+      Тема: <br />
+      “Система моделирования работы платной парковки”<br />
+    </i>
+  </p>
+  <br />
+
+  <b>РАЗРАБОТЧИКИ:</b>
+  <p>
+    Студенты группы 6402-090301D:<br />
+    <span style="margin-left: 2em">Макаров Павел</span><br />
+    <span style="margin-left: 2em">Надеждин Виталий</span><br />
+    <span style="margin-left: 2em">Парфенов Михаил</span><br />
+  </p>
+
+  <b>РУКОВОДИТЕЛЬ:</b><br />
+  <p>Зеленко Лариса Сергеевна</p>
+  <br />
+
+  <h4 style="text-align: center">Самарский университет 2022</h4>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+  <button mat-stroked-button color="accent">О системе</button>
+  <button mat-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>
+    Закрыть
+  </button>
+</mat-dialog-actions>

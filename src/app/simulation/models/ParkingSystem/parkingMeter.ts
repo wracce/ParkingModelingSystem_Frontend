@@ -13,11 +13,14 @@ export class ParkingMeter {
   constructor(
     public simulationMap: SimulationMap, public parkingMeterCell:ParkingCell
   ) {
+      this.init();
+  }
+
+  public init(){
     this.parkingPlaces = this.simulationMap.parkingCells.filter(
       x => x.template.state === ParkingState.Park
     ).map(x=> new ParkingPlace(x,true));
   }
-
   public getAvailableParkingPlaceForCars(): ParkingPlace|null {
 
     return this.parkingPlaces.filter(x=> x.parkingCell.template.cols*x.parkingCell.template.rows == 1 && x.available == true)[0];
