@@ -3,8 +3,8 @@
     #grid
     [cols]="simulationMap.cols"
     gutterSize="0"
-    [style.width]="simulationMap.cols * boardView.sizeCell + 'px'"
-    [style.height]="simulationMap.rows * boardView.sizeCell + 'px'"
+    [style.width]="simulationMap.cols * boardView.cellSize + 'px'"
+    [style.height]="simulationMap.rows * boardView.cellSize + 'px'"
     [style.margin-top]="marginTop + 'px'"
     [style.margin-left]="marginLeft + 'px'"
     cdkScrollable
@@ -15,18 +15,17 @@
         [class.roadCell]="isRoad(cell)"
         cdkScrollable
         [style]="
-          'transform: rotate(' + (isRoad(cell) ? cell.angle : 0) + 'deg); border: 2px solid black'
+          'transform: rotate(' + (isRoad(cell) ? cell.angle : 0) + 'deg);'
         "
       >
-        {{i}}
         <img
           *ngIf="cell.template.src"
           [src]="cell.template.src"
           [style]="
             'width: ' +
-            cell.template.cols * boardView.sizeCell +
+            cell.template.cols * boardView.cellSize +
             'px; height: ' +
-            cell.template.rows * boardView.sizeCell +
+            cell.template.rows * boardView.cellSize +
             'px;' +
             'transform: rotate(' +
             cell.angle +
@@ -45,9 +44,9 @@
       'px; left: ' +
       car.x +
       'px; width: ' +
-      boardView.sizeCell +
+      boardView.cellSize +
       'px; height: ' +
-      boardView.sizeCell +
+      boardView.cellSize +
       'px; transform: rotate(' +
       car.angle +
       'deg);'

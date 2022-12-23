@@ -179,7 +179,7 @@ export class ParkingMap {
   }
 
 
-  public atId(id: number): {x:number, y:number} {
+  public getPosById(id: number): {x:number, y:number} {
     let x;
     let y;
     if (id <0 || id>=this.getSize()) {
@@ -193,7 +193,7 @@ export class ParkingMap {
     return {x:x,y:y};
   }
 
-  public atXYid(x: number,y:number): number {
+  public getIdByPos(x: number, y:number): number {
     if (x<0 || x>=this.cols || y<0|| y>=this.rows )
       return -1;
     return y*this.cols + x;

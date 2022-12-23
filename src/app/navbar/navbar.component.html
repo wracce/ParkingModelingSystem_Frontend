@@ -1,5 +1,4 @@
 <mat-toolbar mat-toolbar color="primary" class="mat-elevation-z10">
-
   <button mat-button routerLink="">Парковочная система</button>
   <span class="example-spacer"></span>
   <button mat-button (click)="openDialogReference()">
@@ -11,8 +10,7 @@
   <button mat-button routerLink="/manager" routerLinkActive="activeLink" >
     Менеджер
   </button>
-
-  <button mat-button routerLink="/auth" routerLinkActive="activeLink">
-    Войти
+  <button mat-button routerLink="/auth" routerLinkActive="activeLink" (click)="sign()">
+    {{state}}
   </button>
 </mat-toolbar>

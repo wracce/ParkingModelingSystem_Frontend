@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ReferenceComponent } from '../reference/reference.component';
+import {UserStorageService} from "../core/service/user-storage.service";
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,9 @@ export class NavbarComponent implements OnInit {
 
   @Input() view: string ="";
 
-  constructor(public dialog: MatDialog) { }
+  state = "Выйти";
+  constructor(public dialog: MatDialog,
+    private userStorageService: UserStorageService) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +26,15 @@ export class NavbarComponent implements OnInit {
 
   openDialogReference() {
     const dialogRef = this.dialog.open(ReferenceComponent);
+  }
+
+  sign() {
+    if (this.userStorageService.getToken() !== null) {
+    } else {
+      this.userStorageService.signOut();
+      this.state = "Войти";
+    }
+
   }
 }
 
