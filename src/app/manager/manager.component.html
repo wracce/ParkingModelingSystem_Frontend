@@ -16,8 +16,8 @@
         <div class="userBlock">
           <div class="header">Менеджер</div>
           <div class="userBlockContent">
-            ФИО: <b>Иванов Иван Иванович</b> <br />
-            ЛОГИН: <b>solniwko_ivan</b><br />
+            ФИО: <b>{{ fio }}</b> <br />
+            ЛОГИН: <b>{{ login }}</b><br />
           </div>
         </div>
       </mat-grid-tile>
@@ -26,4 +26,3 @@
 </div>
 
 <input type="file" style="display: none" #fileInput accept=".PSF" (change)="onChangeFileInput()" />
- 

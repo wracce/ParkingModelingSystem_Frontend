@@ -15,7 +15,8 @@
         <app-simulation-process-view></app-simulation-process-view>
       </div>
       <div class="app-park-infoWrapper">
-        <div>Свободных мест: <b>VALUE</b></div>
+        <div>Свободных мест для легковых авто: <b>{{parkingPlacesCar}}</b></div>
+        <div>Свободных мест для грузовых авто: <b>{{parkingPlacesTruck}}</b></div>
         <div>Текущее время: <b>VALUE</b></div>
       </div>
       <div class="app-park-tableWrapper">
@@ -26,25 +27,25 @@
             <th mat-header-cell *matHeaderCellDef> № </th>
             <td mat-cell *matCellDef="let element"> {{element.position}} </td>
           </ng-container>
-      
+
           <!-- Name Column -->
           <ng-container matColumnDef="timeIn">
             <th mat-header-cell *matHeaderCellDef> Время въезда </th>
             <td mat-cell *matCellDef="let element"> {{element.timeIn}} </td>
           </ng-container>
-      
+
           <!-- Weight Column -->
           <ng-container matColumnDef="timeOut">
             <th mat-header-cell *matHeaderCellDef> Время выезда </th>
             <td mat-cell *matCellDef="let element"> {{element.timeOut}} </td>
           </ng-container>
-      
+
           <!-- Weight Column -->
           <ng-container matColumnDef="cost">
             <th mat-header-cell *matHeaderCellDef> Стоимость </th>
             <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
           </ng-container>
-      
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>

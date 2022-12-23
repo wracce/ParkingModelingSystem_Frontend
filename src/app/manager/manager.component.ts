@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParkingMap } from '../designer/models/parking-map';
 import { SimulationService } from '../simulation/services/simulation.service';
+import {DataShareService} from "../core/service/data-share.service";
+import {UserService} from "../core/service/user.service";
 
 @Component({
   selector: 'app-manager',
@@ -11,6 +13,8 @@ import { SimulationService } from '../simulation/services/simulation.service';
 export class ManagerComponent implements OnInit {
   @ViewChild('fileInput')
   fileInput!: ElementRef;
+  fio: string;
+  login: string;
   file: File | null = null;
   onClickFileInputButton(): void {
     this.fileInput.nativeElement.click();
@@ -38,6 +42,17 @@ export class ManagerComponent implements OnInit {
 
   }
 
-  constructor(public simulationService: SimulationService, public router: Router) {}
+  constructor(
+    public simulationService: SimulationService,
+    public router: Router,
+    private dataShareService: DataShareService,
+    private userService: UserService) {
+    this.dataShareService.currentUser.subscribe(r => {
+      this.userService.getByUsername(r).subscribe(r2 => {
+        this.fio = r2.fio;
+        this.login = r2.username;
+      })
+    });
+  }
   ngOnInit(): void {}
 }

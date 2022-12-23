@@ -13,6 +13,7 @@ export class UserStorageService {
 
   signOut() {
     window.sessionStorage.clear();
+    window.location.reload();
   }
 
   public saveToken(token: string) {

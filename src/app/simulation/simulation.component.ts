@@ -7,6 +7,8 @@ import { DesignerService } from '../designer/services/designer.service';
 import { SimulationProcessViewComponent } from './components/simulation-process-view/simulation-process-view.component';
 import { DeterminateDistribution } from './models/distributions/determinate-distribution';
 import { SimulationService } from './services/simulation.service';
+import {ParkingState} from "../designer/models/parking-state";
+import {ParkingTemplate} from "../designer/models/parking-template";
 
 @Component({
   selector: 'app-simulation',
@@ -18,11 +20,21 @@ export class SimulationComponent implements OnInit {
   public simulationProcessComponent!: SimulationProcessViewComponent;
 
   selectedId: number = 0;
+  parkingPlacesCar: number = 0;
+  parkingPlacesTruck: number = 0;
+
 
   displayedColumns = ['position', 'timeIn', 'timeOut', 'cost'];
   dataSource = ELEMENT_DATA;
-
-  constructor(public simulationService:SimulationService){}
+  constructor(public simulationService:SimulationService) {
+    this.simulationService.simulationMap.parkingMeter.parkingPlaces.forEach((val) => {
+        if (val.parkingCell.template.name === "Парковочное место 1x1") this.parkingPlacesCar++;
+        else if (val.parkingCell.template.name === "Парковочное место 1x2") this.parkingPlacesTruck++;
+        else if (val.parkingCell.template.name === "Парковочное место 2x1") this.parkingPlacesTruck++;
+    })
+    // this.parkingPlaces = this.simulationService.simulationMap.parkingMeter.parkingPlaces.filter((val) =>
+    // val.parkingCell.template.name === "");
+  }
 
   public selectionChange(event: StepperSelectionEvent): void {
     if (event.previouslySelectedIndex === (0 &&1)) {

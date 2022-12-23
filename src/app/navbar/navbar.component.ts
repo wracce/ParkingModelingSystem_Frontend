@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {UserStorageService} from "../core/service/user-storage.service";
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +9,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   @Input() view: string ="";
-
-  constructor() { }
+  state = "Выйти";
+  constructor(
+    private userStorageService: UserStorageService) { }
 
   ngOnInit(): void {
   }
@@ -17,6 +19,14 @@ export class NavbarComponent implements OnInit {
 
   setView(view:string): void {
     this.view = view;
+  }
+
+  sign() {
+    if (this.userStorageService.getToken() !== null) {
+    } else {
+      this.userStorageService.signOut();
+      this.state = "Войти";
+    }
   }
 }
 
