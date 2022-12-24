@@ -5,6 +5,7 @@ import { CarTemplate } from '../models/car-template';
 import { SimulationEngine } from '../models/simulation-engine';
 import { SimulationMap } from '../models/simulation-map';
 import {BoardView} from "../models/board-view";
+import { ParkingMeter } from '../models/ParkingSystem/parkingMeter';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,13 @@ import {BoardView} from "../models/board-view";
 export class SimulationService {
   public simulationMap!:SimulationMap;
   public simulationEngine!:SimulationEngine;
+  
   public carTemplates!: CarTemplate[];
   public truckTemplates!: CarTemplate[];
 
   public boardView!:BoardView;
   constructor() {
-    this.simulationMap = new SimulationMap();
+    this.simulationMap = new SimulationMap(this);
     this.simulationEngine = new SimulationEngine(this);
     this.carTemplates = [
       new CarTemplate('/assets/cars/car1.png',145,86),

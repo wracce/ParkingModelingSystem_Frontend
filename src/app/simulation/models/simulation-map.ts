@@ -1,14 +1,14 @@
 import { ParkingCell } from 'src/app/designer/models/parking-cell';
 import { ParkingMap } from 'src/app/designer/models/parking-map';
 import { ParkingState } from 'src/app/designer/models/parking-state';
+import { SimulationService } from '../services/simulation.service';
 import { ParkingMeter } from './ParkingSystem/parkingMeter';
+import { SimulationEngine } from './simulation-engine';
 
 export class SimulationMap extends ParkingMap {
-  public startBarrierCell!: ParkingCell;
-  public endBarrierCell!: ParkingCell;
   public parkingMeter!: ParkingMeter;
 
-  constructor() {
+  constructor(public simulationService:SimulationService) {
     super();
   }
 
@@ -21,12 +21,12 @@ export class SimulationMap extends ParkingMap {
     this.rows = parkingMap.rows;
     this.directOfRoad = parkingMap.directOfRoad;
 
-    this.parkingMeter = new ParkingMeter(
-      this,
+    this.parkingMeter = new ParkingMeter(this.simulationService);
+    this.parkingMeter.init(      this,
       this.parkingCells.filter(
         (x) => x.template.state === ParkingState.ParkingMeter
-      )[0]
-    );
+      )[0])
+
 
     this.parkingCells.forEach((value, id) => {
       if (value.template.state === ParkingState.Barrier) {
@@ -46,9 +46,9 @@ export class SimulationMap extends ParkingMap {
           isNearParkingMeter = true;
         }
         if (isNearParkingMeter)
-            this.startBarrierCell = this.parkingCells[this.getIdByPos(xy.x,xy.y)];
+            this.parkingMeter.startBarrierCell = this.parkingCells[this.getIdByPos(xy.x,xy.y)];
         else
-            this.endBarrierCell = this.parkingCells[this.getIdByPos(xy.x,xy.y)];
+            this.parkingMeter.endBarrierCell = this.parkingCells[this.getIdByPos(xy.x,xy.y)];
       }
     });
   }

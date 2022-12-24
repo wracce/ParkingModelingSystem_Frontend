@@ -115,4 +115,16 @@ export class SimulationProcessViewComponent implements OnInit {
   public isRoad(cell: ParkingCell): boolean {
     return cell.template.state === ParkingState.Road;
   }
+
+  public isOpenBarrier(cell:ParkingCell){
+    let isOpen = false;
+    if (cell == this.simulationMap.parkingMeter.startBarrierCell && this.simulationMap.parkingMeter.isOpenStartBarrier == true)
+      isOpen = true;
+      
+    if (cell ==  this.simulationMap.parkingMeter.endBarrierCell && this.simulationMap.parkingMeter.isOpenEndBarrier == true ) {
+      isOpen = true;
+    }
+
+    return isOpen;
+  }
 }

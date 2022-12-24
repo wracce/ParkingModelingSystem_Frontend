@@ -86,6 +86,8 @@ export class SimulationEngine {
           rType));
     }
 
+    this.simulationService.simulationMap.parkingMeter.configurateBarrier();
+
     this.cars = this.cars.filter(
       (car) => {
         if (car.state !== CarSimulationState.END) {

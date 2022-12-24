@@ -19,7 +19,7 @@
         "
       >
         <img
-          *ngIf="cell.template.src"
+          *ngIf="!isOpenBarrier(cell) && cell.template.src"
           [src]="cell.template.src"
           [style]="
             'width: ' +
