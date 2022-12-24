@@ -14,9 +14,10 @@
       <div class="app-park-simulationWrapper">
         <app-simulation-process-view></app-simulation-process-view>
       </div>
-      <div class="app-park-infoWrapper">
-        <div>Свободных мест для легковых авто: <b>{{parkingPlacesCar}}</b></div>
-        <div>Свободных мест для грузовых авто: <b>{{parkingPlacesTruck}}</b></div>
+      <div class="app-park-infoWrapper" color="primary">
+        <div>Мест для авто: <b>{{simulationService.simulationMap.parkingMeter.getCountAllFree()}} /{{simulationService.simulationMap.parkingMeter.getCountAll()}}</b></div>
+        <div>Мест для легковых авто: <b>{{simulationService.simulationMap.parkingMeter.getCountAllFreeCars()}} /{{simulationService.simulationMap.parkingMeter.getCountAllCars()}} </b></div>
+        <div>Мест для грузовых авто: <b>{{simulationService.simulationMap.parkingMeter.getCountAllFreeTrucks()}} /{{simulationService.simulationMap.parkingMeter.getCountAllTrucks()}}</b></div>
         <div>Текущее время: <b>VALUE</b></div>
       </div>
       <div class="app-park-tableWrapper">

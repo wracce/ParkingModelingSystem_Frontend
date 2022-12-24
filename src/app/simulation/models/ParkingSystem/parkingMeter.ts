@@ -95,4 +95,33 @@ export class ParkingMeter {
     if (this.cntEndDelay > 0)
       this.cntEndDelay++;
   }
+
+  public getCountAllCars():number {
+    return this.parkingPlaces.filter(element => element.parkingCell.template.cols*element.parkingCell.template.rows==1).length;
+  }
+
+  public getCountAllTrucks():number {
+    return this.parkingPlaces.filter(element => element.parkingCell.template.cols*element.parkingCell.template.rows>1).length;
+ 
+  }
+
+  public getCountAllFreeCars():number {
+    return this.parkingPlaces.filter(element => element.parkingCell.template.cols*element.parkingCell.template.rows==1 && element.available == true).length;
+
+  }
+
+  public getCountAllFreeTrucks():number {
+    return this.parkingPlaces.filter(element => element.parkingCell.template.cols*element.parkingCell.template.rows>1 && element.available == true).length;
+    
+  }
+
+  public getCountAllFree():number {
+    return this.parkingPlaces.filter(element => element.available == true).length;
+
+  }
+
+  public getCountAll():number {
+    return this.parkingPlaces.length;
+  }
+
 }
