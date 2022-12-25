@@ -22,6 +22,7 @@ export enum CarType {
 }
 
 export class Car implements ICar {
+  public isVisiable!:boolean;
   private timeId!: NodeJS.Timer;
   public path!: { x: number; y: number }[];
   private parkingPlace!: ParkingPlace | null;
@@ -41,8 +42,7 @@ export class Car implements ICar {
     public carType: CarType
   ) {
     this.state = CarSimulationState.INIT;
-    this.path = [];
-    this.step();
+    //this.step();
   }
 
   public step() {
@@ -51,6 +51,9 @@ export class Car implements ICar {
     // проверка на занятость парковки. Обращение к объекту паркомата
     switch (this.state) {
       case CarSimulationState.INIT:
+        this.path = [];
+        this.isVisiable = false;
+
         let xy2 = this.getCoordinateForPosition(
           this.simulationEngine.simulationService.simulationMap.getPosById(
             this.currentCellId
@@ -70,6 +73,7 @@ export class Car implements ICar {
         else
           this.parkingPlace =
             this.simulationEngine.simulationService.simulationMap.parkingMeter.getAvailableParkingPlaceForTrucks();
+            
         if (this.parkingPlace == null) {
           this.state = CarSimulationState.INIT_FROM;
           // this.step();
@@ -78,6 +82,7 @@ export class Car implements ICar {
           this.parkingPlace.available = false;
           // this.step();
         }
+        this.step();
         break;
       case CarSimulationState.INIT_TO:
         this.findPath(
@@ -106,6 +111,7 @@ export class Car implements ICar {
         break;
 
       case CarSimulationState.NAVIGATE:
+        this.isVisiable= true;
         xy = this.path.shift()!;
         coords = this.getCoordinateForPosition(xy);
         this.x = coords.x;

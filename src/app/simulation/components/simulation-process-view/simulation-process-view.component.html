@@ -34,26 +34,28 @@
         />
       </div>
     </mat-grid-tile>
-    <img
-    *ngFor="let car of simulationService.simulationEngine.cars"
-    class="car"
-    [src]="car.template.src"
-    [style]="
-      'top: ' +
-      car.y +
-      'px; left: ' +
-      car.x +
-      'px; width: ' +
-      boardView.cellSize +
-      'px; height: ' +
-      boardView.cellSize +
-      'px; transform: rotate(' +
-      car.angle +
-      'deg); transition-duration: ' + 
-       + simulationService.simulationTime.delayMs +
-      'ms;'
-    "
-  />
+    <div *ngFor="let car of simulationService.simulationEngine.cars">
+      <img
+      class="car"
+      *ngIf="car.isVisiable"
+      [src]="car.template.src"
+      [style]="
+        'top: ' +
+        car.y +
+        'px; left: ' +
+        car.x +
+        'px; width: ' +
+        boardView.cellSize +
+        'px; height: ' +
+        boardView.cellSize +
+        'px; transform: rotate(' +
+        car.angle +
+        'deg); transition-duration: ' +
+         + simulationService.simulationTime.delayMs +
+        'ms;'
+      "
+        />
+    </div>
   </mat-grid-list>
 
 </div>
