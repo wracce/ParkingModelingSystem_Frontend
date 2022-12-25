@@ -18,7 +18,7 @@
         <div>Мест для авто: <b>{{simulationService.simulationMap.parkingMeter.getCountAllFree()}} /{{simulationService.simulationMap.parkingMeter.getCountAll()}}</b></div>
         <div>Мест для легковых авто: <b>{{simulationService.simulationMap.parkingMeter.getCountAllFreeCars()}} /{{simulationService.simulationMap.parkingMeter.getCountAllCars()}} </b></div>
         <div>Мест для грузовых авто: <b>{{simulationService.simulationMap.parkingMeter.getCountAllFreeTrucks()}} /{{simulationService.simulationMap.parkingMeter.getCountAllTrucks()}}</b></div>
-        <div>Текущее время: <b>VALUE</b></div>
+        <div>Текущее время: <b>{{ simulationService.simulationTime.getDisplayTime()}}</b></div>
       </div>
       <div class="app-park-tableWrapper">
         <table mat-table [dataSource]="dataSource">

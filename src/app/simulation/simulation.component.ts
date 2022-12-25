@@ -18,30 +18,23 @@ import {ParkingTemplate} from "../designer/models/parking-template";
 export class SimulationComponent implements OnInit {
   @ViewChild(SimulationProcessViewComponent)
   public simulationProcessComponent!: SimulationProcessViewComponent;
-
-  selectedId: number = 0;
-  parkingPlacesCar: number = 0;
-  parkingPlacesTruck: number = 0;
-
+  public timeDisplay!:Date;
+  public selectedId =0;
 
   displayedColumns = ['position', 'timeIn', 'timeOut', 'cost'];
   dataSource = ELEMENT_DATA;
 
   constructor(public simulationService:SimulationService) {
-    this.simulationService.simulationMap.parkingMeter.parkingPlaces.forEach((val) => {
-        if (val.parkingCell.template.name === "Парковочное место 1x1") this.parkingPlacesCar++;
-        else if (val.parkingCell.template.name === "Парковочное место 1x2") this.parkingPlacesTruck++;
-        else if (val.parkingCell.template.name === "Парковочное место 2x1") this.parkingPlacesTruck++;
-    })
-    // this.parkingPlaces = this.simulationService.simulationMap.parkingMeter.parkingPlaces.filter((val) =>
-    // val.parkingCell.template.name === "");
   }
 
   public selectionChange(event: StepperSelectionEvent): void {
     if (event.previouslySelectedIndex === (0 && 1)) {
-      //this.designerService.getParkingMap().configurateParking(this.designerService.getSetupParkingForm());
-      //this.designerService.resetLinksToParkingCells();
+      this.simulationService.configurateSimulation();
       this.simulationProcessComponent.zoomFree();
+      setInterval(() => {
+          this.timeDisplay = this.simulationService.simulationTime.time;
+        }, 1000)
+
     }
     if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
       //this.onClickFileInputButton();
@@ -53,7 +46,6 @@ export class SimulationComponent implements OnInit {
   public startSimulation() {
     if (!this.simulationService.simulationEngine.isRun){
       this.simulationService.simulationEngine.init(
-        1000,
         new DeterminateDistribution(4000),
         new DeterminateDistribution(2000)
       );

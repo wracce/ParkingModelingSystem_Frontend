@@ -124,4 +124,7 @@ export class ParkingMeter {
     return this.parkingPlaces.length;
   }
 
+  public reset(){
+    this.parkingPlaces.forEach(x=>x.available=true);
+  }
 }

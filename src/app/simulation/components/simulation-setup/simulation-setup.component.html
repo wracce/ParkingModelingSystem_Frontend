@@ -5,10 +5,10 @@
       <mat-form-field appearance="outline" floatLabel="never">
         <input
           matInput
+          [format]="24"
           name="selected_time_A"
-          formControlName="selectedTime"
+          formControlName="startTime"
           [ngxMatTimepicker]="pickerA"
-          placeholder="4:00 PM"
           readonly
         />
       </mat-form-field>
@@ -20,7 +20,13 @@
       <label class="boxLabel">Цена за час ночного тарифа</label>
       <label class="sliderBoxLabelValue"></label>
       <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="box">
       <label class="boxLabel">Процент грузовых автомобилей</label>
+      <label class="sliderBoxLabelValue"></label>
+      <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
+      <label class="boxLabel">Настройка вероятности заезда</label>
       <label class="sliderBoxLabelValue"></label>
       <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
     </div>
@@ -28,22 +34,6 @@
     <mat-divider></mat-divider>
     <div class="box">
       <label class="boxLabel">Настройка потока</label>
-      <div class="box box_distributions">
-        <button
-          class="list_distributions"
-          mat-stroked-button
-          [matMenuTriggerFor]="distributionsTypes"
-        >
-          VALUE<mat-icon style="float: right; margin-top: 5px"
-            >expand_more</mat-icon
-          >
-        </button>
-        <button class="setting_distribution" mat-icon-button>
-          <mat-icon>settings</mat-icon>
-        </button>
-      </div>
-
-      <label class="boxLabel">Настройка вероятности заезда</label>
       <div class="box box_distributions">
         <button
           class="list_distributions"

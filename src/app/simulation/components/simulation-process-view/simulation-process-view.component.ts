@@ -108,7 +108,7 @@ export class SimulationProcessViewComponent implements OnInit {
     if (this.boardView.h + 2 * this.sizePadding < this.boardView.cellSize * this.simulationMap.rows)
       this.marginTop = 0;
 
-    console.log(this.cars);
+    console.log(this.cars); 
 
   }
 

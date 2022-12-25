@@ -2,9 +2,10 @@ import {SimulationService} from '../services/simulation.service';
 import {Car, CarSimulationState, CarType} from './car';
 import {Distribution} from './distributions/distribution';
 import {UniformDistribution} from "./distributions/uniform-distribution";
+import { SimulationTime } from './simulation-time';
 
 export class SimulationEngine {
-  public timeDelay!: number;
+  public timer!: SimulationTime;
   public isPlay!: boolean;
   public isRun!: boolean;
 
@@ -21,35 +22,31 @@ export class SimulationEngine {
   private countInitTime!: number;
   private initTimeout!: number;
   private initDistribution!: Distribution
-  private countStayTime!: number;
-  private stayTimeout!: number;
   private stayDistribution!: Distribution
 
   constructor(public simulationService: SimulationService) {
     this.cars = [];
   }
 
-  public init(timeDelay: number, initDistribution:Distribution, stayDistribution:Distribution) {
-    this.isRun = false;
-    this.isPlay = false;
-    this.cars.length = 0;
-
-    this.countInitTime = 0;
-    this.initTimeout = 0;
-    this.countStayTime = 0;
-    this.stayTimeout = 0;
-
-    this.timeDelay = timeDelay;
+  public init(initDistribution:Distribution, stayDistribution:Distribution) {
     this.initDistribution = initDistribution;
     this.stayDistribution = stayDistribution;
 
-    this.simulationService.simulationMap.parkingMeter.parkingPlaces.forEach(x=>x.available=true);
+    this.isRun = false;
+    this.isPlay = false;
+    this.cars.length = 0;
+    this.countInitTime = 0;
+    this.initTimeout = 0;
+
+    this.timer = this.simulationService.simulationTime;
+
+    this.simulationService.simulationMap.parkingMeter.reset();
     this.calculateCarSpecs();
   }
 
   public run() {
     if (!this.isRun)
-      this.timeId = setInterval(() => this.step(), this.timeDelay);
+      this.timeId = setInterval(() => this.step(), this.timer.delayMs);
     this.isPlay = true;
     this.isRun = true;
   }
@@ -68,7 +65,7 @@ export class SimulationEngine {
 
   private step() {
     if(!this.isPlay)
-      return
+      return;
 
     if (this.countInitTime >= this.initTimeout) {
       this.countInitTime = 0;
@@ -102,7 +99,8 @@ export class SimulationEngine {
 
     console.log(this.cars)
 
-    this.countInitTime += this.timeDelay;
+    this.countInitTime += this.timer.delayMs;
+    this.timer.addTick();
   }
   private calculateCarSpecs() {
     let direct = this.simulationService.simulationMap.directOfRoad;
