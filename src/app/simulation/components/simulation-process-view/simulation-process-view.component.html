@@ -49,7 +49,9 @@
       boardView.cellSize +
       'px; transform: rotate(' +
       car.angle +
-      'deg);'
+      'deg); transition-duration: ' + 
+       + simulationService.simulationTime.delayMs +
+      'ms;'
     "
   />
   </mat-grid-list>
