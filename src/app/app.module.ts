@@ -57,6 +57,7 @@ import {UserService} from "./core/service/user.service";
 import { MatTableModule } from '@angular/material/table'
 import {DataShareService} from "./core/service/data-share.service";
 import { ReferenceComponent } from './reference/reference.component';
+import { DialogConfigurateDistributionComponent } from './simulation/components/dialog-configurate-distribution/dialog-configurate-distribution.component';
 
 
 
@@ -80,6 +81,7 @@ import { ReferenceComponent } from './reference/reference.component';
     DialogConfigurateUserComponent,
     SimulationProcessViewComponent,
     ReferenceComponent,
+    DialogConfigurateDistributionComponent,
 
   ],
   imports: [

@@ -39,7 +39,8 @@ export class Car implements ICar {
     public simulationEngine: SimulationEngine,
     public isVisit: boolean, // хочет ли машина заехать
     public template: CarTemplate,
-    public carType: CarType
+    public carType: CarType,
+    public stayTime: number
   ) {
     this.state = CarSimulationState.INIT;
     //this.step();
@@ -74,7 +75,7 @@ export class Car implements ICar {
           this.parkingPlace =
             this.simulationEngine.simulationService.simulationMap.parkingMeter.getAvailableParkingPlaceForTrucks();
             
-        if (this.parkingPlace == null) {
+        if (this.parkingPlace == null || this.isVisit == false) {
           this.state = CarSimulationState.INIT_FROM;
           // this.step();
         } else {

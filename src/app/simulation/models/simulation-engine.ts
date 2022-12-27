@@ -21,16 +21,32 @@ export class SimulationEngine {
 
   private countInitTime!: number;
   private initTimeout!: number;
+
   private initDistribution!: Distribution;
   private stayDistribution!: Distribution;
+  private enterChance!: number;
+  private truckChance!: number;
+  private dayCost!: number;
+  private nightCost!: number;
 
   constructor(public simulationService: SimulationService) {
     this.cars = [];
   }
 
-  public init(initDistribution: Distribution, stayDistribution: Distribution) {
-    this.initDistribution = initDistribution;
-    this.stayDistribution = stayDistribution;
+  public init(
+    traficDistribution: Distribution,
+    parkingDistribution: Distribution,
+    enterChance: number,
+    truckChance: number,
+    dayCost: number,
+    nightCost: number
+  ) {
+    this.initDistribution = traficDistribution;
+    this.stayDistribution = parkingDistribution;
+    this.enterChance = enterChance;
+    this.truckChance = truckChance;
+    this.dayCost = dayCost;
+    this.nightCost = nightCost;
 
     this.isRun = false;
     this.isPlay = false;
@@ -46,7 +62,7 @@ export class SimulationEngine {
 
   public run() {
     if (!this.isRun)
-      this.timeId = setInterval(() => this.step(), this.timer.delayMs);
+      this.timeId = setInterval(() => this.step(), this.timer.delayTick);
     this.isPlay = true;
     this.isRun = true;
   }
@@ -70,24 +86,37 @@ export class SimulationEngine {
 
     if (this.countInitTime >= this.initTimeout) {
       this.countInitTime = 0;
-      this.initTimeout = this.initDistribution.nextValue();
-      let rType = Math.random() < 0.5 ? CarType.Car : CarType.Truck;
-      let rTemplate =
-        rType == CarType.Car
-          ? this.simulationService.carTemplates[
-              Math.floor(new UniformDistribution(0, 5).nextValue())
-            ]
-          : this.simulationService.truckTemplates[
-              Math.floor(new UniformDistribution(0, 2).nextValue())
-            ];
+      this.initTimeout = this.initDistribution.nextValue()*this.timer.realTickMs;
+
+      let isVisit =
+        Math.floor(new UniformDistribution(0, 100).nextValue()) <=
+        this.enterChance;
+      let stayTime = Math.floor(this.stayDistribution.nextValue())*this.timer.realTickMs;;
+      let randtomType =
+        Math.floor(new UniformDistribution(0, 100).nextValue()) <=
+        this.truckChance
+          ? CarType.Truck
+          : CarType.Car;
+      let randomLength = new UniformDistribution(
+        0,
+        randtomType == CarType.Car
+          ? this.simulationService.carTemplates.length
+          : this.simulationService.truckTemplates.length
+      ).nextValue();
+      let randomTemplate =
+        randtomType == CarType.Car
+          ? this.simulationService.carTemplates[randomLength]
+          : this.simulationService.truckTemplates[randomLength];
+
       let car = new Car(
         this.spawnCellId,
         this.endCellId,
         this.carAngle,
         this,
-        true,
-        rTemplate,
-        rType
+        isVisit,
+        randomTemplate,
+        randtomType,
+        stayTime
       );
       car.step();
       this.cars.push(car);
@@ -105,7 +134,7 @@ export class SimulationEngine {
 
     console.log(this.cars);
 
-    this.countInitTime += this.timer.delayMs;
+    this.countInitTime += this.timer.realTickMs;
     this.timer.addTick();
   }
   private calculateCarSpecs() {

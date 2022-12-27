@@ -1,7 +1,7 @@
 export class SimulationTime {
   private defaultTime!: number;
 
-  constructor(public time: Date, public delayMs: number) {
+  constructor(public time: Date, public delayTick: number, public realTickMs:number) {
     this.defaultTime = time.getTime();
   }
 
@@ -10,7 +10,7 @@ export class SimulationTime {
     this.defaultTime = this.time.getTime();
   }
 
-  public getDelta() {
+  public getTickDelta() {
     return +this.time - this.defaultTime;
   }
   
@@ -19,11 +19,12 @@ export class SimulationTime {
   }
 
   public addTick(): void {
-    this.time.setTime(this.time.getTime() + this.delayMs);
+    this.time.setTime(this.time.getTime() + this.realTickMs);
     console.log(this.time);
   }
 
   public getDisplayTime(): string {
-    return this.time.toLocaleTimeString('ru-RU');
+    let timeStr =  this.time.toLocaleTimeString('ru-RU');
+    return timeStr.slice(0,timeStr.length-3);
   }
 }

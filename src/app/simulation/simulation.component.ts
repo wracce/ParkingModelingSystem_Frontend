@@ -18,7 +18,6 @@ import {ParkingTemplate} from "../designer/models/parking-template";
 export class SimulationComponent implements OnInit {
   @ViewChild(SimulationProcessViewComponent)
   public simulationProcessComponent!: SimulationProcessViewComponent;
-  public timeDisplay!:Date;
   public selectedId =0;
 
   displayedColumns = ['position', 'timeIn', 'timeOut', 'cost'];
@@ -31,12 +30,9 @@ export class SimulationComponent implements OnInit {
     if (event.previouslySelectedIndex === (0 && 1)) {
       this.simulationService.configurateSimulation();
       this.simulationProcessComponent.zoomFree();
-      setInterval(() => {
-          this.timeDisplay = this.simulationService.simulationTime.time;
-        }, 1000)
-
     }
     if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
+      
       //this.onClickFileInputButton();
     }
   }
@@ -45,9 +41,21 @@ export class SimulationComponent implements OnInit {
 
   public startSimulation() {
     if (!this.simulationService.simulationEngine.isRun){
+      let form = this.simulationService.setupSimulationForm;
+      let traficDistribution = form.value['traficDistribution'];
+      let parkingDistribution = form.value['parkingDistribution'];
+      let enterChance = form.value['enterChance'];
+      let truckChance = form.value['truckChance'];
+      let dayCost = form.value['dayCost'];
+      let nightCost = form.value['nightCost'];
+      
       this.simulationService.simulationEngine.init(
-        new DeterminateDistribution(4000),
-        new DeterminateDistribution(2000)
+        traficDistribution,
+        parkingDistribution,
+        enterChance,
+        truckChance,
+        dayCost,
+        nightCost
       );
     }
     
@@ -62,6 +70,7 @@ export class SimulationComponent implements OnInit {
   public stopSimulation() {
     this.simulationService.simulationEngine.stop();
   }
+
 }
 
 export const ELEMENT_DATA: Object[] = [

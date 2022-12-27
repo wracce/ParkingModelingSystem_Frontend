@@ -1,7 +1,13 @@
+import { environment } from "src/environments/environment";
 import { Distribution } from "./distribution";
+import { DistributionType } from "./distribution-type";
 
 export class DeterminateDistribution implements Distribution {
-    constructor(public value:number){}
+    public distributionType = DistributionType.DETERMINATE;
+    public value!:number;
+    constructor(value?:number){
+        this.value = value??environment.valueDeterminateDistribution;
+    }
     public nextValue(){
         return this.value;
     }

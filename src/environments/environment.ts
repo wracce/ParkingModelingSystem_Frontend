@@ -4,7 +4,16 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://127.0.0.1:8080'
+  apiBaseUrl: 'http://127.0.0.1:8080',
+
+  // РАСПРЕДЕЛЕНИЯ
+  valueDeterminateDistribution: 10,
+  mxNormalDistribution: 4,
+  dxNormalDistribution: 4,
+  minUniformDistribution: 4,
+  maxUniformDistribution: 4,
+  lambdaExponetialDistribution:4
+
 };
 
 /*

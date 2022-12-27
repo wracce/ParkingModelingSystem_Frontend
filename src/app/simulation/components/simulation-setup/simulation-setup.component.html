@@ -16,19 +16,19 @@
 
       <label class="boxLabel">Цена за час дневного тарифа</label>
       <label class="sliderBoxLabelValue"></label>
-      <mat-slider #rows min="5" max="100" thumbLabel> </mat-slider>
+      <mat-slider #rows min="5" max="100" thumbLabel formControlName="dayCost"> </mat-slider>
       <label class="boxLabel">Цена за час ночного тарифа</label>
       <label class="sliderBoxLabelValue"></label>
-      <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
+      <mat-slider #cols min="5" max="100" thumbLabel formControlName="nightCost"> </mat-slider>
     </div>
     <mat-divider></mat-divider>
     <div class="box">
       <label class="boxLabel">Процент грузовых автомобилей</label>
       <label class="sliderBoxLabelValue"></label>
-      <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
+      <mat-slider #cols min="5" max="100" thumbLabel formControlName="truckChance"> </mat-slider>
       <label class="boxLabel">Настройка вероятности заезда</label>
       <label class="sliderBoxLabelValue"></label>
-      <mat-slider #cols min="5" max="100" thumbLabel> </mat-slider>
+      <mat-slider #cols min="5" max="100" thumbLabel formControlName="enterChance"> </mat-slider>
     </div>
 
     <mat-divider></mat-divider>
@@ -38,13 +38,14 @@
         <button
           class="list_distributions"
           mat-stroked-button
-          [matMenuTriggerFor]="distributionsTypes"
+          [matMenuTriggerFor]="distributionsTypesMenu"
+          (click)="this.selectedDistributionControl = 'traficDistribution'"
         >
-          VALUE<mat-icon style="float: right; margin-top: 5px"
+        {{getNameDistribution('traficDistribution')}}<mat-icon style="float: right; margin-top: 5px"
             >expand_more</mat-icon
           >
         </button>
-        <button class="setting_distribution" mat-icon-button>
+        <button class="setting_distribution" mat-icon-button (click)="setupDistribution('traficDistribution')">
           <mat-icon>settings</mat-icon>
         </button>
       </div>
@@ -54,13 +55,14 @@
         <button
           class="list_distributions"
           mat-stroked-button
-          [matMenuTriggerFor]="distributionsTypes"
+          [matMenuTriggerFor]="distributionsTypesMenu"
+          (click)="this.selectedDistributionControl = 'parkingDistribution'"
         >
-          VALUE<mat-icon style="float: right; margin-top: 5px"
+          {{getNameDistribution('parkingDistribution')}}<mat-icon style="float: right; margin-top: 5px"
             >expand_more</mat-icon
           >
         </button>
-        <button class="setting_distribution" mat-icon-button>
+        <button class="setting_distribution" mat-icon-button (click)="setupDistribution('parkingDistribution')">
           <mat-icon>settings</mat-icon>
         </button>
       </div>
@@ -68,15 +70,15 @@
   </form>
 </div>
 
-<mat-menu #distributionsTypes="matMenu">
-  <button mat-menu-item>Детериминированое</button>
+<mat-menu #distributionsTypesMenu="matMenu">
+  <button mat-menu-item (click)="setSelectedDistribution(distributionTypes.DETERMINATE)">Детериминированое</button>
   <button mat-menu-item [matMenuTriggerFor]="distributionsRandom">
     Случайное
   </button>
 </mat-menu>
 
 <mat-menu #distributionsRandom="matMenu">
-  <button mat-menu-item>Равномерное</button>
-  <button mat-menu-item>Нормальное</button>
-  <button mat-menu-item>Экспонециальное</button>
+  <button mat-menu-item (click)="setSelectedDistribution(distributionTypes.UNIFORM)">Равномерное</button>
+  <button mat-menu-item (click)="setSelectedDistribution(distributionTypes.NORMAL)">Нормальное</button>
+  <button mat-menu-item (click)="setSelectedDistribution(distributionTypes.EXPONETIAL)">Экспонециальное</button>
 </mat-menu>

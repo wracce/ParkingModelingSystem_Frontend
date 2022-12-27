@@ -1,0 +1,52 @@
+<div class="content">
+  <form [formGroup]="distributionForm">
+    <div [ngSwitch]="distribution.distributionType">
+      <ng-template [ngSwitchCase]="distributions.NORMAL">
+        <mat-form-field appearance="fill">
+          <mat-label>MX</mat-label>
+          <input matInput type="number" formControlName="mx"/>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>DX</mat-label>
+          <input matInput type="number" formControlName="dx" />
+        </mat-form-field>
+      </ng-template>
+      <ng-template [ngSwitchCase]="distributions.EXPONETIAL">
+        <mat-form-field appearance="fill">
+          <mat-label>λ</mat-label>
+          <input matInput type="number" formControlName="lambda" />
+        </mat-form-field>
+      </ng-template>
+      <ng-template [ngSwitchCase]="distributions.DETERMINATE">
+        <mat-form-field appearance="fill">
+          <mat-label>Интервал</mat-label>
+          <input matInput type="number" formControlName="value" />
+        </mat-form-field>
+      </ng-template>
+      <ng-template [ngSwitchCase]="distributions.UNIFORM">
+        <mat-form-field appearance="fill">
+          <mat-label>Минимальное значение</mat-label>
+          <input matInput type="number" formControlName="min" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Максимальное значение</mat-label>
+          <input matInput type="number" formControlName="max" />
+        </mat-form-field>
+      </ng-template>
+      <div class="clearfix"></div>
+    </div>
+  </form>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">Отмена</button>
+  <button
+    mat-raised-button
+    color="accent"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="changeDistribution()"
+  >
+    Изменить
+  </button>
+</mat-dialog-actions>
