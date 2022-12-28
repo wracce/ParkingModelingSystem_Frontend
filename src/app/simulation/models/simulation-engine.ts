@@ -79,10 +79,24 @@ export class SimulationEngine {
     this.isPlay = false;
   }
 
-  private async step() {
-    console.log('start');
+  private step() {
 
     if (!this.isPlay) return;
+    let newCar:Car;
+
+    this.simulationService.simulationMap.parkingMeter.configurateBarrier();
+
+    this.cars = this.cars.filter(
+      (car) => {
+        if (car.state !== CarSimulationState.END) {
+          if (car != newCar)
+          car.step();
+          return true;
+        } else {
+          return false;
+        }
+      }
+      );
 
     if (this.countInitTime >= this.initTimeout) {
       this.countInitTime = 0;
@@ -108,7 +122,7 @@ export class SimulationEngine {
           ? this.simulationService.carTemplates[randomLength]
           : this.simulationService.truckTemplates[randomLength];
 
-      let car = new Car(
+      newCar = new Car(
         this.spawnCellId,
         this.endCellId,
         this.carAngle,
@@ -116,33 +130,25 @@ export class SimulationEngine {
         isVisit,
         randomTemplate,
         randtomType,
-        stayTime
+        stayTime,
+        this.timer,
+        this.timer.realTickMs,
+        this.simulationService,
       );
-      car.step();
-      this.cars.push(car);
+      this.cars.push(newCar);
+
     }
 
-    this.simulationService.simulationMap.parkingMeter.configurateBarrier();
 
-    this.cars.forEach((car, id) => {
-      if (car.state == CarSimulationState.END) {
-        this.cars.splice(id, 1);
-        return;
-      }
-      car.step();
-    });
-
-    console.log(this.cars);
 
     this.countInitTime += this.timer.realTickMs;
     this.timer.addTick();
   }
-  private calculateCarSpecs() {
+
+  private calculateCarSpecs(): void {
     let direct = this.simulationService.simulationMap.directOfRoad;
     this.rows = this.simulationService.simulationMap.rows;
     this.cols = this.simulationService.simulationMap.cols;
-    console.log('ROWS: ', this.rows);
-    console.log('COLS: ', this.cols);
     if (direct === 'left') {
       this.spawnCellId = this.simulationService.simulationMap.getIdByPos(
         0,

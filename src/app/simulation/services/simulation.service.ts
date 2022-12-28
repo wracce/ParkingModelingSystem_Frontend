@@ -11,6 +11,8 @@ import { SimulationTime } from '../models/simulation-time';
 import { DeterminateDistribution } from '../models/distributions/determinate-distribution';
 import { NormalDistribution } from '../models/distributions/normal-distribution';
 import { Distribution } from '../models/distributions/distribution';
+import {TableRow} from "../models/table-row";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,8 @@ export class SimulationService {
   public simulationTime!:SimulationTime;
 
   public boardView!:BoardView;
+  public parkingTable!: TableRow[];
+  private subject = new Subject<any>(); // FIXME
   constructor() {
     this.simulationMap = new SimulationMap(this);
 
@@ -55,12 +59,22 @@ export class SimulationService {
       nightCost: new FormControl(50),
     });
 
-    this.simulationTime = new SimulationTime(new Date(), 1000, 60000); // tick 1s = 1m real time
+    this.simulationTime = new SimulationTime(new Date(), 100, 60000); // tick 1s = 1m real time
+
+    this.parkingTable =[];//new TableRow(100,2000,300,45)];
   }
 
   public configurateSimulation() {
     let timeStr = this.setupSimulationForm.value['startTime'];
     let timeArr = timeStr.match(/\d+/g);
     this.simulationTime.configurate(timeArr[0],timeArr[1],0);
+  }
+
+  public sendNotification(value: boolean) {
+    this.subject.next({text:"notify"});
+  }
+
+  public getNotification() {
+    return this.subject.asObservable();
   }
 }

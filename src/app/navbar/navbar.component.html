@@ -4,13 +4,13 @@
   <button mat-button (click)="openDialogReference()">
     Справка
   </button>
-  <button mat-button routerLink="/administrator" routerLinkActive="activeLink">
+  <button *ngIf="adminBtn" mat-button routerLink="/administrator" routerLinkActive="activeLink">
     Администратор
   </button>
-  <button mat-button routerLink="/manager" routerLinkActive="activeLink" >
+  <button *ngIf="managerBtn" mat-button routerLink="/manager" routerLinkActive="activeLink" >
     Менеджер
   </button>
-  <button mat-button routerLink="/auth" routerLinkActive="activeLink" (click)="sign()">
-    {{state}}
+  <button mat-button routerLink="/auth" routerLinkActive="activeLink">
+    Войти
   </button>
 </mat-toolbar>

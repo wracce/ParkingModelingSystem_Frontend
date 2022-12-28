@@ -13,14 +13,13 @@ export class SimulationTime {
   public getTickDelta() {
     return +this.time - this.defaultTime;
   }
-  
+
   public reset(): void {
     this.time.setTime(this.defaultTime);
   }
 
   public addTick(): void {
     this.time.setTime(this.time.getTime() + this.realTickMs);
-    console.log(this.time);
   }
 
   public getDisplayTime(): string {

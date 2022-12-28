@@ -8,6 +8,7 @@ export class DataShareService {
 
   currentUser = this.userInfo.asObservable();
 
+
   constructor() {
   }
 

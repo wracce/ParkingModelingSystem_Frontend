@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ReferenceComponent } from '../reference/reference.component';
 import {UserStorageService} from "../core/service/user-storage.service";
@@ -8,11 +8,16 @@ import {UserStorageService} from "../core/service/user-storage.service";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+@Injectable({
+  providedIn: 'root'
+})
 export class NavbarComponent implements OnInit {
 
   @Input() view: string ="";
+  public adminBtn: boolean = false;
+  public managerBtn: boolean = false;
 
-  state = "Выйти";
+
   constructor(public dialog: MatDialog,
     private userStorageService: UserStorageService) { }
 
@@ -28,13 +33,6 @@ export class NavbarComponent implements OnInit {
     const dialogRef = this.dialog.open(ReferenceComponent);
   }
 
-  sign() {
-    if (this.userStorageService.getToken() !== null) {
-    } else {
-      this.userStorageService.signOut();
-      this.state = "Войти";
-    }
 
-  }
 }
 

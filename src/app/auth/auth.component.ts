@@ -7,6 +7,7 @@ import {UserStorageService} from "../core/service/user-storage.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {DataShareService} from "../core/service/data-share.service";
+import {NavbarComponent} from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-auth',
@@ -30,6 +31,7 @@ export class AuthComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private dataShareService: DataShareService,
+    private navbar: NavbarComponent,
 
   ) {
     this.userInfo = {} as UserInfo;
@@ -62,8 +64,12 @@ export class AuthComponent implements OnInit {
     this.authService.isLoggedIn = true;
     if (this.userRole === "ROLE_ADMINISTRATOR") {
       this.router.navigate(['/administrator']);
+      this.navbar.adminBtn = true;
+      this.navbar.managerBtn = false;
     } else {
       this.router.navigate(['/manager']);
+      this.navbar.managerBtn = true;
+      this.navbar.adminBtn = false;
     }
   }
 

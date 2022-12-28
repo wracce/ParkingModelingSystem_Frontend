@@ -9,7 +9,6 @@ export abstract class RouteCar{
     private static convertArrToMatrix(arr:number[], cols:number){
         let matrix:number[][] = [];
         while(arr.length) matrix.push(arr.splice(0,cols));
-        console.log("MatrixPath: ",matrix);
 
         return matrix;
     }
@@ -46,11 +45,7 @@ export abstract class RouteCar{
       let startPos:IPoint = map.getPosById(sourceCell.id) as IPoint ;
       let endPos:IPoint = map.getPosById(destinationCell.id) as IPoint ;
       let path = aStarInstance.findPath(startPos, endPos).map(e=>{return {x:e[0], y:e[1]}});
-
-      console.log("Start: ",startPos);
-      console.log("End: ",endPos);
-      console.log("Path:",path);
-      return  path;
+      return  path.splice(1,path.length);
     }
 
 }

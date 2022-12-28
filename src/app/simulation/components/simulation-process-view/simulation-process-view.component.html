@@ -37,7 +37,6 @@
     <div *ngFor="let car of simulationService.simulationEngine.cars">
       <img
       class="car"
-      *ngIf="car.isVisiable"
       [src]="car.template.src"
       [style]="
         'top: ' +
