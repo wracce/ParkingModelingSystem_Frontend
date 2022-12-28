@@ -68,6 +68,7 @@ export class SimulationService {
     let timeStr = this.setupSimulationForm.value['startTime'];
     let timeArr = timeStr.match(/\d+/g);
     this.simulationTime.configurate(timeArr[0], timeArr[1], 0);
+    this.parkingTable$ = this.parkingTable$.pipe(map(value=> []));
   }
 
   public addRowToParkingTable(
@@ -75,8 +76,7 @@ export class SimulationService {
     timeParking: number,
     cost: number
   ): void {
-    this.parkingTable$ = this.parkingTable$.pipe(map((value) => {console.log("PIPE ADD"); return [...value,new TableRow(value.length + 1, timeIn, timeParking, cost)];})
-    );
+    this.parkingTable$ = this.parkingTable$.pipe(map(value=> [...value,new TableRow(value.length + 1, timeIn, timeParking, cost)]));
   }
 
   public getParkingTable():Observable<TableRow[]> {

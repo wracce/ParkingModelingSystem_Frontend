@@ -96,7 +96,7 @@ export class SimulationEngine {
               if(car.path[0].x == barrierId.x && car.path[0].y == barrierId.x)
               this.simulationService.addRowToParkingTable(
                 this.timer.getDisplayTime(),
-                car.stayTime / 1000,
+                car.stayTime/ this.timer.realTickMs,
                 5000
               );
             }
