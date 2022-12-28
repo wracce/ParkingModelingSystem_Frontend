@@ -2,6 +2,7 @@ import { SimulationService } from '../services/simulation.service';
 import { Car, CarSimulationState, CarType } from './car';
 import { Distribution } from './distributions/distribution';
 import { UniformDistribution } from './distributions/uniform-distribution';
+import { SimulationMap } from './simulation-map';
 import { SimulationTime } from './simulation-time';
 import { TableRow } from './table-row';
 
@@ -81,32 +82,41 @@ export class SimulationEngine {
   }
 
   private step() {
-
     if (!this.isPlay) return;
-    let newCar:Car;
+    let newCar: Car;
 
     this.simulationService.simulationMap.parkingMeter.configurateBarrier();
 
-    this.cars = this.cars.filter(
-      (car) => {
-        if (car.state !== CarSimulationState.END) {
-          if (car != newCar)
+    this.cars = this.cars.filter((car) => {
+      if (car.state !== CarSimulationState.END) {
+        if (car != newCar) {
           car.step();
-          return true;
-        } else {
-          return false;
+          if (car.isVisit && car.path.length > 0){
+            let barrierId = this.simulationService.simulationMap.getPosById(this.simulationService.simulationMap.parkingMeter.startBarrierCell.id);
+              if(car.path[0].x == barrierId.x && car.path[0].y == barrierId.x)
+              this.simulationService.addRowToParkingTable(
+                this.timer.getDisplayTime(),
+                car.stayTime / 1000,
+                5000
+              );
+            }
         }
+        return true;
+      } else {
+        return false;
       }
-      );
+    });
 
     if (this.countInitTime >= this.initTimeout) {
       this.countInitTime = 0;
-      this.initTimeout = this.initDistribution.nextValue()*this.timer.realTickMs;
+      this.initTimeout =
+        this.initDistribution.nextValue() * this.timer.realTickMs;
 
       let isVisit =
         Math.floor(new UniformDistribution(0, 100).nextValue()) <=
         this.enterChance;
-      let stayTime = Math.floor(this.stayDistribution.nextValue())*this.timer.realTickMs;;
+      let stayTime =
+        Math.floor(this.stayDistribution.nextValue()) * this.timer.realTickMs;
       let randtomType =
         Math.floor(new UniformDistribution(0, 100).nextValue()) <=
         this.truckChance
@@ -134,18 +144,10 @@ export class SimulationEngine {
         stayTime,
         this.timer,
         this.timer.realTickMs,
-        this.simulationService,
+        this.simulationService
       );
       this.cars.push(newCar);
-      this.simulationService.addRowToParkingTable(
-        this.timer.getDisplayTime(),
-        stayTime/1000,
-        5000
-      );
-
     }
-
-
 
     this.countInitTime += this.timer.realTickMs;
     this.timer.addTick();

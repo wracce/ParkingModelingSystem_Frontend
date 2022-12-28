@@ -59,7 +59,7 @@ export class SimulationService {
       nightCost: new FormControl(50),
     });
 
-    this.simulationTime = new SimulationTime(new Date(), 100, 60000); // tick 1s = 1m real time
+    this.simulationTime = new SimulationTime(new Date(), 1000, 60000); // tick 1s = 1m real time
 
     //this.parkingTable$ = new Observable<TableRow[]>();
   }
@@ -75,8 +75,6 @@ export class SimulationService {
     timeParking: number,
     cost: number
   ): void {
-    console.log("Add cat to TableCars");
-    
     this.parkingTable$ = this.parkingTable$.pipe(map((value) => {console.log("PIPE ADD"); return [...value,new TableRow(value.length + 1, timeIn, timeParking, cost)];})
     );
   }
