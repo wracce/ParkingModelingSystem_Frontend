@@ -1,7 +1,7 @@
 export class TableRow {
   constructor(
     public position: number,
-    public timeIn: Date,
+    public timeIn: string,
     public parkingTime: number,
     public cost: number) {
   }

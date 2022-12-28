@@ -3,6 +3,7 @@ import { Car, CarSimulationState, CarType } from './car';
 import { Distribution } from './distributions/distribution';
 import { UniformDistribution } from './distributions/uniform-distribution';
 import { SimulationTime } from './simulation-time';
+import { TableRow } from './table-row';
 
 export class SimulationEngine {
   public timer!: SimulationTime;
@@ -136,6 +137,11 @@ export class SimulationEngine {
         this.simulationService,
       );
       this.cars.push(newCar);
+      this.simulationService.addRowToParkingTable(
+        this.timer.getDisplayTime(),
+        stayTime/1000,
+        5000
+      );
 
     }
 

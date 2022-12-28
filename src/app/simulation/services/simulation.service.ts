@@ -4,53 +4,53 @@ import { Car } from '../models/car';
 import { CarTemplate } from '../models/car-template';
 import { SimulationEngine } from '../models/simulation-engine';
 import { SimulationMap } from '../models/simulation-map';
-import {BoardView} from "../models/board-view";
+import { BoardView } from '../models/board-view';
 import { ParkingMeter } from '../models/ParkingSystem/parkingMeter';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SimulationTime } from '../models/simulation-time';
 import { DeterminateDistribution } from '../models/distributions/determinate-distribution';
 import { NormalDistribution } from '../models/distributions/normal-distribution';
 import { Distribution } from '../models/distributions/distribution';
-import {TableRow} from "../models/table-row";
-import {Subject} from "rxjs";
+import { TableRow } from '../models/table-row';
+import { from, map, Observable, of, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SimulationService {
-  public simulationMap!:SimulationMap;
+  public simulationMap!: SimulationMap;
   public carTemplates!: CarTemplate[];
   public truckTemplates!: CarTemplate[];
 
   public setupSimulationForm!: FormGroup;
 
-  public simulationEngine!:SimulationEngine;
-  public simulationTime!:SimulationTime;
+  public simulationEngine!: SimulationEngine;
+  public simulationTime!: SimulationTime;
 
-  public boardView!:BoardView;
-  public parkingTable!: TableRow[];
-  private subject = new Subject<any>(); // FIXME
+  public boardView!: BoardView;
+  public parkingTable$: Observable<TableRow[]> = of([]);
+
   constructor() {
     this.simulationMap = new SimulationMap(this);
 
     this.simulationEngine = new SimulationEngine(this);
 
     this.carTemplates = [
-      new CarTemplate('/assets/cars/car1.png',145,86),
-      new CarTemplate('/assets/cars/car2.png',86,145),
-      new CarTemplate('/assets/cars/car3.png',86,145),
-      new CarTemplate('/assets/cars/car4.png',86,145),
-      new CarTemplate('/assets/cars/car5.png',86,145),
+      new CarTemplate('/assets/cars/car1.png', 145, 86),
+      new CarTemplate('/assets/cars/car2.png', 86, 145),
+      new CarTemplate('/assets/cars/car3.png', 86, 145),
+      new CarTemplate('/assets/cars/car4.png', 86, 145),
+      new CarTemplate('/assets/cars/car5.png', 86, 145),
     ];
 
     this.truckTemplates = [
-      new CarTemplate('/assets/cars/truck1.png',145,86),
-      new CarTemplate('/assets/cars/truck2.png',86,145),
+      new CarTemplate('/assets/cars/truck1.png', 145, 86),
+      new CarTemplate('/assets/cars/truck2.png', 86, 145),
     ];
-    this.boardView = new BoardView(0,0,0);
+    this.boardView = new BoardView(0, 0, 0);
 
     this.setupSimulationForm = new FormGroup({
-      startTime: new FormControl("8:00"),
+      startTime: new FormControl('8:00'),
       traficDistribution: new FormControl(new NormalDistribution()),
       parkingDistribution: new FormControl(new NormalDistribution()),
       enterChance: new FormControl(50),
@@ -61,20 +61,27 @@ export class SimulationService {
 
     this.simulationTime = new SimulationTime(new Date(), 100, 60000); // tick 1s = 1m real time
 
-    this.parkingTable =[];//new TableRow(100,2000,300,45)];
+    //this.parkingTable$ = new Observable<TableRow[]>();
   }
 
   public configurateSimulation() {
     let timeStr = this.setupSimulationForm.value['startTime'];
     let timeArr = timeStr.match(/\d+/g);
-    this.simulationTime.configurate(timeArr[0],timeArr[1],0);
+    this.simulationTime.configurate(timeArr[0], timeArr[1], 0);
   }
 
-  public sendNotification(value: boolean) {
-    this.subject.next({text:"notify"});
+  public addRowToParkingTable(
+    timeIn: string,
+    timeParking: number,
+    cost: number
+  ): void {
+    console.log("Add cat to TableCars");
+    
+    this.parkingTable$ = this.parkingTable$.pipe(map((value) => {console.log("PIPE ADD"); return [...value,new TableRow(value.length + 1, timeIn, timeParking, cost)];})
+    );
   }
 
-  public getNotification() {
-    return this.subject.asObservable();
+  public getParkingTable():Observable<TableRow[]> {
+    return this.parkingTable$;
   }
 }

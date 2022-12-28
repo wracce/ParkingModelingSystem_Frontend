@@ -52,22 +52,6 @@ export class Car implements ICar {
     this.isVisible = false;
     this.step();
   }
-  private addToTable(): void { //FIXME: новый метод добавления в таблицу.
-    // ИЗМЕНЕНИЯ В РАМКАХ ДОБАВЛЕНИЯ В ТАБЛИЦУ ВНЕСЕНЫ В ФАЙЛЫ:
-    // simulationService(методы в конце файла), simulationComponent (методы в конце файла), Car(метод
-    // addToTable, вызывается в step.INIT
-    // Я пытался подрубить rxJS, но чёт не работает...
-    // А еще у нас какие то приколы с stayTime - оно бывает ниже нуля.
-
-    this.simulationService.parkingTable.push(new TableRow(
-      1,
-      this.simulationTime.time,
-      this.stayTime,
-      5000)
-    );
-    this.simulationService.sendNotification(true);
-    console.log(this.simulationService.parkingTable);
-  }
   public step() {
     let xy;
     let coords;
@@ -95,7 +79,6 @@ export class Car implements ICar {
         } else {
           this.state = CarSimulationState.INIT_TO;
           this.parkingPlace.available = false;
-          this.addToTable();
         }
         break;
       case CarSimulationState.INIT_TO:

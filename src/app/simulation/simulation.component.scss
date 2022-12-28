@@ -1,18 +1,18 @@
-@use 'sass:map';
-@use '@angular/material' as mat;
-@import '/src/variables.scss';
+@use "sass:map";
+@use "@angular/material" as mat;
+@import "/src/variables.scss";
 
-$color-config:    mat.get-color-config($defaultTheme);
-$primary-palette: map.get($color-config, 'primary');
-$accent-palette: map.get($color-config, 'accent');
+$color-config: mat.get-color-config($defaultTheme);
+$primary-palette: map.get($color-config, "primary");
+$accent-palette: map.get($color-config, "accent");
 
 :host ::ng-deep .mat-horizontal-content-container {
-  padding:0 !important;
+  padding: 0 !important;
 }
 
 .container {
   flex-flow: column wrap;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 64px - 72px);
@@ -20,82 +20,83 @@ $accent-palette: map.get($color-config, 'accent');
   width: 100%;
 }
 
-.app-park-infoWrapper{
+.app-park-infoWrapper {
   padding: 10px 10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height:90px;
-  width: 320px;
+  height: 90px;
+  width: 340px;
   margin-bottom: 10px;
-  background-color: mat.get-color-from-palette($primary-palette,lighter);
-  border: 2px solid mat.get-color-from-palette($primary-palette,300);
+  background-color: mat.get-color-from-palette($primary-palette, lighter);
+  border: 2px solid mat.get-color-from-palette($primary-palette, 300);
 }
 
-.app-park-simulationWrapper{
+.app-park-simulationWrapper {
   min-height: calc(100vh - 64px - 72px - 32px);
   max-height: calc(100vh - 64px - 72px - 32px);
   width: 60%;
 }
 
 .app-park-tableWrapper {
-  background-color: mat.get-color-from-palette($primary-palette,lighter);
+  background-color: mat.get-color-from-palette($primary-palette, lighter);
   height: calc(100vh - 64px - 72px - 100px - 32px - 2 * 60px);
-  width: 320px;
+  width: 340px;
   margin: 0 5px 0 5px;
+  overflow-y: auto;
 }
 
-.buttonsWrapper{
+.buttonsWrapper {
   height: 60px;
-  width: 320px;
+  width: 340px;
   margin: 0 5px 0 5px;
   border-radius: 0 0 10px 10px;
-  background-color: mat.get-color-from-palette($primary-palette,300);
+  background-color: mat.get-color-from-palette($primary-palette, 300);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.buttonsPlayersWrapper{
-  background: mat.get-color-from-palette($primary-palette,300) ;
+.buttonsPlayersWrapper {
+  background: mat.get-color-from-palette($primary-palette, 300);
   border-radius: 0;
 }
 
-.btnZoomOut{
+.btnZoomOut {
   flex-basis: 15%;
-  background-color: mat.get-color-from-palette($accent-palette,darker);
+  background-color: mat.get-color-from-palette($accent-palette, darker);
   border-radius: 8px 0 0 8px;
   height: 70%;
   margin-right: 2px;
 }
 
-.btnZoomFree{
+.btnZoomFree {
   flex-basis: 15%;
-  background-color: mat.get-color-from-palette($accent-palette,darker);
+  background-color: mat.get-color-from-palette($accent-palette, darker);
   border-radius: 0 0 0 0;
   height: 70%;
   margin-right: 2px;
 }
 
-.btnZoomIn{
+.btnZoomIn {
   flex-basis: 15%;
-  background-color: mat.get-color-from-palette($accent-palette,darker);
+  background-color: mat.get-color-from-palette($accent-palette, darker);
   border-radius: 0 8px 8px 0;
   height: 70%;
 }
 
 .example-container {
   height: 100%;
-  width: 320px;
+  width: 340px;
   overflow: auto;
 }
 
 table {
-  background: mat.get-color-from-palette($primary-palette,lighter) ;
+  background: mat.get-color-from-palette($primary-palette, lighter);
   width: 100%;
 }
 
-.playerButton{
+.playerButton {
   margin: 0px 5px 0px 5px;
 }

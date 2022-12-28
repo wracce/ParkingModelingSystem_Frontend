@@ -11,13 +11,14 @@ import {ParkingState} from "../designer/models/parking-state";
 import {ParkingTemplate} from "../designer/models/parking-template";
 import {TableRow} from "./models/table-row";
 import {Subscription} from "rxjs";
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-simulation',
   templateUrl: './simulation.component.html',
   styleUrls: ['./simulation.component.scss'],
 })
-export class SimulationComponent implements OnInit, OnDestroy {
+export class SimulationComponent implements OnInit {
   @ViewChild(SimulationProcessViewComponent)
   public simulationProcessComponent!: SimulationProcessViewComponent;
   public selectedId =0;
@@ -25,15 +26,9 @@ export class SimulationComponent implements OnInit, OnDestroy {
   public displayedColumns = ['position', 'timeIn', 'parkingTime', 'cost'];
   public dataSource:TableRow[];
 
-  private subscription:Subscription;
-
   constructor(public simulationService:SimulationService) {
-    this.dataSource = simulationService.parkingTable;
-    this.subscription = simulationService.getNotification().subscribe(data => {
-      if (data) {
-        this.updateTable();
-      }
-    })
+    this.dataSource = [];
+
   }
 
   public selectionChange(event: StepperSelectionEvent): void {
@@ -47,7 +42,12 @@ export class SimulationComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    setInterval(()=>this.simulationService.getParkingTable().subscribe(value => {
+      this.dataSource = [...value];
+      console.log(value);
+    }),1000); 
+  }
 
   public startSimulation() {
     if (!this.simulationService.simulationEngine.isRun){
@@ -79,13 +79,5 @@ export class SimulationComponent implements OnInit, OnDestroy {
 
   public stopSimulation() {
     this.simulationService.simulationEngine.stop();
-  }
-
-  private updateTable() {
-    this.dataSource = this.simulationService.parkingTable;
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
