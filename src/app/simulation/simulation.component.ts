@@ -12,6 +12,9 @@ import {ParkingTemplate} from "../designer/models/parking-template";
 import {TableRow} from "./models/table-row";
 import {Subscription} from "rxjs";
 import { MatTableDataSource } from '@angular/material/table';
+import {Validator} from "./validation/validator";
+import {ValidatorDialogComponent} from "./validation/validator-dialog/validator-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-simulation',
@@ -26,7 +29,9 @@ export class SimulationComponent implements OnInit {
   public displayedColumns = ['position', 'timeIn', 'parkingTime', 'cost'];
   public dataSource:TableRow[];
 
-  constructor(public simulationService:SimulationService) {
+  constructor(
+    public simulationService:SimulationService,
+    public matDialog: MatDialog) {
     this.dataSource = [];
 
   }
@@ -45,11 +50,11 @@ export class SimulationComponent implements OnInit {
   ngOnInit() {
     setInterval(()=>this.simulationService.getParkingTable().subscribe(value => {
       this.dataSource = [...value];
-      console.log(value);
-    }),1000); 
+    }),1000);
   }
 
   public startSimulation() {
+
     if (!this.simulationService.simulationEngine.isRun){
       let form = this.simulationService.setupSimulationForm;
       let traficDistribution = form.value['traficDistribution'];
@@ -74,6 +79,7 @@ export class SimulationComponent implements OnInit {
     } else {
       this.simulationService.simulationEngine.run();
     }
+
   }
 
 

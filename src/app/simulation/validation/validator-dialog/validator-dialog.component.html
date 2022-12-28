@@ -1,0 +1,13 @@
+<mat-dialog-content>
+  <div>
+    <strong>Обнаружены следующие ошибки:</strong>
+  </div>
+  <div *ngFor="let msg of message; let i = index">
+    {{(i + 1)  + message[i]}}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" mat-dialog-close>
+    ОК
+  </button>
+</mat-dialog-actions>

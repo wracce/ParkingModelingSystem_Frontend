@@ -58,6 +58,7 @@ import { MatTableModule } from '@angular/material/table'
 import {DataShareService} from "./core/service/data-share.service";
 import { ReferenceComponent } from './reference/reference.component';
 import { DialogConfigurateDistributionComponent } from './simulation/components/dialog-configurate-distribution/dialog-configurate-distribution.component';
+import { ValidatorDialogComponent } from './simulation/validation/validator-dialog/validator-dialog.component';
 
 
 
@@ -82,6 +83,7 @@ import { DialogConfigurateDistributionComponent } from './simulation/components/
     SimulationProcessViewComponent,
     ReferenceComponent,
     DialogConfigurateDistributionComponent,
+    ValidatorDialogComponent,
 
   ],
   imports: [

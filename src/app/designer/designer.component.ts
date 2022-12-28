@@ -5,6 +5,9 @@ import { MatStepper } from '@angular/material/stepper';
 import { observable } from 'rxjs';
 import { DesignerParkingComponent } from './components/designer-parking/designer-parking.component';
 import { DesignerService } from './services/designer.service';
+import {Validator} from "../simulation/validation/validator";
+import {MatDialog} from "@angular/material/dialog";
+import {ParkingMeter} from "../simulation/models/ParkingSystem/parkingMeter";
 
 @Component({
   selector: 'app-designer',
@@ -21,8 +24,13 @@ export class DesignerComponent implements OnInit {
   stepper!: MatStepper;
 
   selectedId: number = 0;
+  public isValid: boolean = false;
 
-  constructor(private designerService: DesignerService) {}
+  constructor(
+    private designerService: DesignerService,
+    public matDialog: MatDialog
+  ) {
+  }
 
   ngOnInit(): void {}
 
@@ -41,7 +49,14 @@ export class DesignerComponent implements OnInit {
       this.designerParkingComponent.zoomFree();
     }
     if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
+      let validator: Validator = new Validator(this.designerService.getParkingMap(), this.matDialog);
+      if (validator.validate()) {
+        this.isValid = true;
+      }
     }
   }
+
+
+
 
 }

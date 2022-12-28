@@ -102,7 +102,7 @@ export class ParkingMeter {
 
   public getCountAllTrucks():number {
     return this.parkingPlaces.filter(element => element.parkingCell.template.cols*element.parkingCell.template.rows>1).length;
- 
+
   }
 
   public getCountAllFreeCars():number {
@@ -112,7 +112,7 @@ export class ParkingMeter {
 
   public getCountAllFreeTrucks():number {
     return this.parkingPlaces.filter(element => element.parkingCell.template.cols*element.parkingCell.template.rows>1 && element.available == true).length;
-    
+
   }
 
   public getCountAllFree():number {
@@ -123,6 +123,8 @@ export class ParkingMeter {
   public getCountAll():number {
     return this.parkingPlaces.length;
   }
+
+
 
   public reset(){
     this.parkingPlaces.forEach(x=>x.available=true);

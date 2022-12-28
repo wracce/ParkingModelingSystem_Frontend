@@ -177,7 +177,17 @@ export class ParkingMap {
       (cell) => cell.template.state !== ParkingState.Road
     );
   }
+  public getParkingMeters(): ParkingCell[] {
+    return this.parkingCells.filter(
+      (cell) => cell.template.state == ParkingState.ParkingMeter
+    );
+  }
 
+  public getBarriers(): ParkingCell[] {
+    return this.parkingCells.filter(
+      (cell) => cell.template.state == ParkingState.Barrier
+    );
+  }
 
   public getPosById(id: number): {x:number, y:number} {
     let x;
