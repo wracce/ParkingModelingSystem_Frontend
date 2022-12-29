@@ -59,7 +59,7 @@ export class SimulationService {
       nightCost: new FormControl(50),
     });
 
-    this.simulationTime = new SimulationTime(new Date(), 1000, 60000); // tick 1s = 1m real time
+    this.simulationTime = new SimulationTime(new Date(), 400, 60000); // tick 1s = 1m real time
 
     //this.parkingTable$ = new Observable<TableRow[]>();
   }

@@ -4,11 +4,11 @@
       <ng-template [ngSwitchCase]="distributions.NORMAL">
         <mat-form-field appearance="fill">
           <mat-label>MX</mat-label>
-          <input matInput type="number" formControlName="mx"/>
+          <input matInput type="number" formControlName="mx" min="10" max="50" step="1"/>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>DX</mat-label>
-          <input matInput type="number" formControlName="dx" />
+          <input matInput type="number" formControlName="dx" min="0" max="16" step="1"/>
         </mat-form-field>
       </ng-template>
       <ng-template [ngSwitchCase]="distributions.EXPONETIAL">
@@ -20,17 +20,17 @@
       <ng-template [ngSwitchCase]="distributions.DETERMINATE">
         <mat-form-field appearance="fill">
           <mat-label>Интервал</mat-label>
-          <input matInput type="number" formControlName="value" />
+          <input matInput type="number" formControlName="value" min="1" max="50" step="1"/>
         </mat-form-field>
       </ng-template>
       <ng-template [ngSwitchCase]="distributions.UNIFORM">
         <mat-form-field appearance="fill">
           <mat-label>Минимальное значение</mat-label>
-          <input matInput type="number" formControlName="min" />
+          <input matInput type="number" formControlName="min" min="2" max="25" step="1"/>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Максимальное значение</mat-label>
-          <input matInput type="number" formControlName="max" />
+          <input matInput type="number" formControlName="max"min="26" max="40" step="1" />
         </mat-form-field>
       </ng-template>
       <div class="clearfix"></div>
@@ -45,6 +45,7 @@
     color="accent"
     [mat-dialog-close]="true"
     cdkFocusInitial
+    [disabled]="distributionForm.invalid"
     (click)="changeDistribution()"
   >
     Изменить

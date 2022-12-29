@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeterminateDistribution } from '../../models/distributions/determinate-distribution';
 import { Distribution } from '../../models/distributions/distribution';
@@ -23,28 +23,28 @@ export class DialogConfigurateDistributionComponent {
         let determinateDistribution = this
         .distribution as DeterminateDistribution;
         this.distributionForm = new FormGroup({
-          value: new FormControl(determinateDistribution.value)
+          value: new FormControl(determinateDistribution.value, Validators.required)
         });
         break;
       case DistributionType.EXPONETIAL:
         let exponetialDistribution = this
         .distribution as ExponetialDistribution;
         this.distributionForm = new FormGroup({
-          lambda: new FormControl(exponetialDistribution.lambda)
+          lambda: new FormControl(exponetialDistribution.lambda, Validators.required)
         });
         break;
       case DistributionType.UNIFORM:
         let uniformDistribution = this.distribution as UniformDistribution;
         this.distributionForm = new FormGroup({
-          max: new FormControl(uniformDistribution.min),
-          min: new FormControl(uniformDistribution.max)
+          max: new FormControl(uniformDistribution.min, Validators.required),
+          min: new FormControl(uniformDistribution.max, Validators.required)
         });
         break;
       case DistributionType.NORMAL:
         let normalDistribution = this.distribution as NormalDistribution;
         this.distributionForm = new FormGroup({
-          mx: new FormControl(normalDistribution.mx),
-          dx: new FormControl(normalDistribution.dx)
+          mx: new FormControl(normalDistribution.mx, Validators.required),
+          dx: new FormControl(normalDistribution.dx, Validators.required)
         });
         break;
     }

@@ -15,4 +15,8 @@ export class DialogConfigurateUserComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: string, administratorService:AdministratorService) {
     this.settingsUserForm = administratorService.settingsUserForm;
   }
+
+  istoMinMax(): boolean {
+    return !(this.settingsUserForm.value["password"].length >= 4 || this.settingsUserForm.value["password"].length == 0);
+  }
 }

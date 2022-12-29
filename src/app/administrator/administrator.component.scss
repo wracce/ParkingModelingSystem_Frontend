@@ -97,15 +97,15 @@ mat-divider[vertical] {
       font-weight: 300;
       font-size: 16pt;
       margin-left: 10px;
-      
+
     }
 
     > .accountsBlockHeaderButton {
-      
+
       height: 100%;
       margin-right: 10px;
-      
-      
+
+
       mat-icon{
         $size: 30px;
         height: $size !important;
@@ -113,7 +113,7 @@ mat-divider[vertical] {
         font-size: $size !important;
         line-height: $size !important;
         font-weight: 500;
-        
+
       }
     }
   }

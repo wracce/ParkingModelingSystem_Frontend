@@ -13,7 +13,6 @@ export const environment = {
   minUniformDistribution: 4,
   maxUniformDistribution: 4,
   lambdaExponetialDistribution:4
-
 };
 
 /*

@@ -114,6 +114,11 @@ export class Car implements ICar {
           this.parkingPlace!.available = true;
           this.state = CarSimulationState.INIT_FROM;
         } else {
+          let cellspos = this.simulationEngine.simulationService.simulationMap.getCellPositions(this.currentCellId);
+          if (cellspos.length > 1) {
+            let xy = this.simulationEngine.simulationService.simulationMap.getPosById(cellspos[1]);
+            this.rotateCar(xy);
+          }
           this.currentTime += this.simulationTime.realTickMs;
         }
         break;

@@ -11,7 +11,9 @@ export class UniformDistribution implements Distribution {
         this.max = max??environment.maxUniformDistribution;
     }
     public nextValue(){
-        let res = Math.floor(Math.random() * (this.max - this.min)) + this.min;
-        return res;
+      console.log("uni");
+        let ret = Math.abs(Math.floor(Math.random() * (this.max - this.min)) + this.min);
+        while (ret == 0) ret = Math.abs(Math.floor(Math.random() * (this.max - this.min)) + this.min);
+        return ret;
     }
 }

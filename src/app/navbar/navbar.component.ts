@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit {
       });
     } else
       this.router.navigate(['/auth']);
-
   }
 
   public authInOut(): void {

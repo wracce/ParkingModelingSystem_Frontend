@@ -2,7 +2,7 @@
   <button mat-button (click)="routeToHome()">Парковочная система</button>
   <span class="example-spacer"></span>
   <button mat-button (click)="openDialogReference()">
-    Справка
+    Справка <mat-icon>help_outline</mat-icon>
   </button>
   <!-- <button *ngIf="adminBtn" mat-button routerLink="/administrator" routerLinkActive="activeLink">
     Администратор
@@ -11,6 +11,6 @@
     Менеджер
   </button> -->
   <button mat-button (click)="authInOut()" routerLinkActive="activeLink">
-    {{this.authService.isLoggedIn?"Выйти":"Войти"}}
+    {{this.authService.isLoggedIn?"Выйти":"Войти"}} <mat-icon>input</mat-icon>
   </button>
 </mat-toolbar>

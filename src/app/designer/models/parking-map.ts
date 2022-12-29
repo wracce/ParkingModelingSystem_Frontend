@@ -119,7 +119,7 @@ export class ParkingMap {
       // cols or rows changed?
       if (
         this.getParkingCols() != form?.value.cols ||
-        this.getParkingRows() != form?.value.rows
+        this.getParkingRows() != form?.value.rows || this.directOfRoad != form?.value.directOfRoad
       ) {
         this.rows = form?.value.rows;
         this.cols = form?.value.cols;
@@ -135,49 +135,50 @@ export class ParkingMap {
         )
           this.rows += this.widthOfRoad;
         this.configurateParking();
-      } else if (this.directOfRoad != form?.value.directOfRoad) {
-        let m: number = form?.value.rows;
-        let n: number = form?.value.cols;
-        if (
-          form?.value.directOfRoad.localeCompare('left') == 0 ||
-          form?.value.directOfRoad.localeCompare('right') == 0
-        )
-          n += this.widthOfRoad;
-        if (
-          form?.value.directOfRoad.localeCompare('top') == 0 ||
-          form?.value.directOfRoad.localeCompare('bottom') == 0
-        )
-          m += this.widthOfRoad;
-
-        let newParkingMap = new ParkingMap(
-          form?.value.name,
-          n,
-          m,
-          form?.value.directOfRoad,
-          this.widthOfRoad
-        );
-        newParkingMap.configurateParking();
-        // debugger;
-        let clearParkingCells = this.getParkingCells();
-        let i0 = newParkingMap.directOfRoad.localeCompare('top') == 0 ? 1 : 0;
-        let j0 = newParkingMap.directOfRoad.localeCompare('left') == 0 ? 1 : 0;
-
-        for (let i = i0; i < i0 + newParkingMap.getParkingRows(); i++) {
-          for (let j = j0; j < j0 + newParkingMap.getParkingCols(); j++) {
-            // debugger;
-            newParkingMap.getCells()[i * n + j].template =
-              clearParkingCells[
-                (i - i0) * this.getParkingCols() + (j - j0)
-              ].template;
-          }
-        }
-
-        this.cols = newParkingMap.cols;
-        this.rows = newParkingMap.rows;
-        this.directOfRoad = newParkingMap.directOfRoad;
-        this.parkingCells.length = 0;
-        this.parkingCells.push(...newParkingMap.getCells());
       }
+      // else if (this.directOfRoad != form?.value.directOfRoad) {
+      //   let m: number = form?.value.rows;
+      //   let n: number = form?.value.cols;
+      //   if (
+      //     form?.value.directOfRoad.localeCompare('left') == 0 ||
+      //     form?.value.directOfRoad.localeCompare('right') == 0
+      //   )
+      //     n += this.widthOfRoad;
+      //   if (
+      //     form?.value.directOfRoad.localeCompare('top') == 0 ||
+      //     form?.value.directOfRoad.localeCompare('bottom') == 0
+      //   )
+      //     m += this.widthOfRoad;
+      //
+      //   let newParkingMap = new ParkingMap(
+      //     form?.value.name,
+      //     n,
+      //     m,
+      //     form?.value.directOfRoad,
+      //     this.widthOfRoad
+      //   );
+      //   newParkingMap.configurateParking();
+      //   // debugger;
+      //   let clearParkingCells = this.getParkingCells();
+      //   let i0 = newParkingMap.directOfRoad.localeCompare('top') == 0 ? 1 : 0;
+      //   let j0 = newParkingMap.directOfRoad.localeCompare('left') == 0 ? 1 : 0;
+      //
+      //   for (let i = i0; i < i0 + newParkingMap.getParkingRows(); i++) {
+      //     for (let j = j0; j < j0 + newParkingMap.getParkingCols(); j++) {
+      //       // debugger;
+      //       newParkingMap.getCells()[i * n + j].template =
+      //         clearParkingCells[
+      //           (i - i0) * this.getParkingCols() + (j - j0)
+      //         ].template;
+      //     }
+      //   }
+      //
+      //   this.cols = newParkingMap.cols;
+      //   this.rows = newParkingMap.rows;
+      //   this.directOfRoad = newParkingMap.directOfRoad;
+      //   this.parkingCells.length = 0;
+      //   this.parkingCells.push(...newParkingMap.getCells());
+      // }
     }
   }
 
