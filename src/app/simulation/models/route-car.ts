@@ -13,7 +13,7 @@ export abstract class RouteCar{
         return matrix;
     }
 
-    private static parkingCellsToWalkables(parkingMap: ParkingMap, sourceCell: ParkingCell, distinationCell: ParkingCell, openBarrierCell:ParkingCell): number[] {
+    private static parkingCellsToWalkables(parkingMap: ParkingMap, sourceCell: ParkingCell, destinationCell: ParkingCell, openBarrierCell:ParkingCell): number[] {
       let routeMap:number[] = [];
       parkingMap.parkingCells.forEach((val) => {
         if (val.template.state === ParkingState.Undef
@@ -27,7 +27,7 @@ export abstract class RouteCar{
 
       routeMap[openBarrierCell.id] = 0;
 
-      for(const cellId of parkingMap.getCellPositions(distinationCell.id))
+      for(const cellId of parkingMap.getCellPositions(destinationCell.id))
         routeMap[cellId] = 0;
 
       for(const cellId of parkingMap.getCellPositions(sourceCell.id))
