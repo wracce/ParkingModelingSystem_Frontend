@@ -93,7 +93,7 @@ export class AdministratorComponent implements OnInit {
         dialogRef.afterClosed().subscribe((data) => {
           if (data === true) {
             userInfo.id = user.id;
-            userInfo.userRole = "ROLE_MANAGER";
+            userInfo.role = "ROLE_MANAGER";
             userInfo.username = this.administratorService.settingsUserForm.value['login'];
             userInfo.password = this.administratorService.settingsUserForm.value['password'];
             userInfo.fio = this.administratorService.settingsUserForm.value['fio'];
