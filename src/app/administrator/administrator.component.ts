@@ -20,7 +20,7 @@ import { ValidatorDialogComponent } from '../simulation/validation/validator-dia
   styleUrls: ['./administrator.component.scss'],
 })
 export class AdministratorComponent implements OnInit {
-  @ViewChild('fileInput')
+  @ViewChild('fileInput2')
   fileInput!: ElementRef;
   fio: string;
   login: string;
@@ -132,7 +132,7 @@ export class AdministratorComponent implements OnInit {
       if (ParkingFileManager.loadFromFileReader(this, map)) {
         if (validator.validate()) {
           pDesignerService.getParkingMap().from(map);
-          pRouter.navigate(['/admininstator/designer']);
+          pRouter.navigate(['/administrator/designer']);
           return;
         } else{
           pDialog.open(ValidatorDialogComponent,{data:{messange: ["Неверная топология"]}})
