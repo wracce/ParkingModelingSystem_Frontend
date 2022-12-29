@@ -97,7 +97,7 @@ export class SimulationEngine {
               this.simulationService.addRowToParkingTable(
                 this.timer.getDisplayTime(),
                 car.stayTime/ this.timer.realTickMs,
-                5000
+                this.getMoney(car)
               );
             }
         }
@@ -192,5 +192,24 @@ export class SimulationEngine {
       );
       this.carAngle = -90;
     }
+
+  }
+
+  public getMoney(car:Car):number {
+    let minDayTime = (new Date());
+    minDayTime.setTime(this.timer.time.getTime());
+    minDayTime.setHours(6);
+    minDayTime.setMinutes(0);
+    minDayTime.setSeconds(0);
+    let maxDayTime = (new Date());
+    maxDayTime.setTime(this.timer.time.getTime());
+    maxDayTime.setHours(23);
+    maxDayTime.setMinutes(59);
+    maxDayTime.setSeconds(59);
+    this.timer.time
+    if (this.timer.time >= minDayTime && this.timer.time <= maxDayTime) {
+      return this.dayCost*car.stayTime/this.timer.realTickMs;
+    }
+    return this.nightCost*car.stayTime/this.timer.realTickMs;
   }
 }

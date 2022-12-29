@@ -2,6 +2,10 @@ import {Component, Injectable, Input, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ReferenceComponent } from '../reference/reference.component';
 import {UserStorageService} from "../core/service/user-storage.service";
+import { AuthService } from '../core/service/auth.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -13,26 +17,36 @@ import {UserStorageService} from "../core/service/user-storage.service";
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() view: string ="";
-  public adminBtn: boolean = false;
-  public managerBtn: boolean = false;
-
-
   constructor(public dialog: MatDialog,
-    private userStorageService: UserStorageService) { }
+    private userStorageService: UserStorageService, public authService:AuthService, private router:Router) { }
 
   ngOnInit(): void {
   }
 
 
-  setView(view:string): void {
-    this.view = view;
-  }
-
   openDialogReference() {
     const dialogRef = this.dialog.open(ReferenceComponent);
   }
 
+  public linkToHome():string {
+    let link="/auth";
+    
+    let role = this.userStorageService.getAuthorities();
+    console.log(role);
+
+    if(role.localeCompare("ROLE_ADMINISTRATOR"))
+      link = "/administrator";
+    if(role.localeCompare("ROLE_MANAGER"))
+      link = "/manager";
+    return link;
+  }
+
+  public authInOut():void {
+    if (this.authService.isLoggedIn){
+      this.userStorageService.signOut();
+    }
+      // this.router.navigate(['/auth']);
+    }
 
 }
 

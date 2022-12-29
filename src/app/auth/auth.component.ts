@@ -64,12 +64,9 @@ export class AuthComponent implements OnInit {
     this.authService.isLoggedIn = true;
     if (this.userRole === "ROLE_ADMINISTRATOR") {
       this.router.navigate(['/administrator']);
-      this.navbar.adminBtn = true;
-      this.navbar.managerBtn = false;
     } else {
       this.router.navigate(['/manager']);
-      this.navbar.managerBtn = true;
-      this.navbar.adminBtn = false;
+      
     }
   }
 

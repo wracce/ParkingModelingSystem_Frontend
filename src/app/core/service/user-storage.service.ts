@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
 
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUsername';
@@ -8,10 +9,11 @@ const AUTHORITIES_KEY = 'AuthAuthorities';
   providedIn: 'root'
 })
 export class UserStorageService {
-  private role: string = "";
-  constructor() { }
+  public role: string = "";
+  constructor(public authService:AuthService) { }
 
   signOut() {
+    this.authService.isLoggedIn = false;
     window.sessionStorage.clear();
     window.location.reload();
   }
@@ -47,9 +49,8 @@ export class UserStorageService {
     this.role = "";
 
     if (sessionStorage.getItem(TOKEN_KEY)) {
-      // @ts-ignore
 
-      this.role = JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY));
+      this.role = JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)!);
     }
 
     return this.role;
