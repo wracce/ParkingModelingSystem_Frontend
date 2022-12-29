@@ -40,10 +40,10 @@ export class ManagerComponent implements OnInit {
           pRouter.navigate(['/manager/simulation']);
           return;
         } else{
-          pDialog.open(ValidatorDialogComponent,{data:{messange: ["Неверная топология"]}})
+          pDialog.open(ValidatorDialogComponent,{data:{message: ["Неверная топология"]}})
         }
       } else {
-        pDialog.open(ValidatorDialogComponent,{data:{messange: ["Файл не распознан"]}})
+        pDialog.open(ValidatorDialogComponent,{data:{message: ["Файл не распознан"]}})
       }
     };
     fileReader.readAsText(this.file);

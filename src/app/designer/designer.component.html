@@ -1,11 +1,11 @@
 
-<mat-horizontal-stepper #stepper linear (selectionChange)="selectionChange($event)" [selectedIndex]="selectedId">
-  <mat-step label="Настройка" >
+<mat-horizontal-stepper #stepper linear (selectionChange)="selectionChange($event)">
+  <mat-step label="Настройка" [stepControl]="designerService.getSetupParkingForm()">
     <div class="container">
       <div class="content"><app-designer-setup></app-designer-setup></div>
     </div>
   </mat-step>
-  <mat-step label="Заполнение" completed="true">
+  <mat-step label="Заполнение">
     <div class="container">
       <div class="app-park-objectsWrapper">
         <app-designer-templates></app-designer-templates>
@@ -26,7 +26,7 @@
       </div>
     </div>
   </mat-step>
-  <mat-step label="Подтверждение" [editable]="this.isValid">
+  <mat-step label="Подтверждение">
     <app-designer-confirm></app-designer-confirm>
   </mat-step>
 

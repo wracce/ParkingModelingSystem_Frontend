@@ -135,10 +135,10 @@ export class AdministratorComponent implements OnInit {
           pRouter.navigate(['/administrator/designer']);
           return;
         } else{
-          pDialog.open(ValidatorDialogComponent,{data:{messange: ["Неверная топология"]}})
+          pDialog.open(ValidatorDialogComponent,{data:{message: ["Неверная топология"]}})
         }
       } else {
-        pDialog.open(ValidatorDialogComponent,{data:{messange: ["Файл не распознан"]}})
+        pDialog.open(ValidatorDialogComponent,{data:{message: ["Файл не распознан"]}})
       }
     };
     fileReader.readAsText(this.file);

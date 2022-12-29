@@ -1,6 +1,6 @@
 import { CdkDragDrop, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ParkingCell } from '../models/parking-cell';
 import { ParkingMap } from '../models/parking-map';
 import { ParkingState } from '../models/parking-state';
@@ -15,7 +15,7 @@ export class DesignerService {
   public deltaOver!:number;
   public selectedCells!: number[];
   public isDragging!:boolean;
-
+  public isSetupFormValidate!:boolean;
   private linkOfParkingTemplate!: string;
   private linksToParkingCells!: string[];
   private linkOfParkingCell!: string;
@@ -26,6 +26,7 @@ export class DesignerService {
   private setupParkingForm!: FormGroup;
 
   constructor() {
+    this.isSetupFormValidate = false;
     this.indexOver = -1;
     this.deltaOver = -2;
     this.isDragging = false;
@@ -36,7 +37,7 @@ export class DesignerService {
     this.linkOfParkingTemplate = 'designerObjsList';
     this.parkingTemplateGroup = new ParkingTemplateGroup();
     this.setupParkingForm = new FormGroup({
-      name: new FormControl(this.parkingMap.name),
+      name: new FormControl(this.parkingMap.name, Validators.required),
       cols: new FormControl(this.parkingMap.cols),
       rows: new FormControl(this.parkingMap.rows),
       directOfRoad: new FormControl(this.parkingMap.directOfRoad),

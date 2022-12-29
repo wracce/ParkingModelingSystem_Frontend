@@ -5,9 +5,10 @@ import { MatStepper } from '@angular/material/stepper';
 import { observable } from 'rxjs';
 import { DesignerParkingComponent } from './components/designer-parking/designer-parking.component';
 import { DesignerService } from './services/designer.service';
-import {Validator} from "../simulation/validation/validator";
-import {MatDialog} from "@angular/material/dialog";
-import {ParkingMeter} from "../simulation/models/ParkingSystem/parkingMeter";
+import { Validator } from '../simulation/validation/validator';
+import { MatDialog } from '@angular/material/dialog';
+import { ParkingMeter } from '../simulation/models/ParkingSystem/parkingMeter';
+import { ValidatorDialogComponent } from '../simulation/validation/validator-dialog/validator-dialog.component';
 
 @Component({
   selector: 'app-designer',
@@ -15,22 +16,16 @@ import {ParkingMeter} from "../simulation/models/ParkingSystem/parkingMeter";
   styleUrls: ['./designer.component.scss'],
 })
 export class DesignerComponent implements OnInit {
-
   @ViewChild(DesignerParkingComponent)
   public designerParkingComponent!: DesignerParkingComponent;
-  @ViewChild('setupParkingForm', { static: true })
-  setupParkingForm!: NgForm;
-  @ViewChild('stepper')
-  stepper!: MatStepper;
+  @ViewChild('stepper', { static: false })
+  public stepper!: MatStepper;
 
-  selectedId: number = 0;
-  public isValid: boolean = false;
 
   constructor(
-    private designerService: DesignerService,
+    public designerService: DesignerService,
     public matDialog: MatDialog
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {}
 
@@ -41,6 +36,8 @@ export class DesignerComponent implements OnInit {
   }
 
   public selectionChange(event: StepperSelectionEvent): void {
+    console.log(event);
+
     if (event.previouslySelectedIndex === (0 && 1)) {
       this.designerService
         .getParkingMap()
@@ -49,14 +46,13 @@ export class DesignerComponent implements OnInit {
       this.designerParkingComponent.zoomFree();
     }
     if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
-      let validator: Validator = new Validator(this.designerService.getParkingMap());
-      if (validator.validate()) {
-        this.isValid = true;
+      let validator: Validator = new Validator(
+        this.designerService.getParkingMap(),this.matDialog
+      );
+      if (!validator.validate()) {
+        setTimeout(() => this.stepper.previous(), 0);
+        this.matDialog.open(ValidatorDialogComponent, {data:{message: [validator.message]}});
       }
     }
   }
-
-
-
-
 }
