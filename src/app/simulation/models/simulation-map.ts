@@ -12,14 +12,8 @@ export class SimulationMap extends ParkingMap {
     super();
   }
 
-  public load(parkingMap: ParkingMap): void {
-    this.getCells().length = 0;
-    this.getCells().push(...parkingMap.parkingCells);
-    this.name = parkingMap.name;
-    this.cols = parkingMap.cols;
-    this.widthOfRoad = parkingMap.widthOfRoad;
-    this.rows = parkingMap.rows;
-    this.directOfRoad = parkingMap.directOfRoad;
+  public override from(parkingMap: ParkingMap): void {
+    super.from(parkingMap);
 
     this.parkingMeter = new ParkingMeter(this.simulationService);
     this.parkingMeter.init(      this,

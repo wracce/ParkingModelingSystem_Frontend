@@ -49,7 +49,7 @@ export class DesignerComponent implements OnInit {
       this.designerParkingComponent.zoomFree();
     }
     if (event.previouslySelectedIndex === 1 && event.selectedIndex === 2) {
-      let validator: Validator = new Validator(this.designerService.getParkingMap(), this.matDialog);
+      let validator: Validator = new Validator(this.designerService.getParkingMap());
       if (validator.validate()) {
         this.isValid = true;
       }

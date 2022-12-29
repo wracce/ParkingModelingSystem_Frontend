@@ -7,7 +7,7 @@
             <button mat-raised-button color="accent" routerLink="/administrator/designer">
               Создать топологию
             </button>
-            <button mat-raised-button color="accent">
+            <button (click)="onClickFileInputButton()" mat-raised-button color="accent">
               Редактировать топологию
             </button>
           </div>
@@ -49,3 +49,6 @@
     </mat-grid-list>
   </div>
 </div>
+
+<input type="file" style="display: none" #fileInput accept=".PSF" (change)="onChangeFileInput()" />
+

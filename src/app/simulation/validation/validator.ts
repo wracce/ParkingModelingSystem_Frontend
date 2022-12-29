@@ -6,6 +6,7 @@ import {ParkingCell} from "../../designer/models/parking-cell";
 import {RouteCar} from "../models/route-car";
 
 export class Validator {
+  public message = "";
   private parkingMeters: ParkingCell[];
   private startBarrierCell!: ParkingCell | undefined;
   private endBarrierCell!: ParkingCell | undefined;
@@ -13,41 +14,40 @@ export class Validator {
 
   constructor(
     private parkingMap: ParkingMap,
-    private dialog: MatDialog
+    private dialog?: MatDialog
   ) {
   }
 
   public validate(): boolean {
-    let message: string[] = [];
     let errorIndex: number = 0;
     if (this.isBarriersNumberInvalid()) {
-      message.push(". Необходимо два шлагбаума.\n");
+      this.message = "Необходимо два шлагбаума.\n";
       errorIndex++;
     } else if (this.isBarrierNotNearParkingMeter()) {
-      message.push(". Один из шлагбаумов должен быть рядом с паркоматом.\n");
+      this.message = "Один из шлагбаумов должен быть рядом с паркоматом.\n";
       errorIndex++;
     } else if (this.isParkingMetersNumberInvalid()) {
-      message.push(". Необходим один паркомат.\n");
+      this.message = "Необходим один паркомат.\n";
       errorIndex++;
     } else if (this.isParkingPlacesNotExist()) {
-      message.push(". Ошибка в расстановке парковочных мест.");
+      this.message = "Ошибка в расстановке парковочных мест.";
       errorIndex++;
     } else if (this.isBarriersNotNearRoad()) {
-      message.push(". Шлагбаумы должны быть рядом с шоссе.\n");
+      this.message = "Шлагбаумы должны быть рядом с шоссе.\n";
       errorIndex++;
     } else if (this.isParkingMeterNotNearRoad()) {
-      message.push(". Паркомат должен быть рядом с шоссе.\n");
+      this.message = "Паркомат должен быть рядом с шоссе.\n";
       errorIndex++;
     }
     if (errorIndex > 0) {
-      this.showError(message);
+      //this.showError(message);
       return false;
     }
     return true;
   }
 
   private showError(message: string[]) {
-    this.dialog.open(ValidatorDialogComponent, {
+    this.dialog?.open(ValidatorDialogComponent, {
       data: {
         message: message
       }

@@ -23,6 +23,15 @@ export class ParkingMap {
     this.parkingCells = [];
   }
 
+  public from(parkingMap: ParkingMap):void {
+    this.getCells().length = 0;
+    this.getCells().push(...parkingMap.parkingCells);
+    this.name = parkingMap.name;
+    this.cols = parkingMap.cols;
+    this.widthOfRoad = parkingMap.widthOfRoad;
+    this.rows = parkingMap.rows;
+    this.directOfRoad = parkingMap.directOfRoad;
+  }
 
   public getCells(): ParkingCell[] {
     return this.parkingCells;

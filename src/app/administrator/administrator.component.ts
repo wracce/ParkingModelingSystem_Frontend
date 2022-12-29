@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfigurateUserComponent } from './dialog-configurate-user/dialog-configurate-user.component';
@@ -7,6 +7,12 @@ import { UserService } from '../core/service/user.service';
 import { DataShareService } from '../core/service/data-share.service';
 import { AdministratorService } from './services/administrator.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { Router } from '@angular/router';
+import { DesignerService } from '../designer/services/designer.service';
+import { ParkingFileManager } from '../designer/models/parking-file-manager';
+import { Validator } from '../simulation/validation/validator';
+import { ParkingMap } from '../designer/models/parking-map';
+import { ValidatorDialogComponent } from '../simulation/validation/validator-dialog/validator-dialog.component';
 
 @Component({
   selector: 'app-administrator',
@@ -14,15 +20,21 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./administrator.component.scss'],
 })
 export class AdministratorComponent implements OnInit {
+  @ViewChild('fileInput')
+  fileInput!: ElementRef;
   fio: string;
   login: string;
+  file: File | null = null;
   usersList: UserInfo[];
+
   constructor(
     public dialog: MatDialog,
     private userService: UserService,
     private dataShareService: DataShareService,
     public administratorService: AdministratorService,
     private snackBar: MatSnackBar,
+    private router:Router,
+    public designerService:DesignerService
   ) {
     this.userService.getAll().subscribe((r: UserInfo[]) => {
       this.usersList = r;
@@ -102,5 +114,37 @@ export class AdministratorComponent implements OnInit {
         duration: 5000,
       });
     });
+  }
+
+  createParkingMap():void{
+  }
+
+  onChangeFileInput(): void {
+    const files: { [key: string]: File } = this.fileInput.nativeElement.files;
+    this.file = files[0];
+    let pDialog = this.dialog;
+    let pRouter = this.router;
+    let pDesignerService = this.designerService;
+    let fileReader = new FileReader();
+    fileReader.onload = function () {
+      let map = new ParkingMap();
+      let validator = new Validator(map);
+      if (ParkingFileManager.loadFromFileReader(this, map)) {
+        if (validator.validate()) {
+          pDesignerService.getParkingMap().from(map);
+          pRouter.navigate(['/admininstator/designer']);
+          return;
+        } else{
+          pDialog.open(ValidatorDialogComponent,{data:{messange: ["Неверная топология"]}})
+        }
+      } else {
+        pDialog.open(ValidatorDialogComponent,{data:{messange: ["Файл не распознан"]}})
+      }
+    };
+    fileReader.readAsText(this.file);
+  }
+
+  onClickFileInputButton(): void {
+    this.fileInput.nativeElement.click();
   }
 }
