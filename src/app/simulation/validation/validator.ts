@@ -24,7 +24,7 @@ export class Validator {
       this.message = "Необходимо два шлагбаума.\n";
       errorIndex++;
     } else if (this.isBarrierNotNearParkingMeter()) {
-      this.message = "Один из шлагбаумов должен быть рядом с паркоматом.\n";
+      this.message = "Один шлагбаум должен быть рядом с паркоматом.\n";
       errorIndex++;
     } else if (this.isParkingMetersNumberInvalid()) {
       this.message = "Необходим один паркомат.\n";
@@ -101,8 +101,10 @@ export class Validator {
   }
 
   private isBarrierNotNearParkingMeter(): boolean {
+    let count = 0;
     this.startBarrierCell = undefined;
     this.endBarrierCell = undefined;
+
     for (let i = 0; i < this.barriersArr.length; i++) {
       let isNearParkingMeter = false;
       let barrierXY = this.parkingMap.getPosById(this.barriersArr[i].id);
@@ -131,12 +133,13 @@ export class Validator {
         }
       }
       if (isNearParkingMeter) {
+        count++;
         this.startBarrierCell = this.barriersArr[i];
       } else {
         this.endBarrierCell = this.barriersArr[i];
       }
     }
-    return this.startBarrierCell == undefined;
+    return this.startBarrierCell == undefined || count != 1;
   }
 
   private isBarriersNotNearRoad(): boolean {

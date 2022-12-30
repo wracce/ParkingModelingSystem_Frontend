@@ -132,10 +132,11 @@ export class AdministratorComponent implements OnInit {
       let validator = new Validator(map);
       if (ParkingFileManager.loadFromFileReader(this, map)) {
         if (validator.validate()) {
-          let dY = map.directOfRoad==="top"||"bottom"?-1:0
-          let dX = map.directOfRoad==="right"||"left"?-1:0
+          let dY = (map.directOfRoad==="top"|| map.directOfRoad==="bottom")?-1:0
+          let dX = (map.directOfRoad==="right"|| map.directOfRoad==="left")?-1:0
           pForm.setValue({directOfRoad:map.directOfRoad,cols:map.cols+dX, rows:map.rows+dY, name:map.name});
           pDesignerService.getParkingMap().from(map);
+          pDesignerService.resetLinksToParkingCells();
           pRouter.navigate(['/administrator/designer']);
           return;
         } else{

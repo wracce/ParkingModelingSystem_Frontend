@@ -8,9 +8,9 @@
             <div
               class="cell"
               cdkDropList
-              [id]="nameOfIdList"
+              [id]="this.designerService.getNameOfObjsList()"
               [cdkDropListData]="template"
-              [cdkDropListConnectedTo]="valueListConnectedTo"
+              [cdkDropListConnectedTo]="this.designerService.getLinksToParkingCells()"
               (cdkDropListDropped)="designerService.drop($event)"
             >
               <div class ="cdk-drag-wrapper">

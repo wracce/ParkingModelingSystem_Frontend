@@ -40,8 +40,8 @@ export class DesignerParkingComponent implements OnInit {
   parkingMap!: ParkingMap;
   types!: ParkingTemplateGroup;
   cells: ParkingCell[] = [];
-  nameOfIdList: string = '';
-  valueListConnectedTo: string[] = [];
+  //nameOfIdList: string = '';
+  //valueListConnectedTo: string[] = [];
 
   selectedCells!: number[];
 
@@ -59,8 +59,8 @@ export class DesignerParkingComponent implements OnInit {
   ngOnInit(): void {
     this.types = this.designerService.getTypes();
     this.cells = this.parkingMap.getCells();
-    this.nameOfIdList = this.designerService.getNameOfGridList();
-    this.valueListConnectedTo = this.designerService.getLinksToParkingCells();
+    // this.nameOfIdList = this.designerService.getNameOfGridList();
+    //this.valueListConnectedTo = this.designerService.getLinksToParkingCells();
   }
 
   public setIndexOver(id: number) {

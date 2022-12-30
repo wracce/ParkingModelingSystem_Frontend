@@ -8,8 +8,8 @@ export const environment = {
 
   // РАСПРЕДЕЛЕНИЯ
   valueDeterminateDistribution: 10,
-  mxNormalDistribution: 4,
-  dxNormalDistribution: 4,
+  mxNormalDistribution: 10,
+  dxNormalDistribution: 50,
   minUniformDistribution: 4,
   maxUniformDistribution: 4,
   lambdaExponetialDistribution:4

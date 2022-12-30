@@ -13,20 +13,20 @@ import { DesignerService } from '../../services/designer.service';
 })
 export class DesignerTemplatesComponent implements OnInit {
   types!:ParkingTemplateGroup;
-  nameOfIdList:string ="";
-  valueListConnectedTo:string[] =[];
+  //nameOfIdList:string ="";
+  //valueListConnectedTo:string[] =[];
   
   panelOpenState = false;
   parkingMap: any;
 
-  selectedCells!: number[];
+  //selectedCells!: number[];
   constructor(public designerService:DesignerService) {}
 
   ngOnInit(): void {
-    this.selectedCells = this.designerService.getSelectedCells();
+    //this.selectedCells = this.designerService.getSelectedCells();
     this.types = this.designerService.getTypes();
-    this.nameOfIdList = this.designerService.getNameOfObjsList();
-     this.valueListConnectedTo =this.designerService.getLinksToParkingCells();
+    //this.nameOfIdList = this.designerService.getNameOfObjsList();
+     //this.valueListConnectedTo =this.designerService.getLinksToParkingCells();
   }
 
   isPark(template:ParkingTemplate):boolean {

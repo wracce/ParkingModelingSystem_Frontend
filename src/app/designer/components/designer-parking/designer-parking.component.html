@@ -64,9 +64,9 @@
         <div
           class="cell"
           cdkDropList
-          [id]="nameOfIdList + i"
+          [id]="this.designerService.getNameOfGridList() + i"
           [cdkDropListData]="cell"
-          [cdkDropListConnectedTo]="valueListConnectedTo"
+          [cdkDropListConnectedTo]="designerService.linksToParkingCells"
           (cdkDropListDropped)="designerService.drop($event)"
           (mouseover)="setIndexOver(i)"
           (mouseout)="designerService.indexOver = -1"

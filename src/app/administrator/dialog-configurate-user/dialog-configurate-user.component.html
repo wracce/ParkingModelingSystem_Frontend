@@ -43,7 +43,7 @@
 
 <mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="false">Отмена</button>
-  <button [disabled]="settingsUserForm.invalid || istoMinMax()" *ngIf=" data == 'add'" mat-raised-button color="accent" [mat-dialog-close]=true cdkFocusInitial>
+  <button [disabled]="settingsUserForm.invalid" *ngIf=" data == 'add'" mat-raised-button color="accent" [mat-dialog-close]=true cdkFocusInitial>
     Зарегистрировать
   </button>
   <button [disabled]="settingsUserForm.invalid || istoMinMax()" *ngIf=" data === 'edit'" mat-raised-button color="accent" [mat-dialog-close]=true cdkFocusInitial>
