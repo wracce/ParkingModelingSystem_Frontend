@@ -26,7 +26,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions class="dialog-actions">
-  <button mat-stroked-button color="accent">О системе</button>
+  <button mat-stroked-button color="accent">
+    <a href="assets/manual/aboutSystem.html" target="_blank">О системе</a>
+    <mat-icon>search</mat-icon>
+  </button>
   <button mat-button color="accent" [mat-dialog-close]="true" cdkFocusInitial>
     Закрыть
   </button>

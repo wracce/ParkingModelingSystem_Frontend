@@ -15,20 +15,20 @@
       <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
 
       <label class="boxLabel">Цена за час дневного тарифа</label>
-      <label class="sliderBoxLabelValue"></label>
-      <mat-slider #rows min="5" max="100" thumbLabel formControlName="dayCost"> </mat-slider>
+      <label class="sliderBoxLabelValue"><strong>{{setupSimulationForm.value['dayCost']}} ₽</strong></label>
+      <mat-slider #dayCost min="100" max="200" thumbLabel formControlName="dayCost"> </mat-slider>
       <label class="boxLabel">Цена за час ночного тарифа</label>
-      <label class="sliderBoxLabelValue"></label>
-      <mat-slider #cols min="5" max="100" thumbLabel formControlName="nightCost"> </mat-slider>
+      <label class="sliderBoxLabelValue"><strong>{{setupSimulationForm.value['nightCost']}} ₽</strong></label>
+      <mat-slider #nightCost min="150" max="250" thumbLabel formControlName="nightCost"> </mat-slider>
     </div>
     <mat-divider></mat-divider>
     <div class="box">
       <label class="boxLabel">Процент грузовых автомобилей</label>
-      <label class="sliderBoxLabelValue"></label>
-      <mat-slider #cols min="5" max="100" thumbLabel formControlName="truckChance"> </mat-slider>
+      <label class="sliderBoxLabelValue"><strong>{{setupSimulationForm.value['truckChance']}} %</strong></label>
+      <mat-slider #cols min="0" max="100" thumbLabel formControlName="truckChance"> </mat-slider>
       <label class="boxLabel">Настройка вероятности заезда</label>
-      <label class="sliderBoxLabelValue"></label>
-      <mat-slider #cols min="5" max="100" thumbLabel formControlName="enterChance"> </mat-slider>
+      <label class="sliderBoxLabelValue"><strong>{{setupSimulationForm.value['enterChance']}} %</strong></label>
+      <mat-slider #cols min="0" max="100" thumbLabel formControlName="enterChance"> </mat-slider>
     </div>
 
     <mat-divider></mat-divider>

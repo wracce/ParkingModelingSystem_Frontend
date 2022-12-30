@@ -1,6 +1,8 @@
 export class SimulationTime {
   private defaultTime!: number;
 
+  public displayTime: string = "";
+
   constructor(public time: Date, public delayTick: number, public realTickMs:number) {
     this.defaultTime = time.getTime();
   }
@@ -11,7 +13,7 @@ export class SimulationTime {
   }
 
   public getTickDelta() {
-    return +this.time - this.defaultTime;
+    return this.time.getTime() - this.defaultTime;
   }
 
   public reset(): void {

@@ -59,6 +59,7 @@ import {DataShareService} from "./core/service/data-share.service";
 import { ReferenceComponent } from './reference/reference.component';
 import { DialogConfigurateDistributionComponent } from './simulation/components/dialog-configurate-distribution/dialog-configurate-distribution.component';
 import { ValidatorDialogComponent } from './simulation/validation/validator-dialog/validator-dialog.component';
+import { TotalScoreDialogComponent } from './simulation/components/total-score-dialog/total-score-dialog.component';
 
 
 
@@ -84,6 +85,7 @@ import { ValidatorDialogComponent } from './simulation/validation/validator-dial
     ReferenceComponent,
     DialogConfigurateDistributionComponent,
     ValidatorDialogComponent,
+    TotalScoreDialogComponent,
 
   ],
   imports: [

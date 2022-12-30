@@ -13,6 +13,7 @@ import { NormalDistribution } from '../models/distributions/normal-distribution'
 import { Distribution } from '../models/distributions/distribution';
 import { TableRow } from '../models/table-row';
 import { from, map, Observable, of, Subject } from 'rxjs';
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({
   providedIn: 'root',
@@ -30,10 +31,12 @@ export class SimulationService {
   public boardView!: BoardView;
   public parkingTable$: Observable<TableRow[]> = of([]);
 
-  constructor() {
+  constructor(
+    scoreDialog: MatDialog
+  ) {
     this.simulationMap = new SimulationMap(this);
 
-    this.simulationEngine = new SimulationEngine(this);
+    this.simulationEngine = new SimulationEngine(this, scoreDialog);
 
     this.carTemplates = [
       new CarTemplate('/assets/cars/car1.png', 145, 86),
@@ -55,8 +58,8 @@ export class SimulationService {
       parkingDistribution: new FormControl(new NormalDistribution()),
       enterChance: new FormControl(50),
       truckChance: new FormControl(50),
-      dayCost: new FormControl(50),
-      nightCost: new FormControl(50),
+      dayCost: new FormControl(150),
+      nightCost: new FormControl(200),
     });
 
     this.simulationTime = new SimulationTime(new Date(), 400, 60000); // tick 1s = 1m real time

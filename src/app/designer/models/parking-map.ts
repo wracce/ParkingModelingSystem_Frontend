@@ -31,6 +31,7 @@ export class ParkingMap {
     this.widthOfRoad = parkingMap.widthOfRoad;
     this.rows = parkingMap.rows;
     this.directOfRoad = parkingMap.directOfRoad;
+
   }
 
   public getCells(): ParkingCell[] {

@@ -124,6 +124,7 @@ export class AdministratorComponent implements OnInit {
     this.file = files[0];
     let pDialog = this.dialog;
     let pRouter = this.router;
+    let pForm = this.designerService.getSetupParkingForm();
     let pDesignerService = this.designerService;
     let fileReader = new FileReader();
     fileReader.onload = function () {
@@ -131,6 +132,9 @@ export class AdministratorComponent implements OnInit {
       let validator = new Validator(map);
       if (ParkingFileManager.loadFromFileReader(this, map)) {
         if (validator.validate()) {
+          let dY = map.directOfRoad==="top"||"bottom"?-1:0
+          let dX = map.directOfRoad==="right"||"left"?-1:0
+          pForm.setValue({directOfRoad:map.directOfRoad,cols:map.cols+dX, rows:map.rows+dY, name:map.name});
           pDesignerService.getParkingMap().from(map);
           pRouter.navigate(['/administrator/designer']);
           return;

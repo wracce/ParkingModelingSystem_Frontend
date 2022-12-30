@@ -1,0 +1,49 @@
+<mat-dialog-content>
+  <div class="container">
+    <div>
+      <p style="text-align: center; font-size: 18px; font-weight: bold">Отчёт по симуляции</p>
+    </div>
+    <div class="score-row">
+      <span class="row-name">Время симуляции: </span>
+      <span class="row-value">{{this.data.delta}} мин.</span>
+    </div>
+    <div class="score-row">
+      <span class="row-name">Минимальный чек за парковку: </span>
+      <span class="row-value">{{this.data.minCost}} ₽</span>
+    </div>
+    <div class="score-row">
+      <span class="row-name">Максимальный чек за парковку: </span>
+      <span class="row-value">{{this.data.maxCost}} ₽</span>
+    </div>
+    <div class="score-row">
+      <span class="row-name">Средний чек за парковку: </span>
+      <span class="row-value">{{this.data.avgCost}} ₽</span>
+    </div>
+    <div class="score-row">
+      <span class="row-name">Общий доход парковки: </span>
+      <span class="row-value">{{this.data.totalCost}} ₽</span>
+    </div>
+
+    <div class="score-row">
+      <span class="row-name">Минимальное время стоянки: </span>
+      <span class="row-value">{{this.data.minTime}} мин.</span>
+    </div>
+    <div class="score-row">
+      <span class="row-name">Максимальное время стоянки: </span>
+      <span class="row-value">{{this.data.maxTime}} мин.</span>
+    </div>
+    <div class="score-row">
+      <span class="row-name">Среднее время стоянки: </span>
+      <span class="row-value">{{this.data.avgTime}} мин.</span>
+    </div>
+    <div class="score-row">
+      <span class="row-name">Общее время стоянки: </span>
+      <span class="row-value">{{this.data.totalTime}} мин.</span>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" mat-dialog-close>
+    ОК
+  </button>
+</mat-dialog-actions>

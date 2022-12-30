@@ -1,14 +1,12 @@
-import { ParkingCell } from 'src/app/designer/models/parking-cell';
-import { ParkingMap } from 'src/app/designer/models/parking-map';
-import { ParkingState } from 'src/app/designer/models/parking-state';
-import { SimulationService } from '../services/simulation.service';
-import { ParkingMeter } from './ParkingSystem/parkingMeter';
-import { SimulationEngine } from './simulation-engine';
+import {ParkingMap} from 'src/app/designer/models/parking-map';
+import {ParkingState} from 'src/app/designer/models/parking-state';
+import {SimulationService} from '../services/simulation.service';
+import {ParkingMeter} from './ParkingSystem/parkingMeter';
 
 export class SimulationMap extends ParkingMap {
   public parkingMeter!: ParkingMeter;
 
-  constructor(public simulationService:SimulationService) {
+  constructor(public simulationService: SimulationService) {
     super();
   }
 
@@ -16,33 +14,45 @@ export class SimulationMap extends ParkingMap {
     super.from(parkingMap);
 
     this.parkingMeter = new ParkingMeter(this.simulationService);
-    this.parkingMeter.init(      this,
+    this.parkingMeter.init(this,
       this.parkingCells.filter(
         (x) => x.template.state === ParkingState.ParkingMeter
       )[0])
 
-
+    let barriersArr = this.parkingCells.filter(val => val.template.state === ParkingState.Barrier);
     this.parkingCells.forEach((value, id) => {
-      if (value.template.state === ParkingState.Barrier) {
-        let xy = this.getPosById(id);
+      for (let i = 0; i < barriersArr.length; i++) {
         let isNearParkingMeter = false;
-        if (this.parkingMeter.parkingMeterCell ===
-          this.parkingCells[this.getIdByPos(xy.x - 1, xy.y)]) {
-          isNearParkingMeter = true;
-        } else if (this.parkingMeter.parkingMeterCell ===
-          this.parkingCells[this.getIdByPos(xy.x, xy.y - 1)]) {
-          isNearParkingMeter = true;
-        } else if (this.parkingMeter.parkingMeterCell ===
-          this.parkingCells[this.getIdByPos(xy.x + 1, xy.y)]) {
-          isNearParkingMeter = true;
-        } else if (this.parkingMeter.parkingMeterCell ===
-          this.parkingCells[this.getIdByPos(xy.x, xy.y + 1)]) {
-          isNearParkingMeter = true;
+        let barrierXY = this.simulationService.simulationMap.getPosById(barriersArr[i].id);
+        let id: number = this.simulationService.simulationMap.getIdByPos(barrierXY.x - 1, barrierXY.y);
+        if (id >= 0) {
+          if (this.simulationService.simulationMap.parkingCells[id].template.state === ParkingState.ParkingMeter) {
+            isNearParkingMeter = true;
+          }
         }
-        if (isNearParkingMeter)
-            this.parkingMeter.startBarrierCell = this.parkingCells[this.getIdByPos(xy.x,xy.y)];
-        else
-            this.parkingMeter.endBarrierCell = this.parkingCells[this.getIdByPos(xy.x,xy.y)];
+        id = this.simulationService.simulationMap.getIdByPos(barrierXY.x, barrierXY.y - 1);
+        if (id >= 0) {
+          if (this.simulationService.simulationMap.parkingCells[id].template.state === ParkingState.ParkingMeter) {
+            isNearParkingMeter = true;
+          }
+        }
+        id = this.simulationService.simulationMap.getIdByPos(barrierXY.x + 1, barrierXY.y);
+        if (id >= 0) {
+          if (this.simulationService.simulationMap.parkingCells[id].template.state === ParkingState.ParkingMeter) {
+            isNearParkingMeter = true;
+          }
+        }
+        id = this.simulationService.simulationMap.getIdByPos(barrierXY.x, barrierXY.y + 1);
+        if (id >= 0) {
+          if (this.simulationService.simulationMap.parkingCells[id].template.state === ParkingState.ParkingMeter) {
+            isNearParkingMeter = true;
+          }
+        }
+        if (isNearParkingMeter) {
+          this.parkingMeter.startBarrierCell = barriersArr[i];
+        } else {
+          this.parkingMeter.endBarrierCell = barriersArr[i];
+        }
       }
     });
   }

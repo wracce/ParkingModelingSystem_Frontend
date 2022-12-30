@@ -42,6 +42,8 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-width: 640px;
   min-height: 480px;
+  //background: url("assets/img.png") no-repeat;
+  //background-size: 1920px 1080px;
 }
 
 ::-webkit-scrollbar-track {
@@ -65,6 +67,8 @@ body {
 ::-webkit-scrollbar-corner {
     background-color: transparent;
 }
+
+
 
 // ::-webkit-scrollbar {
 //     width: 4px;
