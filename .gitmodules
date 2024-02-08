@@ -1,0 +1,3 @@
+[submodule "parking-modeling-system_backend"]
+	path = parking-modeling-system_backend
+	url = https://github.com/C00kieHunt3R/ParkingModelingSystem_Backend.git
