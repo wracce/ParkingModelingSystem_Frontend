@@ -22,7 +22,7 @@ export class SimulationEngine {
   private cols: number;
   public cars!: Car[];
 
-  private timeId!: NodeJS.Timer;
+  private timeId!: number;
 
   private countInitTime!: number;
   private initTimeout!: number;
@@ -69,7 +69,7 @@ export class SimulationEngine {
 
   public run() {
     if (!this.isRun)
-      this.timeId = setInterval(() => this.step(), this.timer.delayTick);
+      this.timeId = window.setInterval(() => this.step(), this.timer.delayTick);
     this.isPlay = true;
     this.isRun = true;
   }
