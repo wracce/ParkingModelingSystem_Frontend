@@ -44,9 +44,9 @@
 
  ## Скриншоты
 <p align="center">
-    <img width="49%" src="assets/example1.jpg" />
-    <img width="49%" src="assets/example2.jpg" />
     <img width="49%" src="assets/example3.jpg" />
+    <img width="49%" src="assets/example2.jpg" />
+    <img width="49%" src="assets/example1.jpg" />
     <img width="49%" src="assets/example4.jpg" />
     <img width="49%" src="assets/example5.jpg" />
 </p>
