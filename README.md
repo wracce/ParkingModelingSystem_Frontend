@@ -42,10 +42,11 @@
 
  ## Скриншоты
 <p align="center">
-    <img width="49%" src="assets/edit-table.png" />
-    <img width="49%" src="assets/login.png" />
-    <img width="49%" src="assets/tables.png" />
-    <img width="49%" src="assets/dark-theme.png" />
+    <img width="49%" src="assets/example1.jpg" />
+    <img width="49%" src="assets/example2.jpg" />
+    <img width="49%" src="assets/example3.jpg" />
+    <img width="49%" src="assets/example4.jpg" />
+    <img width="49%" src="assets/example5.jpg" />
 </p>
 
  ## Попробовать
@@ -53,7 +54,7 @@
 
 Для запуска (Поменяйте логин и пароль Postgres на свой):
 ```bash
-java -jar ParkingModelingSystem_Backend-1.0-SNAPSHOT.jar  --spring.datasource.username=postgres --spring.datasource.password=5432
+java -jar parking-modeling-system-1.0.jar  --spring.datasource.username=postgres --spring.datasource.password=5432
 ```
 
 ## Стек технологий
@@ -105,7 +106,7 @@ mvn package
 
 5. Запуск проекта:
 ```bash
-java -jar target/parking-modeling-system-0.0.1-SNAPSHOOT.jar --spring.datasource.username=postgres --spring.datasource.password=5432
+java -jar target/ParkingModelingSystem_Backend-1.0-SNAPSHOT.jar  --spring.datasource.username=postgres --spring.datasource.password=5432
 ```
 
 ## Лицензия
