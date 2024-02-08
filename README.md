@@ -53,7 +53,7 @@
 
 Для запуска (Поменяйте логин и пароль Postgres на свой):
 ```bash
-java -jar parking-modeling-system-0.0.1.jar  --spring.datasource.username=postgres --spring.datasource.password=5432
+java -jar ParkingModelingSystem_Backend-1.0-SNAPSHOT.jar  --spring.datasource.username=postgres --spring.datasource.password=5432
 ```
 
 ## Стек технологий
